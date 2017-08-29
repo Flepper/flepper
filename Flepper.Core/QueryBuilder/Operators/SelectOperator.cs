@@ -4,7 +4,7 @@ using Flepper.Core.QueryBuilder.Operators.Interfaces;
 
 namespace Flepper.Core.QueryBuilder.Operators
 {
-    public class SelectOperator : BaseFlepper, ISelectOperator
+    public class SelectOperator : BaseFlepperQueryBuilder, ISelectOperator
     {
         public ISelectOperator Select()
         {

@@ -2,7 +2,7 @@
 {
     public interface IFromOperator
     {
-        void From(string schema, string table);
-        void From(string table);
+        IFromOperator From(string schema, string table);
+        IFromOperator From(string table);
     }
 }

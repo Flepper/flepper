@@ -13,12 +13,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Operator
             var selectOperator = new SelectOperator();
 
             selectOperator.Select().From("user");
-
-            var query = selectOperator.SqlQuery;
-
-            query.Trim()
+            selectOperator.SqlQuery
+                .Trim()
                 .Should()
                 .Be("SELECT * FROM [user]");
+
+            selectOperator.ExecuteQuery();
         }
 
         [Fact]
@@ -26,13 +26,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Operator
         {
             var selectOperator = new SelectOperator();
 
-            selectOperator.Select("Id", "Name", "Birthday").From("User");
-
-            var query = selectOperator.SqlQuery;
-
-            query.Trim()
+            selectOperator.Select("Id", "Name", "Birthday").From("user");
+            selectOperator.SqlQuery
+                .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
+
+            selectOperator.ExecuteQuery();
         }
     }
 }

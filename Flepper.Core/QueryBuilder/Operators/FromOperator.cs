@@ -3,15 +3,17 @@ using Flepper.Core.QueryBuilder.Operators.Interfaces;
 
 namespace Flepper.Core.QueryBuilder.Operators
 {
-    public class FromOperator : BaseFlepper, IFromOperator
+    public class FromOperator : BaseFlepperQueryBuilder, IFromOperator
     {
-        public void From(string schema, string table)
+        public IFromOperator From(string schema, string table)
         {
+            return this;
         }
 
-        public void From(string table)
+        public IFromOperator From(string table)
         {
             Command.AppendFormat("FROM [{0}] ", table).AppendLine();
+            return this;
         }
     }
 }
