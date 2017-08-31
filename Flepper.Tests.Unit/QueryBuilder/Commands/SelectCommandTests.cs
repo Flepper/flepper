@@ -15,8 +15,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var selectCommand = new SelectCommand();
 
             selectCommand.Select().From("user");
-            selectCommand.GetQuery()
-                .Trim()
+            selectCommand.Query                .Trim()
                 .Should()
                 .Be("SELECT * FROM [user]");
         }
@@ -27,8 +26,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var selectCommand = new SelectCommand();
 
             selectCommand.Select("Id", "Name", "Birthday").From("user");
-            selectCommand.GetQuery()
-                .Trim()
+            selectCommand.Query                .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
         }
@@ -38,8 +36,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             var selectCommand = new SelectCommand();
             selectCommand.Select("Id", "Name", "Birthday").From("user").Where("Name").Equal("Nicolas");
-            selectCommand.GetQuery()
-                .Trim()
+            selectCommand.Query                .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
         }

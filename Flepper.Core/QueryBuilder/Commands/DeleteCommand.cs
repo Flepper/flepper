@@ -7,7 +7,10 @@ namespace Flepper.Core.QueryBuilder.Commands
     {
         public IDeleteCommand Delete()
         {
+            BeforeExecute();
+
             Command.Append("DELETE ");
+
             return this;
         }
     }
