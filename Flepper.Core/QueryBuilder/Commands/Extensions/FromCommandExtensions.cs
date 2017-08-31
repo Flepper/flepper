@@ -1,6 +1,7 @@
 ﻿using Flepper.Core.QueryBuilder.Commands.Interfaces;
 using Flepper.Core.QueryBuilder.Filters;
 using Flepper.Core.QueryBuilder.Filters.Interfaces;
+using Flepper.Core.QueryBuilder.Join.Interfaces;
 
 namespace Flepper.Core.QueryBuilder.Commands.Extensions
 {
@@ -11,6 +12,13 @@ namespace Flepper.Core.QueryBuilder.Commands.Extensions
             var whereFilter = new WhereFilter();
             whereFilter.Where(field);
             return whereFilter;
+        }
+
+        public static IJoin InnerJoin(this IFromCommand fromCommand, string table)
+        {
+            var join = new Join.Join();
+            join.Inner(table);
+            return join;
         }
     }
 }

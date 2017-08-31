@@ -27,5 +27,15 @@ namespace Flepper.Core.QueryBuilder.Operators.Comparison
         {
             Command.AppendFormat("= {0} ", value);
         }
+
+        public void Equal(object value)
+        {
+            Command.AppendFormat("= [{0}] ", value);
+        }
+
+        public void NotEqual(object value)
+        {
+            Command.AppendFormat("<> [{0}] ", value);
+        }
     }
 }
