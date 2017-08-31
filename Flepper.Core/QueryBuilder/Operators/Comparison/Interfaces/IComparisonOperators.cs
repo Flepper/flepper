@@ -1,6 +1,6 @@
 ﻿namespace Flepper.Core.QueryBuilder.Operators.Comparison.Interfaces
 {
-    public interface IEqualComparisonOperator
+    public interface IComparisonOperators
     {
         void Equal(string value);
         void Equal(int value);
