@@ -6,7 +6,7 @@ namespace Flepper.Core.QueryBuilder.Commands.Extensions
 {
     public static class FromCommandExtensions
     {
-        public static IWhereFilter Where(this IFromCommand fromOperator, string field)
+        public static IWhereFilter Where(this IFromCommand fromCommand, string field)
         {
             var whereFilter = new WhereFilter();
             whereFilter.Where(field);

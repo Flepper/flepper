@@ -7,12 +7,14 @@ namespace Flepper.Core.Base
     {
         protected static StringBuilder Command = new StringBuilder();
 
-        public string SqlQuery => Command.ToString();
-
-        public void ExecuteQuery()
+        public string GetQuery()
         {
-            //TODO: Execute Dapper Query Method;
+            var result = Command.ToString();
             Command = new StringBuilder();
+
+            return result;
         }
+
+
     }
 }
