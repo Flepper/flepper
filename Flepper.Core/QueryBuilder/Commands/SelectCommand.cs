@@ -8,12 +8,16 @@ namespace Flepper.Core.QueryBuilder.Commands
     {
         public ISelectCommand Select()
         {
+            BeforeExecute();
+
             Command.Append("SELECT * ");
             return this;
         }
 
         public ISelectCommand Select(params string[] columns)
         {
+            BeforeExecute();
+
             var fields = columns.Aggregate("", (current, column) => current + $"[{column}],");
 
             fields = fields.Remove(fields.Length - 1, 1) + " ";

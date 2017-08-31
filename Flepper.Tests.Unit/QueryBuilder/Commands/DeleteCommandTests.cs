@@ -17,8 +17,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             deleteCommand.Delete().From("Test");
 
-            deleteCommand.GetQuery()
-                .Trim()
+            deleteCommand.Query.Trim()
                 .Should()
                 .Be("DELETE FROM [Test]");
         }
@@ -28,14 +27,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             var command = new DeleteCommand();
 
-            command
-                .Delete()
+            command.Delete()
                 .From("Test")
                 .Where("Id")
                 .Equal(2);
 
             command
-                .GetQuery()
+                .Query
                 .Trim()
                 .Should()
                 .Be("DELETE FROM [Test] WHERE [Id] = 2");
