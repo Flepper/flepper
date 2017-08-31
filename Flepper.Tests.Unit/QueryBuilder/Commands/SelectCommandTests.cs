@@ -6,47 +6,42 @@ using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
+    [Collection("CommandTests")]
     public class SelectCommandTests
     {
         [Fact]
         public void ShouldCreateSelectStatementForAllColumns()
         {
-            var selectOperator = new SelectCommand();
+            var selectCommand = new SelectCommand();
 
-            selectOperator.Select().From("user");
-            selectOperator.SqlQuery
+            selectCommand.Select().From("user");
+            selectCommand.GetQuery()
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [user]");
-
-            selectOperator.ExecuteQuery();
         }
 
         [Fact]
         public void ShouldCreateSelectStatementWithSpecificColumns()
         {
-            var selectOperator = new SelectCommand();
+            var selectCommand = new SelectCommand();
 
-            selectOperator.Select("Id", "Name", "Birthday").From("user");
-            selectOperator.SqlQuery
+            selectCommand.Select("Id", "Name", "Birthday").From("user");
+            selectCommand.GetQuery()
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
-
-            selectOperator.ExecuteQuery();
         }
 
         [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
-            var selectOperator = new SelectCommand();
-            selectOperator.Select("Id", "Name", "Birthday").From("user").Where("Name").Equal("Nicolas");
-            selectOperator.SqlQuery
+            var selectCommand = new SelectCommand();
+            selectCommand.Select("Id", "Name", "Birthday").From("user").Where("Name").Equal("Nicolas");
+            selectCommand.GetQuery()
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
-
-            selectOperator.ExecuteQuery();
         }
     }
 }
