@@ -1,19 +1,18 @@
 ﻿using System.Linq;
 using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Operators.Interfaces;
+using Flepper.Core.QueryBuilder.Commands.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Operators
+namespace Flepper.Core.QueryBuilder.Commands
 {
-    public class SelectOperator : BaseFlepperQueryBuilder, ISelectOperator
+    public class SelectCommand : BaseFlepperQueryBuilder, ISelectCommand
     {
-        public ISelectOperator Select()
+        public ISelectCommand Select()
         {
             Command.Append("SELECT * ");
-
             return this;
         }
 
-        public ISelectOperator Select(params string[] columns)
+        public ISelectCommand Select(params string[] columns)
         {
             var fields = columns.Aggregate("", (current, column) => current + $"[{column}],");
 
