@@ -84,7 +84,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             selectCommand
                 .Query
                 .Trim()
-                .Should()
+                .Should() 
                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");
         }
     }
