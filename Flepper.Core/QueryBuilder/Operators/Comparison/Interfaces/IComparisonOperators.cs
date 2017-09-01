@@ -3,8 +3,6 @@
     public interface IComparisonOperators
     {
         void Equal(string value);
-        void Equal(object value);
         void Equal(int value);
-        void NotEqual(object value);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Flepper.Core.QueryBuilder.Join.Interfaces;
 using Flepper.Core.QueryBuilder.Join.Operators;
+using Flepper.Core.QueryBuilder.Join.Operators.Intersection;
+using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces;
 
 namespace Flepper.Core.QueryBuilder.Join.Extensions
 {
