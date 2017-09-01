@@ -2,6 +2,7 @@
 using Flepper.Core.QueryBuilder.Commands.Extensions;
 using Flepper.Core.QueryBuilder.Join.Extensions;
 using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Extensions;
+using Flepper.Core.QueryBuilder.Operators.Alias.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -17,14 +18,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             selectCommand
                 .Select()
-                .From("Table1")
-                .InnerJoin("Table2");
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2");
 
             selectCommand
                  .Query
                  .Trim()
                  .Should()
-                 .Contain("INNER JOIN [Table2]");
+                 .Contain("INNER JOIN [Table2] t2");
         }
 
         [Fact]
@@ -34,16 +35,16 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             selectCommand
                 .Select()
-                .From("Table1")
-                .InnerJoin("Table2")
-                .On("column1")
-                .Equal("column2");
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2")
+                .On("t2", "column1")
+                .Equal("t1","column2");
 
             selectCommand
                  .Query
                  .Trim()
                  .Should()
-                 .Contain("INNER JOIN [Table2] ON [column1] = [column2]");
+                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] = t1.[column2]");
         }
 
         [Fact]
@@ -53,16 +54,16 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             selectCommand
                 .Select()
-                .From("Table1")
-                .InnerJoin("Table2")
-                .On("column1")
-                .NotEqual("column2");
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2")
+                .On("t2","column1")
+                .NotEqual("t1","column2");
 
             selectCommand
                  .Query
                  .Trim()
                  .Should()
-                 .Contain("INNER JOIN [Table2] ON [column1] <> [column2]");
+                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2]");
         }
     }
 }

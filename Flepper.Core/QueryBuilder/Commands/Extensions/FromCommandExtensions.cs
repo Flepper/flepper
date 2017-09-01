@@ -20,5 +20,14 @@ namespace Flepper.Core.QueryBuilder.Commands.Extensions
             join.Inner(table);
             return join;
         }
+
+        public static IAliasOperator As(this IFromCommand fromCommand, string alias)
+        {
+            var aliasOperator = new AliasOperator();
+
+            aliasOperator.As(alias);
+
+            return aliasOperator;
+        }
     }
 }

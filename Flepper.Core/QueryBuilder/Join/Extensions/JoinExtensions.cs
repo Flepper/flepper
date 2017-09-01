@@ -1,17 +1,16 @@
 ﻿using Flepper.Core.QueryBuilder.Join.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Operators;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces;
 
 namespace Flepper.Core.QueryBuilder.Join.Extensions
 {
     public static class JoinExtensions
     {
-        public static IIOnOperator On(this IJoin join, string column)
+        public static IAliasOperator As(this IJoin join, string alias)
         {
-            var onOperator = new OnOperator();
-            onOperator.On(column);
-            return onOperator;
+            var aliasOperator = new AliasOperator();
+
+            aliasOperator.As(alias);
+
+            return aliasOperator;
         }
     }
 }
