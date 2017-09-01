@@ -1,6 +1,7 @@
 ﻿using Flepper.Core.QueryBuilder.Commands;
 using Flepper.Core.QueryBuilder.Commands.Extensions;
 using Flepper.Core.QueryBuilder.Join.Extensions;
+using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Extensions;
 using FluentAssertions;
 using Xunit;
 

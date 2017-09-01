@@ -1,6 +1,7 @@
 ﻿using Flepper.Core.Base;
+using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Join.Operators
+namespace Flepper.Core.QueryBuilder.Join.Operators.Intersection
 {
     public class OnOperator :BaseFlepperQueryBuilder, IIOnOperator
     {
