@@ -49,7 +49,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
         [Fact]
         public void ShouldReturnInnerJoinWithOnNotEqualStatement()
-        {
+        {    
             var selectCommand = new SelectCommand();
 
             selectCommand
