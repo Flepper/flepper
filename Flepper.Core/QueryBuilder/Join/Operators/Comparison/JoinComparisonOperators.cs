@@ -13,19 +13,19 @@ namespace Flepper.Core.QueryBuilder.Join.Operators.Comparison
 
         public static IJoinComparisonOperators Create()
         {
-            if(_joinComparisonOperators is null) _joinComparisonOperators = new JoinComparisonOperators();
+            if (_joinComparisonOperators is null) _joinComparisonOperators = new JoinComparisonOperators();
 
             return _joinComparisonOperators;
         }
 
-        public void Equal(string column)
+        public void Equal(string tableAlias, string column)
         {
-            Command.AppendFormat("= [{0}] ", column);
+            Command.AppendFormat("= {0}.[{1}] ", tableAlias, column);
         }
 
-        public void NotEqual(string column)
+        public void NotEqual(string tableAlias, string column)
         {
-            Command.AppendFormat("<> [{0}] ", column);
+            Command.AppendFormat("<> {0}.[{1}] ", tableAlias, column);
         }
     }
 }

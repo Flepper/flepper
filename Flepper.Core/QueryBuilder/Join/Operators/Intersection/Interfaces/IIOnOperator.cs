@@ -2,6 +2,6 @@
 {
     public interface IIOnOperator
     {
-        void On(string column);
+        void On(string tableAlias, string column);
     }
 }
