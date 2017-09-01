@@ -10,15 +10,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldReturnInnerJoinStatement()
         {
-            var selectCommand = new SelectCommand();
 
-            selectCommand
-                .Select()
+            FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2");
 
-            selectCommand
-                 .Query
+            FlepperQueryBuilder.Query
                  .Trim()
                  .Should()
                  .Contain("INNER JOIN [Table2] t2");
@@ -27,17 +24,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldReturnInnerJoinWithOnEqualStatement()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand
-                .Select()
+            FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
-                .Equal("t1","column2");
+                .Equal("t1", "column2");
 
-            selectCommand
-                 .Query
+            FlepperQueryBuilder.Query
                  .Trim()
                  .Should()
                  .Contain("INNER JOIN [Table2] t2 ON t2.[column1] = t1.[column2]");
@@ -46,17 +39,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldReturnInnerJoinWithOnNotEqualStatement()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand
-                .Select()
+            FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .NotEqual("t1", "column2");
 
-            selectCommand
-                 .Query
+            FlepperQueryBuilder.Query
                  .Trim()
                  .Should()
                  .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2]");
@@ -65,18 +54,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldReturnInnerJoinWithWhereStatement()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand
-                .Select()
+            FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .NotEqual("t1", "column2")
                 .Where("t1", "name").Equal("table");
 
-            selectCommand
-                .Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");

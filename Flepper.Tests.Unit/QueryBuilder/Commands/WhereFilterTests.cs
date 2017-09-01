@@ -10,11 +10,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldContainsWhereInStatement()
         {
-            var selectCommand = new SelectCommand();
+            FlepperQueryBuilder.Select()
+                .From("user").Where("name");
 
-            selectCommand.Select().From("user").Where("name");
-
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Contain("WHERE");
@@ -23,14 +22,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldContainsWhereWithComparisonOperatos()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand.Select()
+            FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .Equal("gustavo");
 
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Contain("WHERE [name] = 'gustavo'");
@@ -39,15 +36,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldContainsWhereWithLogicalOperator()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand.Select()
+            FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .Equal("gustavo")
                 .And("age");
 
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Contain("WHERE [name] = 'gustavo' AND [age]");
@@ -56,16 +51,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldContainsWhereWithLogicalOperatorWithComparisonOperators()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand.Select()
+            FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .Equal("gustavo")
                 .And("age")
                 .Equal(26);
 
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Contain("WHERE [name] = 'gustavo' AND [age] = 26");

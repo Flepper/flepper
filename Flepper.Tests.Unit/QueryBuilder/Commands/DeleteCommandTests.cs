@@ -11,11 +11,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateDeleteStatement()
         {
-            var deleteCommand = new DeleteCommand();
+            FlepperQueryBuilder.Delete().From("Test");
 
-            deleteCommand.Delete().From("Test");
-
-            deleteCommand.Query.Trim()
+            FlepperQueryBuilder.Query
+                .Trim()
                 .Should()
                 .Be("DELETE FROM [Test]");
         }
@@ -23,15 +22,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateDeleteStatementWithWhere()
         {
-            var command = new DeleteCommand();
-
-            command.Delete()
+            FlepperQueryBuilder.Delete()
                 .From("Test")
                 .Where("Id")
                 .Equal(2);
 
-            command
-                .Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Be("DELETE FROM [Test] WHERE [Id] = 2");
