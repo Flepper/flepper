@@ -1,6 +1,8 @@
 ﻿using Flepper.Core.QueryBuilder.Commands;
 using Flepper.Core.QueryBuilder.Commands.Extensions;
+using Flepper.Core.QueryBuilder.Filters.Extensions;
 using Flepper.Core.QueryBuilder.Join.Extensions;
+using Flepper.Core.QueryBuilder.Join.Operators.Comparison.Extensions;
 using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Extensions;
 using Flepper.Core.QueryBuilder.Operators.Alias.Extensions;
 using FluentAssertions;
@@ -56,14 +58,34 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
-                .On("t2","column1")
-                .NotEqual("t1","column2");
+                .On("t2", "column1")
+                .NotEqual("t1", "column2");
 
             selectCommand
                  .Query
                  .Trim()
                  .Should()
                  .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2]");
+        }
+
+        [Fact]
+        public void ShouldReturnInnerJoinWithWhereStatement()
+        {
+            var selectCommand = new SelectCommand();
+
+            selectCommand
+                .Select()
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2")
+                .On("t2", "column1")
+                .NotEqual("t1", "column2")
+                .Where("t1", "name").Equal("table");
+
+            selectCommand
+                .Query
+                .Trim()
+                .Should()
+                .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");
         }
     }
 }
