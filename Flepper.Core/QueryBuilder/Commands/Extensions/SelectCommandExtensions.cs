@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Commands.Extensions
+﻿namespace Flepper.Core.QueryBuilder
 {
     public static class SelectCommandExtensions
     {
