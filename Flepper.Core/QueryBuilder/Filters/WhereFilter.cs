@@ -1,7 +1,6 @@
 ﻿using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Filters.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Filters
+namespace Flepper.Core.QueryBuilder
 {
     public class WhereFilter : BaseFlepperQueryBuilder, IWhereFilter
     {

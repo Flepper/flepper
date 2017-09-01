@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Operators.Comparison.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IComparisonOperators
     {

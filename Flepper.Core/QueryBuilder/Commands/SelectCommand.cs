@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Commands.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Commands
+namespace Flepper.Core.QueryBuilder
 {
     public class SelectCommand : BaseFlepperQueryBuilder, ISelectCommand
     {

@@ -1,7 +1,6 @@
 ﻿using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Join.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Join
+namespace Flepper.Core.QueryBuilder
 {
     public class Join : BaseFlepperQueryBuilder, IJoin
     {

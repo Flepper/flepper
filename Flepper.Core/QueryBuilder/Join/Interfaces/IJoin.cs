@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Join.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IJoin
     {

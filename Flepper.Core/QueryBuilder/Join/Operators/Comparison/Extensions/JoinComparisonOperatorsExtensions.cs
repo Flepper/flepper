@@ -1,8 +1,4 @@
-﻿using Flepper.Core.QueryBuilder.Filters;
-using Flepper.Core.QueryBuilder.Filters.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Operators.Comparison.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Join.Operators.Comparison.Extensions
+﻿namespace Flepper.Core.QueryBuilder
 {
     public static class JoinComparisonOperatorsExtensions
     {

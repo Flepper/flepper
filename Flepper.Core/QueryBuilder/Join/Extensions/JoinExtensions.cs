@@ -1,6 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Join.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Join.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class JoinExtensions
     {

@@ -1,10 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Filters;
-using Flepper.Core.QueryBuilder.Filters.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Operators.Alias.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class AliasOperatorExtensions
     {
@@ -17,7 +12,7 @@ namespace Flepper.Core.QueryBuilder.Operators.Alias.Extensions
 
         public static IJoin InnerJoin(this IAliasOperator aliasOperator, string table)
         {
-            var join = new Join.Join();
+            var join = new Join();
             join.Inner(table);
             return join;
         }

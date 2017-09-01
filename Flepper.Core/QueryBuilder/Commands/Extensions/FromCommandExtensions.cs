@@ -1,9 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Commands.Interfaces;
-using Flepper.Core.QueryBuilder.Filters;
-using Flepper.Core.QueryBuilder.Filters.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Commands.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class FromCommandExtensions
     {
@@ -16,7 +12,7 @@ namespace Flepper.Core.QueryBuilder.Commands.Extensions
 
         public static IJoin InnerJoin(this IFromCommand fromCommand, string table)
         {
-            var join = new Join.Join();
+            var join = new Join();
             join.Inner(table);
             return join;
         }

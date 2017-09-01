@@ -1,7 +1,6 @@
 ﻿using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Operators.Logical.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Operators.Logical
+namespace Flepper.Core.QueryBuilder
 {
     public class LogicalOperators : BaseFlepperQueryBuilder, ILogicalOperators
     {

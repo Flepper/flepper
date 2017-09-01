@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Filters.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IWhereFilter
     {

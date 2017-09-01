@@ -1,8 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Commands;
+﻿using Flepper.Core.QueryBuilder;
 using Flepper.Core.QueryBuilder.Commands.Extensions;
-using Flepper.Core.QueryBuilder.Filters.Extensions;
-using Flepper.Core.QueryBuilder.Operators.Comparison.Extensions;
-using Flepper.Core.QueryBuilder.Operators.Logical.Extensions;
 using FluentAssertions;
 using Xunit;
 
