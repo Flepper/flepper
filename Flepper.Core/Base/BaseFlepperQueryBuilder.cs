@@ -7,7 +7,7 @@ namespace Flepper.Core.Base
     {
         protected static StringBuilder Command = new StringBuilder();
 
-        public string Query => Command.ToString();
+        public static string Query => Command.ToString();
 
         protected static void BeforeExecute() => Command = new StringBuilder();
     }

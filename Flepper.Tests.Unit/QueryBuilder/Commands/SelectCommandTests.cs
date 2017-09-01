@@ -10,10 +10,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementForAllColumns()
         {
-            var selectCommand = new SelectCommand();
-
-            selectCommand.Select().From("user");
-            selectCommand.Query.Trim()
+            FlepperQueryBuilder.Select().From("user");
+            FlepperQueryBuilder.Query
+                .Trim()
                 .Should()
                 .Be("SELECT * FROM [user]");
         }
@@ -21,10 +20,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithSpecificColumns()
         {
-            var selectCommand = new SelectCommand();
+            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("user");
 
-            selectCommand.Select("Id", "Name", "Birthday").From("user");
-            selectCommand.Query.Trim()
+            FlepperQueryBuilder.Query
+                .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
         }
@@ -32,11 +32,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
-            var selectCommand = new SelectCommand();
+            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("user")
+                .Where("Name").Equal("Nicolas");
 
-            selectCommand.Select("Id", "Name", "Birthday").From("user").Where("Name").Equal("Nicolas");
-
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
@@ -45,11 +45,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithSchema()
         {
-            var selectCommand = new SelectCommand();
+            FlepperQueryBuilder.Select()
+                .From("dbo", "user");
 
-            selectCommand.Select().From("dbo", "user");
-
-            selectCommand.Query
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");

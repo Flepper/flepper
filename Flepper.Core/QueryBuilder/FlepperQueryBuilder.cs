@@ -1,4 +1,6 @@
 ﻿
+using Flepper.Core.Base;
+
 namespace Flepper.Core.QueryBuilder
 {
     public static class FlepperQueryBuilder
@@ -17,5 +19,7 @@ namespace Flepper.Core.QueryBuilder
         {
             return new DeleteCommand().Delete();
         }
+
+        public static string Query => BaseFlepperQueryBuilder.Query;
     }
 }
