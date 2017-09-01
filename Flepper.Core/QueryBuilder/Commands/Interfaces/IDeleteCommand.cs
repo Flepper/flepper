@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Commands.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IDeleteCommand
     {

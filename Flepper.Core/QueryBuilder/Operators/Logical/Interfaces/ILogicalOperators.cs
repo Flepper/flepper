@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Operators.Logical.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface ILogicalOperators
     {

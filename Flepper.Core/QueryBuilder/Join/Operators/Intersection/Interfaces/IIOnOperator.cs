@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IIOnOperator
     {

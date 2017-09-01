@@ -1,4 +1,4 @@
-﻿namespace Flepper.Core.QueryBuilder.Join.Operators.Comparison.Interfaces
+﻿namespace Flepper.Core.QueryBuilder
 {
     public interface IJoinComparisonOperators
     {

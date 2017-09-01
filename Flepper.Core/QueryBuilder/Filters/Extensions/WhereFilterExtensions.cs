@@ -1,8 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Filters.Interfaces;
-using Flepper.Core.QueryBuilder.Operators.Comparison;
-using Flepper.Core.QueryBuilder.Operators.Comparison.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Filters.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class WhereFilterExtensions
     {

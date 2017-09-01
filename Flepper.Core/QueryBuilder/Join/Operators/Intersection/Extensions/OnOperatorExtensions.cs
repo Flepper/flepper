@@ -1,8 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Join.Operators.Comparison;
-using Flepper.Core.QueryBuilder.Join.Operators.Comparison.Interfaces;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Join.Operators.Intersection.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class OnOperatorExtensions
     {

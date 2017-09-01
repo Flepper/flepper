@@ -1,10 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Commands;
+﻿using Flepper.Core.QueryBuilder;
 using Flepper.Core.QueryBuilder.Commands.Extensions;
-using Flepper.Core.QueryBuilder.Filters.Extensions;
-using Flepper.Core.QueryBuilder.Join.Extensions;
-using Flepper.Core.QueryBuilder.Join.Operators.Comparison.Extensions;
-using Flepper.Core.QueryBuilder.Join.Operators.Intersection.Extensions;
-using Flepper.Core.QueryBuilder.Operators.Alias.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -51,7 +46,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
         [Fact]
         public void ShouldReturnInnerJoinWithOnNotEqualStatement()
-        {    
+        {
             var selectCommand = new SelectCommand();
 
             selectCommand
@@ -84,7 +79,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             selectCommand
                 .Query
                 .Trim()
-                .Should() 
+                .Should()
                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");
         }
     }

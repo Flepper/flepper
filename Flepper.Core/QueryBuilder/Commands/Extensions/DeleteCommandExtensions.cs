@@ -1,6 +1,4 @@
-﻿using Flepper.Core.QueryBuilder.Commands.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Commands.Extensions
+﻿namespace Flepper.Core.QueryBuilder
 {
     public static class DeleteCommandExtensions
     {

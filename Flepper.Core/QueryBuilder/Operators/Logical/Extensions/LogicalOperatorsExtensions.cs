@@ -1,8 +1,5 @@
-﻿using Flepper.Core.QueryBuilder.Operators.Comparison;
-using Flepper.Core.QueryBuilder.Operators.Comparison.Interfaces;
-using Flepper.Core.QueryBuilder.Operators.Logical.Interfaces;
-
-namespace Flepper.Core.QueryBuilder.Operators.Logical.Extensions
+﻿
+namespace Flepper.Core.QueryBuilder
 {
     public static class LogicalOperatorsExtensions
     {

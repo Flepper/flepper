@@ -1,7 +1,6 @@
 ﻿using Flepper.Core.Base;
-using Flepper.Core.QueryBuilder.Join.Operators.Comparison.Interfaces;
 
-namespace Flepper.Core.QueryBuilder.Join.Operators.Comparison
+namespace Flepper.Core.QueryBuilder
 {
     public class JoinComparisonOperators : BaseFlepperQueryBuilder, IJoinComparisonOperators
     {
