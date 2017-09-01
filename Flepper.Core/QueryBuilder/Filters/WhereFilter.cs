@@ -9,5 +9,10 @@ namespace Flepper.Core.QueryBuilder.Filters
         {
             Command.AppendFormat("WHERE [{0}] ", field);
         }
+
+        public void Where(string tableAlias, string field)
+        {
+            Command.AppendFormat("WHERE {0}.[{1}] ", tableAlias, field);
+        }
     }
 }
