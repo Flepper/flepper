@@ -12,19 +12,49 @@ namespace Flepper.Core.QueryBuilder
 
         public static ComparisonOperators Create()
         {
-            if(_instance is null) _instance = new ComparisonOperators();
+            if (_instance is null) _instance = new ComparisonOperators();
 
             return _instance;
         }
 
-        public void Equal(string value)
+        public void EqualTo(string value)
         {
             Command.AppendFormat("= '{0}' ", value);
         }
 
-        public void Equal(int value)
+        public void EqualTo(int value)
         {
             Command.AppendFormat("= {0} ", value);
+        }
+
+        public void GreaterThan(int value)
+        {
+            Command.AppendFormat("> {0} ", value);
+        }
+
+        public void LessThan(int value)
+        {
+            Command.AppendFormat("< {0}", value);
+        }
+
+        public void GreaterThanOrEqualTo(int value)
+        {
+            Command.AppendFormat(">= {0} ", value);
+        }
+
+        public void LessThanOrEqualTo(int value)
+        {
+            Command.AppendFormat("<= {0} ", value);
+        }
+
+        public void NotEqualTo(int value)
+        {
+            Command.AppendFormat("<> {0} ", value);
+        }
+
+        public void NotEqualTo(string value)
+        {
+            Command.AppendFormat("<> '{0}' ", value);
         }
     }
 }

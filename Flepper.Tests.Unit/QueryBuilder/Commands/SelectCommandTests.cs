@@ -34,7 +34,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
-                .Where("Name").Equal("Nicolas");
+                .Where("Name").EqualTo("Nicolas");
 
             FlepperQueryBuilder.Query
                 .Trim()

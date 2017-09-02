@@ -59,7 +59,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .NotEqual("t1", "column2")
-                .Where("t1", "name").Equal("table");
+                .Where("t1", "name").EqualTo("table");
 
             FlepperQueryBuilder.Query
                 .Trim()
