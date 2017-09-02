@@ -25,7 +25,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
-                .Equal("gustavo");
+                .EqualTo("gustavo");
 
             FlepperQueryBuilder.Query
                 .Trim()
@@ -39,7 +39,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
-                .Equal("gustavo")
+                .EqualTo("gustavo")
                 .And("age");
 
             FlepperQueryBuilder.Query
@@ -54,9 +54,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
-                .Equal("gustavo")
+                .EqualTo("gustavo")
                 .And("age")
-                .Equal(26);
+                .EqualTo(26);
 
             FlepperQueryBuilder.Query
                 .Trim()

@@ -25,7 +25,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Delete()
                 .From("Test")
                 .Where("Id")
-                .Equal(2);
+                .EqualTo(2);
 
             FlepperQueryBuilder.Query
                 .Trim()
