@@ -14,7 +14,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Delete().From("Test");
 
             FlepperQueryBuilder.Query
-                .Trim()
+                .Trim() 
                 .Should()
                 .Be("DELETE FROM [Test]");
         }
