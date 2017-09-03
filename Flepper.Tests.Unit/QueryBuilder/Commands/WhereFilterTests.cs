@@ -63,5 +63,83 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Contain("WHERE [name] = 'gustavo' AND [age] = 26");
         }
+
+        [Fact]
+        public void ShoulContainWhereWithNotEqual()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").NotEqualTo("value");
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] <> 'value'");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithGreaterThan()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").GreaterThan(1);
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] > 1");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithLessThan()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").LessThan(1);
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] < 1");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithGreaterThanOrEqualTo()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").GreaterThanOrEqualTo(1);
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] >= 1");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithLessThanOrEqualTo()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").LessThanOrEqualTo(1);
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] <= 1");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithNotEqualTo()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").NotEqualTo(1);
+
+            FlepperQueryBuilder.Query
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] <> 1");
+        }
     }
 }
