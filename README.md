@@ -1,4 +1,4 @@
-# Flepper
+# Flepper :frog: 
 
 Flepper is a library to facilitate some database interactions that we need to perform in our applications.
 
