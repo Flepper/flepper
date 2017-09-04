@@ -5,6 +5,8 @@ namespace Flepper.Core.QueryBuilder
 {
     public static class FlepperQueryBuilder
     {
+        public static string Query => BaseFlepperQueryBuilder.Query;
+
         public static ISelectCommand Select()
         {
             return new SelectCommand().Select();
@@ -20,6 +22,14 @@ namespace Flepper.Core.QueryBuilder
             return new DeleteCommand().Delete();
         }
 
-        public static string Query => BaseFlepperQueryBuilder.Query;
+        public static IUpdateCommand Update(string table)
+        {
+            return new UpdateCommand().Update(table);
+        }
+
+        public static IUpdateCommand Update(string schema, string table)
+        {
+            return new UpdateCommand().Update(schema, table);
+        }
     }
 }
