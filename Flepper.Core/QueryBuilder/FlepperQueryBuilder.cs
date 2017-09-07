@@ -1,5 +1,8 @@
 ﻿
+using System;
 using Flepper.Core.Base;
+using Flepper.Core.QueryBuilder.Commands.Interfaces;
+using Flepper.Core.QueryBuilder.Commands;
 
 namespace Flepper.Core.QueryBuilder
 {
@@ -15,6 +18,16 @@ namespace Flepper.Core.QueryBuilder
         public static ISelectCommand Select(params string[] columns)
         {
             return new SelectCommand().Select(columns);
+        }
+
+        public static IInsertCommand InsertInto(string table)
+        {
+            return new InsertCommand().Insert(table);
+        }
+
+        public static IInsertCommand InsertInto(string table,params string[] columns)
+        {
+            return new InsertCommand().Insert(table,columns);
         }
 
         public static IDeleteCommand Delete()
