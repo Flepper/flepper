@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class FromCommand : BaseFlepperQueryBuilder, IFromCommand
+    internal class FromCommand : BaseQueryBuilder, IFromCommand
     {
         public IFromCommand From(string schema, string table)
         {

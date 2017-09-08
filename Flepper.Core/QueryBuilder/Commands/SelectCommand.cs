@@ -3,7 +3,7 @@ using Flepper.Core.Utils.Extensions;
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class SelectCommand : BaseFlepperQueryBuilder, ISelectCommand
+    internal class SelectCommand : BaseQueryBuilder, ISelectCommand
     {
         public ISelectCommand Select()
         {

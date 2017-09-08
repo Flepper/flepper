@@ -2,7 +2,7 @@
 {
     public interface IJoin
     {
-        void Inner(string table);
-        void Left(string table);
+        void InnerJoin(string table);
+        void LeftJoin(string table);
     }
 }

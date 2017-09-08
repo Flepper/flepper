@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class AliasOperator : BaseFlepperQueryBuilder, IAliasOperator
+    internal class AliasOperator : BaseQueryBuilder, IAliasOperator
     {
         public void As(string alias)
         {

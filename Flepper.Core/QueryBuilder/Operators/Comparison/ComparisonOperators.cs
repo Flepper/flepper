@@ -1,8 +1,9 @@
 ﻿using Flepper.Core.Base;
+using Flepper.Core.Utils.Extensions;
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class ComparisonOperators : BaseFlepperQueryBuilder, IComparisonOperators
+    internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
     {
         private static ComparisonOperators _instance;
 
@@ -17,14 +18,9 @@ namespace Flepper.Core.QueryBuilder
             return _instance;
         }
 
-        public void EqualTo(string value)
+        public void EqualTo(object value)
         {
-            Command.AppendFormat("= '{0}' ", value);
-        }
-
-        public void EqualTo(int value)
-        {
-            Command.AppendFormat("= {0} ", value);
+            Command.AppendFormat("= {0} ", value.InsertQuotationMarksIfDateOrString());
         }
 
         public void GreaterThan(int value)
@@ -32,14 +28,14 @@ namespace Flepper.Core.QueryBuilder
             Command.AppendFormat("> {0} ", value);
         }
 
-        public void LessThan(int value)
-        {
-            Command.AppendFormat("< {0}", value);
-        }
-
         public void GreaterThanOrEqualTo(int value)
         {
             Command.AppendFormat(">= {0} ", value);
+        }
+
+        public void LessThan(int value)
+        {
+            Command.AppendFormat("< {0} ", value);
         }
 
         public void LessThanOrEqualTo(int value)
@@ -47,14 +43,9 @@ namespace Flepper.Core.QueryBuilder
             Command.AppendFormat("<= {0} ", value);
         }
 
-        public void NotEqualTo(int value)
+        public void NotEqualTo(object value)
         {
-            Command.AppendFormat("<> {0} ", value);
-        }
-
-        public void NotEqualTo(string value)
-        {
-            Command.AppendFormat("<> '{0}' ", value);
+            Command.AppendFormat("<> {0} ", value.InsertQuotationMarksIfDateOrString());
         }
     }
 }

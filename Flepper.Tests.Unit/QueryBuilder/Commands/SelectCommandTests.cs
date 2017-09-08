@@ -53,6 +53,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");
 
+            
+
         }
     }
 }

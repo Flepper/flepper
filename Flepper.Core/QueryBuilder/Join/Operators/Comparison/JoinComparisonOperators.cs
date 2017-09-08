@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class JoinComparisonOperators : BaseFlepperQueryBuilder, IJoinComparisonOperators
+    internal class JoinComparisonOperators : BaseQueryBuilder, IJoinComparisonOperators
     {
         private static IJoinComparisonOperators _joinComparisonOperators;
 

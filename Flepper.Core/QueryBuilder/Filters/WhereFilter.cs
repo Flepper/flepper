@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class WhereFilter : BaseFlepperQueryBuilder, IWhereFilter
+    internal class WhereFilter : BaseQueryBuilder, IWhereFilter
     {
         public void Where(string field)
         {

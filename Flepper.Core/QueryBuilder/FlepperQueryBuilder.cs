@@ -1,14 +1,11 @@
-﻿
-using System;
-using Flepper.Core.Base;
+﻿using Flepper.Core.Base;
 using Flepper.Core.QueryBuilder.Commands.Interfaces;
-using Flepper.Core.QueryBuilder.Commands;
 
 namespace Flepper.Core.QueryBuilder
 {
     public static class FlepperQueryBuilder
     {
-        public static string Query => BaseFlepperQueryBuilder.Query;
+        public static string Query => BaseQueryBuilder.Query;
 
         public static ISelectCommand Select()
         {

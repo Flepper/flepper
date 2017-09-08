@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class LogicalOperators : BaseFlepperQueryBuilder, ILogicalOperators
+    internal class LogicalOperators : BaseQueryBuilder, ILogicalOperators
     {
         public void And(string column)
         {

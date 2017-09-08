@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Flepper.Core.Base
 {
-    public abstract class BaseFlepperQueryBuilder
+    public abstract class BaseQueryBuilder
     {
         protected static StringBuilder Command = new StringBuilder();
 

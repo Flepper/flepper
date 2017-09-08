@@ -2,7 +2,7 @@
 {
     public interface IValuesOperator
     {
-        void Values(params string[] values);
+        void Values(params object[] values);
     }
 
     

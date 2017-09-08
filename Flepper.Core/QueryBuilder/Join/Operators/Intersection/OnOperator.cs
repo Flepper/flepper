@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class OnOperator : BaseFlepperQueryBuilder, IIOnOperator
+    internal class OnOperator : BaseQueryBuilder, IIOnOperator
     {
         public void On(string tableAlias, string column)
         {

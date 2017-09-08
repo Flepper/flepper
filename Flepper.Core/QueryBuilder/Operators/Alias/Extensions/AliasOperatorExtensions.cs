@@ -13,7 +13,14 @@ namespace Flepper.Core.QueryBuilder
         public static IJoin InnerJoin(this IAliasOperator aliasOperator, string table)
         {
             var join = new Join();
-            join.Inner(table);
+            join.InnerJoin(table);
+            return join;
+        }
+
+        public static IJoin LeftJoin(this IAliasOperator aliasOperator, string table)
+        {
+            var join = new Join();
+            join.LeftJoin(table);
             return join;
         }
 
