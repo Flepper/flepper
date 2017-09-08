@@ -20,14 +20,14 @@ namespace Flepper.Core.QueryBuilder
             return new SelectCommand().Select(columns);
         }
 
-        public static IInsertCommand InsertInto(string table)
+        public static IInsertCommand Insert(string table)
         {
             return new InsertCommand().Insert(table);
         }
 
-        public static IInsertCommand InsertInto(string table,params string[] columns)
+        public static IInsertCommand Insert(string table, params string[] columns)
         {
-            return new InsertCommand().Insert(table,columns);
+            return new InsertCommand().Insert(table, columns);
         }
 
         public static IDeleteCommand Delete()

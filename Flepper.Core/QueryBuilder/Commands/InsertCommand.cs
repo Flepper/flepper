@@ -2,6 +2,7 @@
 using Flepper.Core.Base;
 using Flepper.Core.QueryBuilder.Commands.Interfaces;
 using System.Linq;
+using Flepper.Core.Utils.Extensions;
 
 namespace Flepper.Core.QueryBuilder.Commands
 {
@@ -20,11 +21,7 @@ namespace Flepper.Core.QueryBuilder.Commands
         {
             BeforeExecute();
 
-            var fields = columns
-              .Aggregate("", (current, column) => current + $"{column},");
-            fields = fields.Remove(fields.Length - 1, 1) + "";
-
-            Command.AppendFormat("INSERT INTO [{0}] ({1}) ", table, fields);
+            Command.AppendFormat("INSERT INTO [{0}] ({1}) ", table, columns.JoinColumns());
 
             return this;
         }
