@@ -12,7 +12,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateInsertStatementWithTable()
         {
-            FlepperQueryBuilder.InsertInto("Test");
+            FlepperQueryBuilder.Insert("Test");
 
             FlepperQueryBuilder
                 .Query
@@ -25,25 +25,25 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithColumns()
         {
             FlepperQueryBuilder
-                .InsertInto("Test", "column1", "column2");
+                .Insert("Test", "column1", "column2");
 
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
-                .Be("INSERT INTO [Test] (column1,column2)");
+                .Be("INSERT INTO [Test] ([column1],[column2] )");
         }
 
         [Fact]
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
             FlepperQueryBuilder
-            .InsertInto("Test", "column1", "column2")
+            .Insert("Test", "column1", "column2")
             .Values("'value1'","2");
 
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
-                .Be("INSERT INTO [Test] (column1,column2) VALUES ('value1',2)");
+                .Be("INSERT INTO [Test] ([column1],[column2] ) VALUES ('value1',2)");
 
         }
 
@@ -51,7 +51,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithValues()
         {
             FlepperQueryBuilder
-            .InsertInto("Test")
+            .Insert("Test")
             .Values("'value1'", "2");
 
             FlepperQueryBuilder.Query
