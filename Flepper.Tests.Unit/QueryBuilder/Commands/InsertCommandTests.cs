@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Flepper.Core.QueryBuilder.Commands.Extensions;
 using Xunit;
 using Flepper.Core.QueryBuilder;
 
@@ -38,7 +37,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder
             .Insert("Test", "column1", "column2")
-            .Values("'value1'","2");
+            .Values("value1", 2);
 
             FlepperQueryBuilder.Query
                 .Trim()
@@ -52,7 +51,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder
             .Insert("Test")
-            .Values("'value1'", "2");
+            .Values("value1", 2);
 
             FlepperQueryBuilder.Query
                 .Trim()

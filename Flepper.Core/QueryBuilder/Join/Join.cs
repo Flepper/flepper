@@ -2,14 +2,14 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class Join : BaseFlepperQueryBuilder, IJoin
+    internal class Join : BaseQueryBuilder, IJoin
     {
-        public void Inner(string table)
+        public void InnerJoin(string table)
         {
             Command.AppendFormat("INNER JOIN [{0}] ", table);
         }
 
-        public void Left(string table)
+        public void LeftJoin(string table)
         {
             Command.AppendFormat("LEFT JOIN [{0}] ", table);
         }

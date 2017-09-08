@@ -1,12 +1,10 @@
-﻿using System;
-using Flepper.Core.Base;
+﻿using Flepper.Core.Base;
 using Flepper.Core.QueryBuilder.Commands.Interfaces;
-using System.Linq;
 using Flepper.Core.Utils.Extensions;
 
-namespace Flepper.Core.QueryBuilder.Commands
+namespace Flepper.Core.QueryBuilder
 {
-    public class InsertCommand : BaseFlepperQueryBuilder, IInsertCommand
+    internal class InsertCommand : BaseQueryBuilder, IInsertCommand
     {
         public IInsertCommand Insert(string table)
         {

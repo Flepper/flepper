@@ -3,76 +3,56 @@ namespace Flepper.Core.QueryBuilder
 {
     public static class WhereFilterExtensions
     {
+        private static readonly ComparisonOperators ComparisonOperators = ComparisonOperators.Create();
+
         public static IComparisonOperators EqualTo(this IWhereFilter whereFilter, string value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
+            ComparisonOperators.EqualTo(value);
 
-            equalCompareOperator.EqualTo(value);
-
-            return equalCompareOperator;
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators EqualTo(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.EqualTo(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.EqualTo(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators GreaterThan(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
 
-            equalCompareOperator.GreaterThan(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.GreaterThan(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators LessThan(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.LessThan(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.LessThan(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators GreaterThanOrEqualTo(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.GreaterThanOrEqualTo(value);
-
-            return equalCompareOperator;
+             ComparisonOperators.GreaterThanOrEqualTo(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators LessThanOrEqualTo(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.LessThanOrEqualTo(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.LessThanOrEqualTo(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators NotEqualTo(this IWhereFilter whereFilter, int value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.NotEqualTo(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.NotEqualTo(value);
+            return ComparisonOperators;
         }
 
         public static IComparisonOperators NotEqualTo(this IWhereFilter whereFilter, string value)
         {
-            var equalCompareOperator = ComparisonOperators.Create();
-
-            equalCompareOperator.NotEqualTo(value);
-
-            return equalCompareOperator;
+            ComparisonOperators.NotEqualTo(value);
+            return ComparisonOperators;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.QueryBuilder
 {
-    public class UpdateCommand : BaseFlepperQueryBuilder, IUpdateCommand
+    internal class UpdateCommand : BaseQueryBuilder, IUpdateCommand
     {
         public IUpdateCommand Update(string table)
         {

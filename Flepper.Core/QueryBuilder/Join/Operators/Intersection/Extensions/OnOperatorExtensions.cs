@@ -3,7 +3,7 @@ namespace Flepper.Core.QueryBuilder
 {
     public static class OnOperatorExtensions
     {
-        public static IJoinComparisonOperators Equal(this IIOnOperator onOperator, string tableAlias, string column)
+        public static IJoinComparisonOperators EqualTo(this IIOnOperator onOperator, string tableAlias, string column)
         {
             var joinComparisonOperator = JoinComparisonOperators.Create();
 
@@ -12,7 +12,7 @@ namespace Flepper.Core.QueryBuilder
             return joinComparisonOperator;
         }
 
-        public static IJoinComparisonOperators NotEqual(this IIOnOperator onOperator, string tableAlias, string column)
+        public static IJoinComparisonOperators NotEqualTo(this IIOnOperator onOperator, string tableAlias, string column)
         {
             var joinComparisonOperator = JoinComparisonOperators.Create();
 

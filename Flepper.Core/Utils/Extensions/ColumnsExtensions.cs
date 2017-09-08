@@ -2,7 +2,7 @@
 
 namespace Flepper.Core.Utils.Extensions
 {
-    public static class ColumnsExtensions
+    internal static class ColumnsExtensions
     {
         public static string JoinColumns(this string[] columns)
         {
