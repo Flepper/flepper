@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <id>Flepper.Core</id>
+    <version>1.0.0-rc1</version>
+    <description>A library to facilitate some database interactions that we need to perform in our applications.</description>
+    <title>MVP Release</title>
+    <authors>Nicolas Takashi, Gustavo Fontes</authors>
+    <owners>Nicolas Takashi, Gustavo Fontes</owners>
+    <licenseUrl>https://github.com/nicolastakashi/flepper/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nicolastakashi/flepper</projectUrl>
+    <iconUrl>https://camo.githubusercontent.com/6a76ee7c5821ba36f91d2443c53bf141d1d53d77/68747470733a2f2f7332362e706f7374696d672e6f72672f7531686e32313371682f66726f675f3132382e706e67</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>A library to facilitate some database interactions that we need to perform in our applications. The initial idea of Flepper is to provide a query builder for writing SQL queries fluently, improving th</summary>
+    <releaseNotes>Query Builder with simple database operations</releaseNotes>
+    <copyright>Copyright 2017 (c) Flepper. All rights reserved.</copyright>
+    <language>en-US</language>
+    <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
+  </PropertyGroup>
+
+</Project>

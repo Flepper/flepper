@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Xunit;
-using Flepper.Core.QueryBuilder;
+using Flepper.QueryBuilder;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {

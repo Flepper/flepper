@@ -1,4 +1,4 @@
-﻿using Flepper.Core.QueryBuilder;
+﻿using Flepper.QueryBuilder;
 using FluentAssertions;
 using Xunit;
 
