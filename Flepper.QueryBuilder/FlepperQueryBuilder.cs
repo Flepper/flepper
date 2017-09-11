@@ -5,7 +5,7 @@ namespace Flepper.QueryBuilder
 {
     public static class FlepperQueryBuilder
     {
-        public static string Query => BaseQueryBuilder.Query;
+        public static string Query;
 
         public static ISelectCommand Select()
         {
@@ -40,6 +40,12 @@ namespace Flepper.QueryBuilder
         public static IUpdateCommand Update(string schema, string table)
         {
             return new UpdateCommand().Update(schema, table);
+        }
+
+        public static string Build()
+        {
+            Query = BaseQueryBuilder.Query;
+            return Query;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementForAllColumns()
         {
             FlepperQueryBuilder.Select().From("user");
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -22,7 +23,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -35,7 +36,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
                 .Where("Name").EqualTo("Nicolas");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -47,14 +48,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select()
                 .From("dbo", "user");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");
-
-            
-
         }
     }
 }

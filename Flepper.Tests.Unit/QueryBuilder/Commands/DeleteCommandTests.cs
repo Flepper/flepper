@@ -13,6 +13,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Delete().From("Test");
 
+            FlepperQueryBuilder.Build();
+
             FlepperQueryBuilder.Query
                 .Trim() 
                 .Should()
@@ -26,6 +28,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("Test")
                 .Where("Id")
                 .EqualTo(2);
+
+            FlepperQueryBuilder.Build();
 
             FlepperQueryBuilder.Query
                 .Trim()

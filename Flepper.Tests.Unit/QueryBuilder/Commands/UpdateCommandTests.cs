@@ -11,6 +11,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShoulCreateUpdateCommand()
         {
             FlepperQueryBuilder.Update("table");
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -21,6 +22,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShoulCreateUpdateCommandWithTableSchema()
         {
             FlepperQueryBuilder.Update("dbo","table");
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -32,7 +34,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column","value");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -45,7 +47,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
                 .Set("column", "value");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -60,7 +62,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Set("column", "value")
                 .Set("column", "value")
                 .Set("column", "value");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -73,7 +75,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
                 .Where("column").EqualTo("value");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()

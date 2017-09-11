@@ -12,7 +12,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select()
                 .From("user").Where("name");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -26,7 +26,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("user")
                 .Where("name")
                 .EqualTo("gustavo");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -41,7 +41,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Where("name")
                 .EqualTo("gustavo")
                 .And("age");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -57,7 +57,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .EqualTo("gustavo")
                 .And("age")
                 .EqualTo(26);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -70,7 +70,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").NotEqualTo("value");
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -83,7 +83,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").GreaterThan(1);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -96,7 +96,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").LessThan(1);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -109,7 +109,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").GreaterThanOrEqualTo(1);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -122,7 +122,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").LessThanOrEqualTo(1);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -135,7 +135,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").NotEqualTo(1);
-
+            FlepperQueryBuilder.Build();
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()

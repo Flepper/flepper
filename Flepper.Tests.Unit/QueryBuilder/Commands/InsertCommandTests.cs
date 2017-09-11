@@ -13,8 +13,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Insert("Test");
 
-            FlepperQueryBuilder
-                .Query
+            FlepperQueryBuilder.Build();
+
+            FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
                 .Be("INSERT INTO [Test]");
@@ -25,6 +26,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder
                 .Insert("Test", "column1", "column2");
+
+            FlepperQueryBuilder.Build();
 
             FlepperQueryBuilder.Query
                 .Trim()
@@ -39,6 +42,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             .Insert("Test", "column1", "column2")
             .Values("value1", 2);
 
+            FlepperQueryBuilder.Build();
+
             FlepperQueryBuilder.Query
                 .Trim()
                 .Should()
@@ -52,6 +57,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder
             .Insert("Test")
             .Values("value1", 2);
+
+            FlepperQueryBuilder.Build();
 
             FlepperQueryBuilder.Query
                 .Trim()

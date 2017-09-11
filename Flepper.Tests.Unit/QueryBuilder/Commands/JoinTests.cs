@@ -15,6 +15,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2");
 
+            FlepperQueryBuilder.Build();
+
             FlepperQueryBuilder.Query
                  .Trim()
                  .Should()
@@ -29,6 +31,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .EqualTo("t1", "column2");
+
+            FlepperQueryBuilder.Build();
 
             FlepperQueryBuilder.Query
                  .Trim()
@@ -45,6 +49,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .On("t2", "column1")
                 .NotEqualTo("t1", "column2");
 
+            FlepperQueryBuilder.Build();
+
             FlepperQueryBuilder.Query
                  .Trim()
                  .Should()
@@ -60,6 +66,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .On("t2", "column1")
                 .NotEqualTo("t1", "column2")
                 .Where("t1", "name").EqualTo("table");
+
+            FlepperQueryBuilder.Build();
 
             FlepperQueryBuilder.Query
                 .Trim()
