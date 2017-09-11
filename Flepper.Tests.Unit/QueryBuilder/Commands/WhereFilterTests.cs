@@ -117,7 +117,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
-        public void ShoulContainWhereWithLessThanOrEqualTo()
         {
             FlepperQueryBuilder.Select()
                 .From("table")
