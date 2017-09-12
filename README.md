@@ -22,6 +22,10 @@ dotnet add package Flepper
 
 After executing one of the commands above you will have the Flepper installed and ready to be used.
 
+### More about
+
+Access [Wiki](https://github.com/nicolastakashi/flepper/wiki/Get-Started#creating-queries) to learn more.
+
 ## Developing
 
 Here's a brief intro about what a developer must do in order to start developing
