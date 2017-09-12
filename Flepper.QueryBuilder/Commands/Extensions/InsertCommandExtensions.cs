@@ -2,10 +2,7 @@
 {
     public static class InsertCommandExtensions
     {
-      public static void Values(this IInsertCommand command, params object[] values)
-        {
-            var valuesOperator = new ValuesOperator();
-            valuesOperator.Values(values);
-        }
+        public static IValuesOperator Values(this IInsertCommand command, params object[] values) 
+            => command.To<ValuesOperator>().Values(values);
     }
 }

@@ -1,26 +1,14 @@
-﻿using Flepper.QueryBuilder;
-using Flepper.QueryBuilder.Base;
+﻿using Flepper.QueryBuilder.Base;
 using Flepper.QueryBuilder.Utils.Extensions;
 
 namespace Flepper.QueryBuilder
 {
     internal class SelectCommand : BaseQueryBuilder, ISelectCommand
     {
-        public ISelectCommand Select()
-        {
-            BeforeExecute();
+        public SelectCommand() 
+            => Command.Append("SELECT * ");
 
-            Command.Append("SELECT * ");
-            return this;
-        }
-
-        public ISelectCommand Select(params string[] columns)
-        {
-            BeforeExecute();
-
-            Command.AppendFormat("SELECT {0}", columns.JoinColumns());
-
-            return this;
-        }
+        public SelectCommand(params string[] columns) 
+            => Command.AppendFormat("SELECT {0}", columns.JoinColumns());
     }
 }

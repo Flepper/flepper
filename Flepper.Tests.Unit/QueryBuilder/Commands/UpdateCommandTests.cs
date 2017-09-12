@@ -10,9 +10,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulCreateUpdateCommand()
         {
-            FlepperQueryBuilder.Update("table");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+            FlepperQueryBuilder.Update("table")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [table]");
@@ -21,9 +20,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulCreateUpdateCommandWithTableSchema()
         {
-            FlepperQueryBuilder.Update("dbo","table");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+            FlepperQueryBuilder.Update("dbo", "table")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [dbo].[table]");
@@ -33,9 +31,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateUpdateCommandWithColumnAndValue()
         {
             FlepperQueryBuilder.Update("dbo", "table")
-                .Set("column","value");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .Set("column", "value")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [dbo].[table] SET [column] = 'value'");
@@ -46,9 +43,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
-                .Set("column", "value");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .Set("column", "value")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [dbo].[table] SET [column] = 'value' ,[column] = 'value'");
@@ -61,9 +57,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Set("column", "value")
                 .Set("column", "value")
                 .Set("column", "value")
-                .Set("column", "value");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .Set("column", "value")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [dbo].[table] SET [column] = 'value' ,[column] = 'value' ,[column] = 'value' ,[column] = 'value'");
@@ -74,9 +69,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
-                .Where("column").EqualTo("value");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .Where("column").EqualTo("value")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("UPDATE [dbo].[table] SET [column] = 'value' WHERE [column] = 'value'");

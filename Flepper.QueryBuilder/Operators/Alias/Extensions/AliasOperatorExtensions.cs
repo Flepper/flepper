@@ -1,34 +1,17 @@
-﻿
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     public static class AliasOperatorExtensions
     {
         public static IWhereFilter Where(this IAliasOperator aliasOperator, string field)
-        {
-            var whereFilter = new WhereFilter();
-            whereFilter.Where(field);
-            return whereFilter;
-        }
+            => aliasOperator.To<WhereFilter>().Where(field);
 
         public static IJoin InnerJoin(this IAliasOperator aliasOperator, string table)
-        {
-            var join = new Join();
-            join.InnerJoin(table);
-            return join;
-        }
+            => aliasOperator.To<Join>().InnerJoin(table);
 
         public static IJoin LeftJoin(this IAliasOperator aliasOperator, string table)
-        {
-            var join = new Join();
-            join.LeftJoin(table);
-            return join;
-        }
+            => aliasOperator.To<Join>().LeftJoin(table);
 
         public static IIOnOperator On(this IAliasOperator aliasOperator, string tableAlias, string column)
-        {
-            var onOperator = new OnOperator();
-            onOperator.On(tableAlias, column);
-            return onOperator;
-        }
+            => aliasOperator.To<OnOperator>().On(tableAlias, column);
     }
 }

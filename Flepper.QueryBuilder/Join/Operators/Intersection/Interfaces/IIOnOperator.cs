@@ -1,7 +1,7 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IIOnOperator
+    public interface IIOnOperator : IQueryCommand
     {
-        void On(string tableAlias, string column);
+        IIOnOperator On(string tableAlias, string column);
     }
 }

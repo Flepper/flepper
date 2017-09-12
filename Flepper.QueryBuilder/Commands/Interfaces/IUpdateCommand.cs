@@ -1,8 +1,6 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IUpdateCommand
+    public interface IUpdateCommand : IQueryCommand
     {
-        IUpdateCommand Update(string table);
-        IUpdateCommand Update(string schema, string table);
     }
 }

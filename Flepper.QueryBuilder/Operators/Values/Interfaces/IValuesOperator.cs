@@ -1,7 +1,7 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IValuesOperator
+    public interface IValuesOperator : IQueryCommand
     {
-        void Values(params object[] values);
+        IValuesOperator Values(params object[] values);
     }
 }
