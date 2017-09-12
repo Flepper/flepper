@@ -5,7 +5,7 @@ namespace Flepper.QueryBuilder.Base
 {
     internal abstract class BaseQueryBuilder : IQueryCommand
     {
-        private readonly StringBuilder Command;
+        protected readonly StringBuilder Command;
 
         protected BaseQueryBuilder()
             => Command = new StringBuilder();
