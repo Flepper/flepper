@@ -1,8 +1,8 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IJoin
+    public interface IJoin : IQueryCommand
     {
-        void InnerJoin(string table);
-        void LeftJoin(string table);
+        IJoin InnerJoin(string table);
+        IJoin LeftJoin(string table);
     }
 }

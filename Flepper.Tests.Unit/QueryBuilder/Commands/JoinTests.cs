@@ -13,14 +13,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
-                .InnerJoin("Table2").As("t2");
-
-            FlepperQueryBuilder.Build();
-
-            FlepperQueryBuilder.Query
-                 .Trim()
-                 .Should()
-                 .Contain("INNER JOIN [Table2] t2");
+                .InnerJoin("Table2").As("t2")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("INNER JOIN [Table2] t2");
         }
 
         [Fact]
@@ -30,14 +27,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
-                .EqualTo("t1", "column2");
-
-            FlepperQueryBuilder.Build();
-
-            FlepperQueryBuilder.Query
-                 .Trim()
-                 .Should()
-                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] = t1.[column2]");
+                .EqualTo("t1", "column2")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("INNER JOIN [Table2] t2 ON t2.[column1] = t1.[column2]");
         }
 
         [Fact]
@@ -47,14 +41,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
-                .NotEqualTo("t1", "column2");
-
-            FlepperQueryBuilder.Build();
-
-            FlepperQueryBuilder.Query
-                 .Trim()
-                 .Should()
-                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2]");
+                .NotEqualTo("t1", "column2")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2]");
         }
 
         [Fact]
@@ -65,11 +56,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .NotEqualTo("t1", "column2")
-                .Where("t1", "name").EqualTo("table");
-
-            FlepperQueryBuilder.Build();
-
-            FlepperQueryBuilder.Query
+                .Where("t1", "name").EqualTo("table")
+                .Build()
                 .Trim()
                 .Should()
                 .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");

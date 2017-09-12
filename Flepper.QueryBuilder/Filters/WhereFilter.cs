@@ -1,17 +1,24 @@
-﻿using Flepper.QueryBuilder.Base;
+﻿using System.Text;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
     internal class WhereFilter : BaseQueryBuilder, IWhereFilter
     {
-        public void Where(string field)
+        public WhereFilter(StringBuilder command) : base(command)
         {
-            Command.AppendFormat("WHERE [{0}] ", field);
         }
 
-        public void Where(string tableAlias, string field)
+        public IWhereFilter Where(string field)
+        {
+            Command.AppendFormat("WHERE [{0}] ", field);
+            return this;
+        }
+
+        public IWhereFilter Where(string tableAlias, string field)
         {
             Command.AppendFormat("WHERE {0}.[{1}] ", tableAlias, field);
+            return this;
         }
     }
 }

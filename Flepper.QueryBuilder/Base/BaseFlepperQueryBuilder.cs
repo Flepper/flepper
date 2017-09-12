@@ -5,10 +5,15 @@ namespace Flepper.QueryBuilder.Base
 {
     internal abstract class BaseQueryBuilder
     {
-        protected static StringBuilder Command = new StringBuilder();
+        internal readonly StringBuilder Command;
 
-        public static string Query => Command.ToString();
+        protected BaseQueryBuilder()
+            => Command = new StringBuilder();
 
-        protected static void BeforeExecute() => Command = new StringBuilder();
+        protected BaseQueryBuilder(StringBuilder command)
+            => Command = command;
+
+        public string Build()
+            => Command.ToString();
     }
 }

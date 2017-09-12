@@ -1,7 +1,6 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IDeleteCommand
+    public interface IDeleteCommand : IQueryCommand
     {
-        IDeleteCommand Delete();
     }
 }

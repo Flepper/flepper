@@ -1,30 +1,24 @@
-﻿using Flepper.QueryBuilder.Base;
+﻿using System.Text;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
     internal class JoinComparisonOperators : BaseQueryBuilder, IJoinComparisonOperators
     {
-        private static IJoinComparisonOperators _joinComparisonOperators;
-
-        private JoinComparisonOperators()
+        public JoinComparisonOperators(StringBuilder command) : base(command)
         {
         }
 
-        public static IJoinComparisonOperators Create()
-        {
-            if (_joinComparisonOperators is null) _joinComparisonOperators = new JoinComparisonOperators();
-
-            return _joinComparisonOperators;
-        }
-
-        public void Equal(string tableAlias, string column)
+        public IJoinComparisonOperators Equal(string tableAlias, string column)
         {
             Command.AppendFormat("= {0}.[{1}] ", tableAlias, column);
+            return this;
         }
 
-        public void NotEqual(string tableAlias, string column)
+        public IJoinComparisonOperators NotEqual(string tableAlias, string column)
         {
             Command.AppendFormat("<> {0}.[{1}] ", tableAlias, column);
+            return this;
         }
     }
 }

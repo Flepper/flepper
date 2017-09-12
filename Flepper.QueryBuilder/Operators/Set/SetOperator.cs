@@ -1,14 +1,18 @@
-﻿using Flepper.QueryBuilder.Base;
-using System;
+﻿using System;
+using System.Text;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
     internal class SetOperator : BaseQueryBuilder, ISetOperator
     {
+        public SetOperator(StringBuilder command) : base(command)
+        {
+        }
+
         public ISetOperator Set(string column, string value)
         {
             SetValue(column, $"'{value}'");
-
             return this;
         }
 
@@ -24,9 +28,9 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
-        private static void SetValue(string column, object value)
+        private void SetValue(string column, object value)
         {
-            Command.AppendFormat(Query.Contains("SET")
+            Command.AppendFormat(Command.ToString().Contains("SET")
                 ? ",[{0}] = {1} "
                 : "SET [{0}] = {1} ", column, value);
         }

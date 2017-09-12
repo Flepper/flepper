@@ -3,17 +3,9 @@
     public static class JoinComparisonOperatorsExtensions
     {
         public static IWhereFilter Where(this IJoinComparisonOperators joinComparisonOperators, string field)
-        {
-            var whereFilter = new WhereFilter();
-            whereFilter.Where(field);
-            return whereFilter;
-        }
+            => joinComparisonOperators.To<WhereFilter>().Where(field);
 
         public static IWhereFilter Where(this IJoinComparisonOperators joinComparisonOperators, string tableAlias, string field)
-        {
-            var whereFilter = new WhereFilter();
-            whereFilter.Where(tableAlias, field);
-            return whereFilter;
-        }
+            => joinComparisonOperators.To<WhereFilter>().Where(tableAlias, field);
     }
 }

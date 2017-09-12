@@ -1,8 +1,8 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IJoinComparisonOperators
+    public interface IJoinComparisonOperators : IQueryCommand
     {
-        void Equal(string column, string tableAlias);
-        void NotEqual(string column, string tableAlias);
+        IJoinComparisonOperators Equal(string column, string tableAlias);
+        IJoinComparisonOperators NotEqual(string column, string tableAlias);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IAliasOperator
+    public interface IAliasOperator : IQueryCommand
     {
-        void As(string alias);
+        IAliasOperator As(string alias);
     }
 }
