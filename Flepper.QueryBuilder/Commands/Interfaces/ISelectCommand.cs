@@ -1,8 +1,6 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface ISelectCommand
+    public interface ISelectCommand : IQueryCommand
     {
-        ISelectCommand Select();
-        ISelectCommand Select(params string[] columns);
     }
 }

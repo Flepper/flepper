@@ -5,22 +5,10 @@ namespace Flepper.QueryBuilder
 {
     internal class InsertCommand : BaseQueryBuilder, IInsertCommand
     {
-        public IInsertCommand Insert(string table)
-        {
-            BeforeExecute();
+        public InsertCommand(string table) 
+            => Command.AppendFormat("INSERT INTO [{0}] ", table);
 
-            Command.AppendFormat("INSERT INTO [{0}] ", table);
-
-            return this;
-        }
-
-        public IInsertCommand Insert(string table, string[] columns)
-        {
-            BeforeExecute();
-
-            Command.AppendFormat("INSERT INTO [{0}] ({1}) ", table, columns.JoinColumns());
-
-            return this;
-        }
+        public InsertCommand(string table, string[] columns) 
+            => Command.AppendFormat("INSERT INTO [{0}] ({1}) ", table, columns.JoinColumns());
     }
 }

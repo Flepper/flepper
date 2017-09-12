@@ -1,8 +1,8 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IWhereFilter
+    public interface IWhereFilter : IQueryCommand
     {
-        void Where(string field);
-        void Where(string tableAlias, string field);
+        IWhereFilter Where(string field);
+        IWhereFilter Where(string tableAlias, string field);
     }
 }

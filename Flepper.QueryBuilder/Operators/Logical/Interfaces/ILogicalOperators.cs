@@ -1,8 +1,8 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface ILogicalOperators
+    public interface ILogicalOperators : IQueryCommand
     {
-        void And(string column);
-        void Or(string column);
+        ILogicalOperators And(string column);
+        ILogicalOperators Or(string column);
     }
 }

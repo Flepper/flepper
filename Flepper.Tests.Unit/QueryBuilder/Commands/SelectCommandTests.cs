@@ -10,9 +10,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementForAllColumns()
         {
-            FlepperQueryBuilder.Select().From("user");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+            FlepperQueryBuilder.Select().From("user")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [user]");
@@ -22,9 +21,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithSpecificColumns()
         {
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
-                .From("user");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .From("user")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
@@ -35,9 +33,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
-                .Where("Name").EqualTo("Nicolas");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .Where("Name").EqualTo("Nicolas")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
@@ -47,9 +44,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithSchema()
         {
             FlepperQueryBuilder.Select()
-                .From("dbo", "user");
-            FlepperQueryBuilder.Build();
-            FlepperQueryBuilder.Query
+                .From("dbo", "user")
+                .Build()
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");

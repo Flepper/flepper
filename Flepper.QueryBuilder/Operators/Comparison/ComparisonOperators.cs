@@ -1,5 +1,4 @@
-﻿
-
+﻿using System.Text;
 using Flepper.QueryBuilder.Base;
 using Flepper.QueryBuilder.Utils.Extensions;
 
@@ -7,47 +6,44 @@ namespace Flepper.QueryBuilder
 {
     internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
     {
-        private static ComparisonOperators _instance;
-
-        private ComparisonOperators()
+        public ComparisonOperators(StringBuilder command) : base(command)
         {
         }
 
-        public static ComparisonOperators Create()
-        {
-            if (_instance is null) _instance = new ComparisonOperators();
-
-            return _instance;
-        }
-
-        public void EqualTo(object value)
+        public IComparisonOperators EqualTo(object value)
         {
             Command.AppendFormat("= {0} ", value.InsertQuotationMarksIfDateOrString());
+            return this;
         }
 
-        public void GreaterThan(int value)
+        public IComparisonOperators GreaterThan(int value)
         {
             Command.AppendFormat("> {0} ", value);
+            return this;
         }
 
-        public void GreaterThanOrEqualTo(int value)
+        public IComparisonOperators GreaterThanOrEqualTo(int value)
         {
             Command.AppendFormat(">= {0} ", value);
+            return this;
         }
 
-        public void LessThan(int value)
+        public IComparisonOperators LessThan(int value)
         {
             Command.AppendFormat("< {0} ", value);
+            return this;
         }
 
-        public void LessThanOrEqualTo(int value)
+        public IComparisonOperators LessThanOrEqualTo(int value)
         {
             Command.AppendFormat("<= {0} ", value);
+            return this;
         }
 
-        public void NotEqualTo(object value)
+        public IComparisonOperators NotEqualTo(object value)
         {
             Command.AppendFormat("<> {0} ", value.InsertQuotationMarksIfDateOrString());
+            return this;
         }
     }
 }

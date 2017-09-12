@@ -1,14 +1,26 @@
-﻿
+﻿using System;
 using System.Text;
 
 namespace Flepper.QueryBuilder.Base
 {
-    internal abstract class BaseQueryBuilder
+    internal abstract class BaseQueryBuilder : IQueryCommand
     {
-        protected static StringBuilder Command = new StringBuilder();
+        protected readonly StringBuilder Command;
 
-        public static string Query => Command.ToString();
+        protected BaseQueryBuilder()
+            => Command = new StringBuilder();
 
-        protected static void BeforeExecute() => Command = new StringBuilder();
+        protected BaseQueryBuilder(StringBuilder command)
+            => Command = command;
+
+        public string Build()
+            => Command.ToString();
+
+        public TEnd To<TEnd>()
+            where TEnd : IQueryCommand
+            => (TEnd)Activator.CreateInstance(typeof(TEnd), Command);
+
+        public TEnd To<TEnd>(Func<StringBuilder, TEnd> creator)
+            => creator(Command);
     }
 }

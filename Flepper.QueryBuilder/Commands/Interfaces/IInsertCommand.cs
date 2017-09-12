@@ -1,8 +1,6 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IInsertCommand
+    public interface IInsertCommand: IQueryCommand
     {
-        IInsertCommand Insert(string table);
-        IInsertCommand Insert(string table, string[] columns);
     }
 }

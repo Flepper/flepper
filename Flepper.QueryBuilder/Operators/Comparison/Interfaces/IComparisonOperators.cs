@@ -1,12 +1,12 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IComparisonOperators
+    public interface IComparisonOperators : IQueryCommand
     {
-        void EqualTo(object value);
-        void GreaterThan(int value);
-        void LessThan(int value);
-        void GreaterThanOrEqualTo(int value);
-        void LessThanOrEqualTo(int value);
-        void NotEqualTo(object value);
+        IComparisonOperators EqualTo(object value);
+        IComparisonOperators GreaterThan(int value);
+        IComparisonOperators LessThan(int value);
+        IComparisonOperators GreaterThanOrEqualTo(int value);
+        IComparisonOperators LessThanOrEqualTo(int value);
+        IComparisonOperators NotEqualTo(object value);
     }
 }

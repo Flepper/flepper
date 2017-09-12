@@ -1,8 +1,6 @@
 ﻿namespace Flepper.QueryBuilder
 {
-    public interface IFromCommand
+    public interface IFromCommand : IQueryCommand
     {
-        IFromCommand From(string schema, string table);
-        IFromCommand From(string table);
     }
 }

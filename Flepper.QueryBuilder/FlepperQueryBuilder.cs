@@ -1,51 +1,26 @@
-﻿
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     public static class FlepperQueryBuilder
     {
-        public static string Query;
-
         public static ISelectCommand Select()
-        {
-            return new SelectCommand().Select();
-        }
+            => new SelectCommand();
 
         public static ISelectCommand Select(params string[] columns)
-        {
-            return new SelectCommand().Select(columns);
-        }
+            => new SelectCommand(columns);
 
         public static IInsertCommand Insert(string table)
-        {
-            return new InsertCommand().Insert(table);
-        }
+            => new InsertCommand(table);
 
         public static IInsertCommand Insert(string table, params string[] columns)
-        {
-            return new InsertCommand().Insert(table, columns);
-        }
+            => new InsertCommand(table, columns);
 
         public static IDeleteCommand Delete()
-        {
-            return new DeleteCommand().Delete();
-        }
+            => new DeleteCommand();
 
         public static IUpdateCommand Update(string table)
-        {
-            return new UpdateCommand().Update(table);
-        }
+            => new UpdateCommand(table);
 
         public static IUpdateCommand Update(string schema, string table)
-        {
-            return new UpdateCommand().Update(schema, table);
-        }
-
-        public static string Build()
-        {
-            Query = BaseQueryBuilder.Query;
-            return Query;
-        }
+            => new UpdateCommand(schema, table);
     }
 }

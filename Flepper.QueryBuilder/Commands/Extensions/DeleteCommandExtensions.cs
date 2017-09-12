@@ -3,10 +3,6 @@
     public static class DeleteCommandExtensions
     {
         public static IFromCommand From(this IDeleteCommand deleteCommand, string table)
-        {
-            var fromCommand = new FromCommand();
-            fromCommand.From(table);
-            return fromCommand;
-        }
+            => deleteCommand.To(s => new FromCommand(s, table));
     }
 }
