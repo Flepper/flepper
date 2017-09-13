@@ -131,5 +131,29 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Contain("WHERE [field] <> 1");
         }
+
+        [Fact]
+        public void ShoulContainWhereWithEqualToNull()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").EqualTo(null)
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] IS NULL");
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithNotEqualToNull()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").NotEqualTo(null)
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("WHERE [field] IS NOT NULL");
+        }
     }
 }

@@ -12,7 +12,11 @@ namespace Flepper.QueryBuilder
 
         public IComparisonOperators EqualTo(object value)
         {
-            Command.AppendFormat("= {0} ", value.InsertQuotationMarksIfDateOrString());
+            if(value == null)
+                Command.AppendFormat("IS NULL ");
+            else
+                Command.AppendFormat("= {0} ", value.InsertQuotationMarksIfDateOrString());
+
             return this;
         }
 
@@ -42,7 +46,11 @@ namespace Flepper.QueryBuilder
 
         public IComparisonOperators NotEqualTo(object value)
         {
-            Command.AppendFormat("<> {0} ", value.InsertQuotationMarksIfDateOrString());
+            if (value == null)
+                Command.AppendFormat("IS NOT NULL ");
+            else
+                Command.AppendFormat("<> {0} ", value.InsertQuotationMarksIfDateOrString());
+
             return this;
         }
     }
