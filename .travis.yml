@@ -1,0 +1,16 @@
+language: csharp
+solution: Flepper.sln
+mono: none
+dotnet: 2.0.0
+script:
+  - dotnet restore
+  - dotnet build
+  - dotnet test Flepper.Tests.Unit/Flepper.Tests.Unit.csproj
+notifications:
+  email:
+    recipients:
+      - gustavo.ferrazfontes@gmail.com
+      - nicolas.tcs@hotmail.com
+      - alberto.monteiro@live.com
+    on_success: always
+    on_failure: always
