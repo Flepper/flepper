@@ -42,7 +42,7 @@ Addresses #bugnumber (in this specific format)
 
 ## Contribution Workflow
 
-You can contribute to .NET Core with issues and PRs. Simply filing issues for problems you encounter is a great way to contribute. Contributing implementations is greatly appreciated.
+You can contribute to Flepper Core with issues and PRs. Simply filing issues for problems you encounter is a great way to contribute. Contributing implementations is greatly appreciated.
 
 ## Suggested Workflow
 
