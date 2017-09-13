@@ -5,6 +5,21 @@ One of the easiest ways to contribute is to participate in discussions and discu
 ## General feedback and discussions?
 Please start a discussion on the [Home repo issue tracker](https://github.com/nicolastakashi/flepper/issues).
 
+## Filing issues
+When filing issues, please use our [issue templates](https://github.com/nicolastakashi/flepper/blob/contributing-md/ISSUE_TEMPLATE).
+The best way to get your bug fixed is to be as detailed as you can be about the problem.
+Providing a minimal project with steps to reproduce the problem is ideal.
+Here are questions you can answer before you file a bug to make sure you're not missing any important information.
+
+1. Did you read the [documentation](https://github.com/nicolastakashi/flepper/wiki)?
+2. Did you include the snippet of broken code in the issue?
+3. What are the *EXACT* steps to reproduce this problem?
+4. What package versions are you using (you can see these in the `.csproj` file)?
+5. What operating system are you using?
+6. What version of IIS are you using?
+
+GitHub supports [markdown](https://help.github.com/articles/github-flavored-markdown/), so when filing bugs make sure you check the formatting before clicking submit.
+
 ## Contributing code and content
 Make sure you can build the code. Familiarize yourself with the project workflow and our coding conventions. If you don't know what a pull request is read this article: https://help.github.com/articles/using-pull-requests.
 
