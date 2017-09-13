@@ -1,5 +1,12 @@
 ![Flepper Logo](https://s26.postimg.org/u1hn213qh/frog_128.png)
 
+
+| Branch  | status |
+| ------- | ------ |
+| Master  | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=master)
+| Development | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=development)  |
+
+
 # Flepper
 > A SQL query builder that is flexible and fun to use!
 
