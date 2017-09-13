@@ -16,7 +16,6 @@ Here are questions you can answer before you file a bug to make sure you're not 
 3. What are the *EXACT* steps to reproduce this problem?
 4. What package versions are you using (you can see these in the `.csproj` file)?
 5. What operating system are you using?
-6. What version of IIS are you using?
 
 GitHub supports [markdown](https://help.github.com/articles/github-flavored-markdown/), so when filing bugs make sure you check the formatting before clicking submit.
 
