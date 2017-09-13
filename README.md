@@ -44,8 +44,7 @@ Functionality implemented
 
 ## Contributing
 
-If you'd like to contribute, please fork the repository and use a feature
-branch. Pull requests are warmly welcome.
+Hey, are you in the mood to contribute to Flepper? Then take a look at our file where it explains how to [contribute](https://github.com/nicolastakashi/flepper/blob/contributing-md/CONTRIBUTING.md) and we love receiving feedback and pull requests.
 
 ## Licensing
 "The code in this project is licensed under [MIT] license."
