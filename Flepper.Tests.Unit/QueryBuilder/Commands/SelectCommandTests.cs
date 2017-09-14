@@ -84,14 +84,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreteSelectTop1WithWhereCondition()
         {
-            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .Top()
                 .From("user")
                 .Where("Name").EqualTo("Nicolas")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("SELECT TOP 1 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+                .Be("SELECT TOP 1 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("Nicolas", parameters.@p0);
         }
 
         [Fact]
@@ -107,14 +114,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreteSelectTop5WithWhereCondition()
         {
-            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .Top(5)
                 .From("user")
                 .Where("Name").EqualTo("Nicolas")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("SELECT TOP 5 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+                .Be("SELECT TOP 5 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("Nicolas", parameters.@p0);
         }
     }
 
