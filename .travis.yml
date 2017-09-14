@@ -7,6 +7,9 @@ script:
   - dotnet build
   - dotnet test Flepper.Tests.Unit/Flepper.Tests.Unit.csproj
 notifications:
+  slack:
+    rooms:
+      - brasildotnet:hfolzaVNSDEKWPSRU6LgiQyj#flepper
   email:
     recipients:
       - gustavo.ferrazfontes@gmail.com
@@ -14,3 +17,5 @@ notifications:
       - alberto.monteiro@live.com
     on_success: always
     on_failure: always
+
+      
