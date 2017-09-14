@@ -13,9 +13,7 @@ namespace Flepper.QueryBuilder
 
         public IValuesOperator Values(params object[] values)
         {
-            var parametersCount = AddParameters(values);
-
-            Command.AppendFormat("VALUES ({0})", string.Join(", ", Parameters.Skip(parametersCount).Select(p => p.Key)));
+            Command.AppendFormat("VALUES ({0})", string.Join(", ", Parameters.Skip(AddParameters(values)).Select(p => p.Key)));
             return this;
         }
     }
