@@ -1,4 +1,5 @@
-﻿using Flepper.QueryBuilder;
+﻿using System;
+using Flepper.QueryBuilder;
 using FluentAssertions;
 using Xunit;
 
@@ -41,6 +42,18 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShoudCreateSelectWithColumnsOfType()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>()
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
+        }
+
+        [Fact]
         public void ShouldCreateSelectStatementWithSchema()
         {
             FlepperQueryBuilder.Select()
@@ -50,5 +63,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");
         }
+    }
+
+    public class UserDto
+    {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime Birthday { get; set; }
     }
 }
