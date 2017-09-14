@@ -21,7 +21,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithColumns()
         {
             FlepperQueryBuilder
-                .Insert().Into("Test", "column1", "column2")
+                .Insert().Into("Test")
+                .Columns("column1", "column2")
                 .Build()
                 .Trim()
                 .Should()
@@ -32,7 +33,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Insert().Into("Test", "column1", "column2")
+                .Insert().Into("Test")
+                .Columns("column1", "column2")
                 .Values("value1", 2)
                 .BuildWithParameters();
 
