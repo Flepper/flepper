@@ -7,11 +7,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
     [Collection("CommandTests")]
     public class InsertCommandTests
     {
-
         [Fact]
         public void ShouldCreateInsertStatementWithTable()
         {
-            FlepperQueryBuilder.Insert("Test")
+            FlepperQueryBuilder.Insert().Into("Test")
                 .Build()
                 .Trim()
                 .Should()
@@ -22,7 +21,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithColumns()
         {
             FlepperQueryBuilder
-                .Insert("Test", "column1", "column2")
+                .Insert().Into("Test")
+                .Columns("column1", "column2")
                 .Build()
                 .Trim()
                 .Should()
@@ -33,7 +33,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Insert("Test", "column1", "column2")
+                .Insert().Into("Test")
+                .Columns("column1", "column2")
                 .Values("value1", 2)
                 .BuildWithParameters();
 
@@ -53,7 +54,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateInsertStatementWithValues()
         {
             var queryResult = FlepperQueryBuilder
-                .Insert("Test")
+                .Insert().Into("Test")
                 .Values("value1", 2)
                 .BuildWithParameters();
 

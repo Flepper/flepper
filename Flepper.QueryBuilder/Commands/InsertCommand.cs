@@ -3,12 +3,18 @@ using Flepper.QueryBuilder.Utils.Extensions;
 
 namespace Flepper.QueryBuilder
 {
-    internal class InsertCommand : BaseQueryBuilder, IInsertCommand
+    internal class InsertCommand : BaseQueryBuilder, IInsertCommand, IInsertIntoCommand
     {
-        public InsertCommand(string table) 
-            => Command.AppendFormat("INSERT INTO [{0}] ", table);
+        public IInsertIntoCommand Into(string table)
+        {
+            Command.AppendFormat("INSERT INTO [{0}] ", table);
+            return this;
+        }
 
-        public InsertCommand(string table, string[] columns) 
-            => Command.AppendFormat("INSERT INTO [{0}] ({1}) ", table, columns.JoinColumns());
+        public IInsertIntoCommand Columns(params string[] columns)
+        {
+            Command.AppendFormat("({0}) ", columns.JoinColumns());
+            return this;
+        }
     }
 }
