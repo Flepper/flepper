@@ -1,46 +1,46 @@
-﻿using System.Text;
+using System.Collections.Generic;
+using System.Text;
 using Flepper.QueryBuilder.Base;
-using Flepper.QueryBuilder.Utils.Extensions;
 
 namespace Flepper.QueryBuilder
 {
     internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
     {
-        public ComparisonOperators(StringBuilder command) : base(command)
+        public ComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
         {
         }
 
         public IComparisonOperators EqualTo(object value)
         {
-            if(value == null)
+            if (value == null)
                 Command.AppendFormat("IS NULL ");
             else
-                Command.AppendFormat("= {0} ", value.InsertQuotationMarksIfDateOrString());
+                Command.Append($"= @p{AddParameters(value)} ");
 
             return this;
         }
 
         public IComparisonOperators GreaterThan(int value)
         {
-            Command.AppendFormat("> {0} ", value);
+            Command.Append($"> @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators GreaterThanOrEqualTo(int value)
         {
-            Command.AppendFormat(">= {0} ", value);
+            Command.Append($">= @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators LessThan(int value)
         {
-            Command.AppendFormat("< {0} ", value);
+            Command.Append($"< @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators LessThanOrEqualTo(int value)
         {
-            Command.AppendFormat("<= {0} ", value);
+            Command.Append($"<= @p{AddParameters(value)} ");
             return this;
         }
 
@@ -49,7 +49,7 @@ namespace Flepper.QueryBuilder
             if (value == null)
                 Command.AppendFormat("IS NOT NULL ");
             else
-                Command.AppendFormat("<> {0} ", value.InsertQuotationMarksIfDateOrString());
+                Command.Append($"<> @p{AddParameters(value)} ");
 
             return this;
         }

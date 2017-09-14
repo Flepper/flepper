@@ -51,16 +51,22 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldReturnInnerJoinWithWhereStatement()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("Table1").As("t1")
                 .InnerJoin("Table2").As("t2")
                 .On("t2", "column1")
                 .NotEqualTo("t1", "column2")
                 .Where("t1", "name").EqualTo("table")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult.Query
                 .Trim()
                 .Should()
-                .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = 'table'");
+                .Contain("INNER JOIN [Table2] t2 ON t2.[column1] <> t1.[column2] WHERE t1.[name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("table", parameters.@p0);
         }
     }
 }

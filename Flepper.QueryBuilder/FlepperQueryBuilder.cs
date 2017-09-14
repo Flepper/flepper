@@ -1,4 +1,7 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System.Linq;
+using Flepper.QueryBuilder.Utils;
+
+namespace Flepper.QueryBuilder
 {
     public static class FlepperQueryBuilder
     {
@@ -7,6 +10,9 @@
 
         public static ISelectCommand Select(params string[] columns)
             => new SelectCommand(columns);
+
+        public static ISelectCommand Select<T>() where T : class
+            => new SelectCommand(Cache.GetDtoProperties<T>());
 
         public static IInsertCommand Insert(string table)
             => new InsertCommand(table);

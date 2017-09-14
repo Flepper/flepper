@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 using System.Text;
 using Flepper.QueryBuilder.Base;
 
@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class Join : BaseQueryBuilder, IJoin
     {
-        public Join(StringBuilder command) : base(command)
+        public Join(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
         {
         }
 

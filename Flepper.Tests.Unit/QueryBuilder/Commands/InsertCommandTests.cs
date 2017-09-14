@@ -32,25 +32,40 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
-            FlepperQueryBuilder
+            var queryResult = FlepperQueryBuilder
                 .Insert("Test", "column1", "column2")
                 .Values("value1", 2)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("INSERT INTO [Test] ([column1],[column2] ) VALUES ('value1',2)");
+                .Be("INSERT INTO [Test] ([column1],[column2] ) VALUES (@p0, @p1)");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value1", parameters.@p0);
+            Assert.Equal(2, parameters.@p1);
         }
 
         [Fact]
         public void ShouldCreateInsertStatementWithValues()
         {
-            FlepperQueryBuilder
+            var queryResult = FlepperQueryBuilder
                 .Insert("Test")
                 .Values("value1", 2)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult.Query
                 .Trim()
                 .Should()
-                .Be("INSERT INTO [Test] VALUES ('value1',2)");
+                .Be("INSERT INTO [Test] VALUES (@p0, @p1)");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value1", parameters.@p0);
+            Assert.Equal(2, parameters.@p1);
         }
     }
 }

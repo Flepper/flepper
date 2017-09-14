@@ -21,115 +21,181 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldContainsWhereWithComparisonOperatos()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .EqualTo("gustavo")
-                .Build()
+                .BuildWithParameters();
+
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [name] = 'gustavo'");
+                .Contain("WHERE [name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("gustavo", parameters.@p0);
         }
 
         [Fact]
         public void ShouldContainsWhereWithLogicalOperator()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .EqualTo("gustavo")
                 .And("age")
-                .Build()
+                .BuildWithParameters();
+
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [name] = 'gustavo' AND [age]");
+                .Contain("WHERE [name] = @p0 AND [age]");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("gustavo", parameters.@p0);
         }
 
         [Fact]
         public void ShouldContainsWhereWithLogicalOperatorWithComparisonOperators()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("user")
                 .Where("name")
                 .EqualTo("gustavo")
                 .And("age")
                 .EqualTo(26)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [name] = 'gustavo' AND [age] = 26");
+                .Contain("WHERE [name] = @p0 AND [age] = @p1");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("gustavo", parameters.@p0);
+            Assert.Equal(26, parameters.@p1);
         }
 
         [Fact]
         public void ShoulContainWhereWithNotEqual()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").NotEqualTo("value")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] <> 'value'");
+                .Contain("WHERE [field] <> @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value", parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainWhereWithGreaterThan()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").GreaterThan(1)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] > 1");
+                .Contain("WHERE [field] > @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainWhereWithLessThan()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").LessThan(1)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] < 1");
+                .Contain("WHERE [field] < @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainWhereWithGreaterThanOrEqualTo()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").GreaterThanOrEqualTo(1)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] >= 1");
+                .Contain("WHERE [field] >= @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainWhereWithLessThanOrEqualTo()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").LessThanOrEqualTo(1)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] <= 1");
+                .Contain("WHERE [field] <= @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainWhereWithNotEqualTo()
         {
-            FlepperQueryBuilder.Select()
+            var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").NotEqualTo(1)
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [field] <> 1");
+                .Contain("WHERE [field] <> @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
         }
 
         [Fact]

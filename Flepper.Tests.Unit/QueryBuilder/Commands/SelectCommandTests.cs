@@ -1,4 +1,5 @@
-﻿using Flepper.QueryBuilder;
+﻿using System;
+using Flepper.QueryBuilder;
 using FluentAssertions;
 using Xunit;
 
@@ -31,13 +32,32 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
-            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
                 .Where("Name").EqualTo("Nicolas")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("Nicolas", parameters.@p0);
+        }
+
+        [Fact]
+        public void ShoudCreateSelectWithColumnsOfType()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>()
+                .From("user")
                 .Build()
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
         }
 
         [Fact]
@@ -96,5 +116,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT TOP 5 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
         }
+    }
+
+    public class UserDto
+    {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime Birthday { get; set; }
     }
 }

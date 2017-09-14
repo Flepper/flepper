@@ -10,8 +10,5 @@
 
         public static ITopCommand Top(this ISelectCommand selectCommand, int size = 1)
             => selectCommand.To(s => new TopCommand(s, size));
-
-
-
     }
 }
