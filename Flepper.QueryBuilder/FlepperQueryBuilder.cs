@@ -12,7 +12,7 @@ namespace Flepper.QueryBuilder
             => new SelectCommand(columns);
 
         public static ISelectCommand Select<T>() where T : class
-            => new SelectCommand(CacheUtils.GetDtoProperties<T>());
+            => new SelectCommand(Cache.GetDtoProperties<T>());
 
         public static IInsertCommand Insert(string table)
             => new InsertCommand(table);
