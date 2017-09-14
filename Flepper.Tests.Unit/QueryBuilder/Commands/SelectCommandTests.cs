@@ -70,6 +70,52 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT * FROM [dbo].[user]");
         }
+
+        [Fact]
+        public void ShouldCreateSelectTop1StatementForAllColumns()
+        {
+            FlepperQueryBuilder.Select().Top().From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT TOP 1 * FROM [user]");
+        }
+
+        [Fact]
+        public void ShouldCreteSelectTop1WithWhereCondition()
+        {
+            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .Top()
+                .From("user")
+                .Where("Name").EqualTo("Nicolas")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT TOP 1 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectTop5StatementForAllColumns()
+        {
+            FlepperQueryBuilder.Select().Top(5).From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT TOP 5 * FROM [user]");
+        }
+
+        [Fact]
+        public void ShouldCreteSelectTop5WithWhereCondition()
+        {
+            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .Top(5)
+                .From("user")
+                .Where("Name").EqualTo("Nicolas")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT TOP 5 [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+        }
     }
 
     public class UserDto
