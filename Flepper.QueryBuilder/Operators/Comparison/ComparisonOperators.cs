@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 using Flepper.QueryBuilder.Base;
 
@@ -15,39 +15,32 @@ namespace Flepper.QueryBuilder
             if (value == null)
                 Command.AppendFormat("IS NULL ");
             else
-            {
-                var parameter = AddParameters(value);
-                Command.Append($"= @p{parameter} ");
-            }
+                Command.Append($"= @p{AddParameters(value)} ");
 
             return this;
         }
 
         public IComparisonOperators GreaterThan(int value)
         {
-            var parameter = AddParameters(value);
-            Command.Append($"> @p{parameter} ");
+            Command.Append($"> @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators GreaterThanOrEqualTo(int value)
         {
-            var parameter = AddParameters(value);
-            Command.Append($">= @p{parameter} ");
+            Command.Append($">= @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators LessThan(int value)
         {
-            var parameter = AddParameters(value);
-            Command.Append($"< @p{parameter} ");
+            Command.Append($"< @p{AddParameters(value)} ");
             return this;
         }
 
         public IComparisonOperators LessThanOrEqualTo(int value)
         {
-            var parameter = AddParameters(value);
-            Command.Append($"<= @p{parameter} ");
+            Command.Append($"<= @p{AddParameters(value)} ");
             return this;
         }
 
@@ -56,10 +49,7 @@ namespace Flepper.QueryBuilder
             if (value == null)
                 Command.AppendFormat("IS NOT NULL ");
             else
-            {
-                var parameter = AddParameters(value);
-                Command.Append($"<> @p{parameter} ");
-            }
+                Command.Append($"<> @p{AddParameters(value)} ");
 
             return this;
         }
