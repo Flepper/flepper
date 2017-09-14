@@ -21,14 +21,20 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateDeleteStatementWithWhere()
         {
-            FlepperQueryBuilder.Delete()
+            var build = FlepperQueryBuilder.Delete()
                 .From("Test")
                 .Where("Id")
                 .EqualTo(2)
-                .Build()
+                .BuildWithParameters();
+
+            build.Query
                 .Trim()
                 .Should()
-                .Be("DELETE FROM [Test] WHERE [Id] = 2");
+                .Be("DELETE FROM [Test] WHERE [Id] = @p0");
+
+            dynamic parameters = build.Parameters;
+
+            Assert.Equal(2, parameters.@p0);
         }
     }
 }

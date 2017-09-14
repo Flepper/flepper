@@ -1,11 +1,12 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
     internal class JoinComparisonOperators : BaseQueryBuilder, IJoinComparisonOperators
     {
-        public JoinComparisonOperators(StringBuilder command) : base(command)
+        public JoinComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
         {
         }
 

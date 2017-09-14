@@ -19,4 +19,8 @@
     <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+  </ItemGroup>
+
 </Project>

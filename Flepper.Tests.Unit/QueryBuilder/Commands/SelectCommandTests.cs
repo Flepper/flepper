@@ -31,13 +31,20 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
-            FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
                 .Where("Name").EqualTo("Nicolas")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = 'Nicolas'");
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("Nicolas", parameters.@p0);
         }
 
         [Fact]

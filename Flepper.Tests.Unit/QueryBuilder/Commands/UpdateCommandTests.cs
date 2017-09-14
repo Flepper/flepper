@@ -30,50 +30,83 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateUpdateCommandWithColumnAndValue()
         {
-            FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("UPDATE [dbo].[table] SET [column] = 'value'");
+                .Be("UPDATE [dbo].[table] SET [column] = @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value", parameters.@p0);
         }
 
         [Fact]
         public void ShouldCreateUpdateCommandWithTwoColumnAndValues()
         {
-            FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
                 .Set("column", "value")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("UPDATE [dbo].[table] SET [column] = 'value' ,[column] = 'value'");
+                .Be("UPDATE [dbo].[table] SET [column] = @p0 ,[column] = @p1");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value", parameters.@p0);
+            Assert.Equal("value", parameters.@p1);
         }
 
         [Fact]
         public void ShouldCreateUpdateCommandWithMutiplesColumnAndValues()
         {
-            FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
                 .Set("column", "value")
                 .Set("column", "value")
                 .Set("column", "value")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("UPDATE [dbo].[table] SET [column] = 'value' ,[column] = 'value' ,[column] = 'value' ,[column] = 'value'");
+                .Be("UPDATE [dbo].[table] SET [column] = @p0 ,[column] = @p1 ,[column] = @p2 ,[column] = @p3");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value", parameters.@p0);
+            Assert.Equal("value", parameters.@p1);
+            Assert.Equal("value", parameters.@p2);
+            Assert.Equal("value", parameters.@p3);
         }
 
         [Fact]
         public void ShouldCreateUpdateCommandWithWhereCondition()
         {
-            FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
                 .Set("column", "value")
                 .Where("column").EqualTo("value")
-                .Build()
+                .BuildWithParameters();
+
+            queryResult
+                .Query
                 .Trim()
                 .Should()
-                .Be("UPDATE [dbo].[table] SET [column] = 'value' WHERE [column] = 'value'");
+                .Be("UPDATE [dbo].[table] SET [column] = @p0 WHERE [column] = @p1");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value", parameters.@p0);
+            Assert.Equal("value", parameters.@p1);
         }
     }
 }
