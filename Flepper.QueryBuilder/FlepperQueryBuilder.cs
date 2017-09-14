@@ -8,6 +8,18 @@
         public static ISelectCommand Select(params string[] columns)
             => new SelectCommand(columns);
 
+        public static ISelectTopCommand SelectTop()
+            => new SelectTopCommand();
+
+        public static ISelectTopCommand SelectTop(int numberLines)
+            => new SelectTopCommand(numberLines);
+
+        public static ISelectTopCommand SelectTop(params string[] columns)
+            => new SelectTopCommand(columns);
+
+        public static ISelectTopCommand SelectTop(int numberLines, params string[] columns)
+            => new SelectTopCommand(numberLines, columns);
+
         public static IInsertCommand Insert(string table)
             => new InsertCommand(table);
 

@@ -3,7 +3,7 @@ using Flepper.QueryBuilder.Utils.Extensions;
 
 namespace Flepper.QueryBuilder
 {
-    internal class SelectTopCommand : BaseQueryBuilder, ISelectCommand
+    internal class SelectTopCommand : BaseQueryBuilder, ISelectTopCommand
     {
         public SelectTopCommand() => Command.Append("SELECT TOP 1 * ");
 
