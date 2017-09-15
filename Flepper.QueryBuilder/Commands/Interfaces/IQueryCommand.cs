@@ -16,7 +16,7 @@ namespace Flepper.QueryBuilder
         string Build();
 
         /// <summary>
-        /// Build a query
+        /// Build a query with parameters
         /// </summary>
         /// <returns></returns>
         QueryResult BuildWithParameters();
