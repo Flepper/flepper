@@ -27,7 +27,7 @@
         /// Add Left Join Operator to query
         /// </summary>
         /// <param name="aliasOperator">Alias Operator instance</param>
-        /// <param name="table">Column Name</param>
+        /// <param name="table">Table Name</param>
         /// <returns></returns>
         public static IJoin LeftJoin(this IAliasOperator aliasOperator, string table)
             => aliasOperator.To<Join>().LeftJoin(table);
