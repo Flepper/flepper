@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <id>Flepper.Core</id>
-    <version>1.0.0-rc1</version>
+    <version>1.0.0</version>
     <description>A library to facilitate some database interactions that we need to perform in our applications.</description>
     <title>MVP Release</title>
     <authors>Nicolas Takashi, Gustavo Fontes</authors>
