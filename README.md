@@ -42,12 +42,16 @@ the project further:
 git clone https://github.com/nicolastakashi/flepper
 cd flepper/
 dotnet restore
+dotnet build
 ```
 
 ## Features
 Functionality implemented
 * Query Builder
 
+### Database support
+Currently supported databases
+* MSSQL 2008 or greater
 
 ## Contributing
 
