@@ -29,7 +29,7 @@
         /// Add Top Command
         /// </summary>
         /// <param name="selectCommand">Select Command instance</param>
-        /// <param name="size">Quantity of columns</param>
+        /// <param name="size">Size of records</param>
         /// <returns></returns>
         public static ITopCommand Top(this ISelectCommand selectCommand, int size = 1)
             => selectCommand.To((s, p) => new TopCommand(s, p, size));
