@@ -8,7 +8,7 @@
         /// <summary>
         /// Values Operator Contract
         /// </summary>
-        /// <param name="values">Values</param>
+        /// <param name="values">Array of values</param>
         /// <returns></returns>
         IValuesOperator Values(params object[] values);
     }
