@@ -24,7 +24,7 @@
             => fromCommand.To<Join>().InnerJoin(table);
 
         /// <summary>
-        /// Add Inner Join to query
+        /// Add Left Join to query
         /// </summary>
         /// <param name="fromCommand">From command instance</param>
         /// <param name="table">Table name</param>
