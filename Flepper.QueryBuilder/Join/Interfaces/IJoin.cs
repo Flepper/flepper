@@ -1,7 +1,7 @@
 ﻿namespace Flepper.QueryBuilder
 {
     /// <summary>
-    /// Join Interfaced
+    /// Join Interface
     /// </summary>
     public interface IJoin : IQueryCommand
     {
