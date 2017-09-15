@@ -19,6 +19,15 @@
     <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Flepper.QueryBuilder.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Flepper.QueryBuilder.xml</DocumentationFile>
+    <WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
