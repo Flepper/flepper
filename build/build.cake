@@ -13,7 +13,11 @@ Task("Default").Does(() =>
     Information("Hello World!");
 });
 
-Task("Coverage").IsDependentOn("build").Does(() =>
+Task("CiBuild").IsDependentOn("Coverage").IsDependentOn("NugetPack").Does(() =>
+{
+});
+
+Task("Coverage").IsDependentOn("Build").Does(() =>
 {
     var settings = new OpenCoverSettings()
     {
