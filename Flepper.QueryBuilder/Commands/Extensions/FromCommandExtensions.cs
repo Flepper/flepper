@@ -44,19 +44,19 @@
         /// <summary>
         /// OrderBy to query
         /// </summary>
-        /// /// <param name="fromCommand">From command instance</param>
+        /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="columns">Columns</param>
         /// <returns></returns>
-        public static ISort OrderBy(this IQueryCommand fromCommand, params string[] columns)
-            => fromCommand.To<Sort>().OrderBy(columns);
+        public static ISort OrderBy(this ISortCommand sortCommand, params string[] columns)
+            => sortCommand.To<Sort>().OrderBy(columns);
 
         /// <summary>
         /// OrderBy descending to query
         /// </summary>
-        /// /// <param name="fromCommand">From command instance</param>
+        /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="columns">Columns</param>
         /// <returns></returns>
-        public static ISort OrderByDesc(this IQueryCommand fromCommand, params string[] columns)
-            => fromCommand.To<Sort>().OrderByDesc(columns);
+        public static ISort OrderByDesc(this ISortCommand sortCommand, params string[] columns)
+            => sortCommand.To<Sort>().OrderByDesc(columns);
     }
 }

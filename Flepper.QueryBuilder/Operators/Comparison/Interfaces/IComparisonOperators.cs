@@ -3,7 +3,7 @@
     /// <summary>
     /// Comparison Operator Interface
     /// </summary>
-    public interface IComparisonOperators : IQueryCommand
+    public interface IComparisonOperators : IQueryCommand, ISortCommand
     {
         /// <summary>
         /// Equal Comparison Operator Contract
