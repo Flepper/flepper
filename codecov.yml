@@ -1,2 +1,2 @@
 fixes:
-  - "build/*::"        # reduce root e.g., "build/path/" => "path/"
+  - "build/::"        # reduce root e.g., "build/path/" => "path/"
