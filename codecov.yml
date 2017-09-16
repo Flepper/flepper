@@ -1,2 +1,0 @@
-fixes:
-  - "build/::Flepper.QueryBuilder/"        # reduce root e.g., "build/path/" => "path/"
