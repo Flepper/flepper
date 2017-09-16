@@ -14,7 +14,7 @@ build_script:
 - ps: >-
     cd .\build
 
-    .\build.ps1 -Target Coverage
+    .\build.ps1 -Target CiBuild
 test: off
 deploy:
 - provider: NuGet
