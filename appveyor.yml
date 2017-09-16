@@ -1,0 +1,39 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - development
+  - master
+image: Visual Studio 2017
+environment:
+  COVERALLS_REPO_TOKEN: AcN0gpsByT9yr0hAhaqBfFWZqNnbyVupI
+nuget:
+  disable_publish_on_pr: true
+build_script:
+- ps: >-
+    cd .\build
+
+    .\build.ps1 -Target CiBuild
+test: off
+deploy:
+- provider: NuGet
+  api_key:
+    secure: kZUVWGIVKz18NJ+ieIU5XoP4CP9XNSmo8P/uowchBGOojbOR/Oyx60E37OBH9Op6
+  artifact: ./artifacts*.*
+  on:
+    branch: master
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false
+- provider: Email
+  to:
+  - gustavo.ferrazfontes@gmail.com
+  - nicolas.tcs@hotmail.com
+  - alberto.monteiro@live.com
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false

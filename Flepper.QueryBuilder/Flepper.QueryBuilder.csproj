@@ -6,8 +6,8 @@
     <version>1.0.0</version>
     <description>A library to facilitate some database interactions that we need to perform in our applications.</description>
     <title>MVP Release</title>
-    <authors>Nicolas Takashi, Gustavo Fontes</authors>
-    <owners>Nicolas Takashi, Gustavo Fontes</owners>
+    <authors>Nicolas Takashi, Gustavo Fontes, Alberto Monteiro</authors>
+    <owners>Nicolas Takashi, Gustavo Fontes, Alberto Monteiro</owners>
     <licenseUrl>https://github.com/nicolastakashi/flepper/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/nicolastakashi/flepper</projectUrl>
     <iconUrl>https://camo.githubusercontent.com/6a76ee7c5821ba36f91d2443c53bf141d1d53d77/68747470733a2f2f7332362e706f7374696d672e6f72672f7531686e32313371682f66726f675f3132382e706e67</iconUrl>
@@ -17,10 +17,8 @@
     <copyright>Copyright 2017 (c) Flepper. All rights reserved.</copyright>
     <language>en-US</language>
     <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Flepper.QueryBuilder.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,6 +26,10 @@
     <WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Flepper.QueryBuilder.xml</DocumentationFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
