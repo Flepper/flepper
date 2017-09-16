@@ -1,7 +1,4 @@
-
-#addin Cake.Coveralls
 #addin nuget:?package=Cake.Codecov
-#tool coveralls.net
 #tool nuget:?package=Codecov
 #tool "nuget:?package=OpenCover"
 #tool "nuget:?package=xunit.runner.console&version=2.2.0"
@@ -34,7 +31,6 @@ Task("Coverage").IsDependentOn("Build").Does(() =>
     OpenCover(t => t.DotNetCoreTest(testProject, testSettings), new FilePath("./coverage.xml"), settings);
 
     Codecov("./coverage.xml");
-    CoverallsNet("./coverage.xml", CoverallsNetReportType.OpenCover);
 });
 
 Task("NugetPack").IsDependentOn("Build").Does(() =>
