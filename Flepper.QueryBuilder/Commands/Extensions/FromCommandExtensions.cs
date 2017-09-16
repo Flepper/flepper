@@ -47,7 +47,7 @@
         /// /// <param name="fromCommand">From command instance</param>
         /// <param name="columns">Columns</param>
         /// <returns></returns>
-        public static ISort OrderBy(this IFromCommand fromCommand, params string[] columns)
+        public static ISort OrderBy(this IQueryCommand fromCommand, params string[] columns)
             => fromCommand.To<Sort>().OrderBy(columns);
 
         /// <summary>
@@ -56,7 +56,7 @@
         /// /// <param name="fromCommand">From command instance</param>
         /// <param name="columns">Columns</param>
         /// <returns></returns>
-        public static ISort OrderByDesc(this IFromCommand fromCommand, params string[] columns)
+        public static ISort OrderByDesc(this IQueryCommand fromCommand, params string[] columns)
             => fromCommand.To<Sort>().OrderByDesc(columns);
     }
 }
