@@ -40,5 +40,23 @@
         /// <returns></returns>
         public static IAliasOperator As(this IFromCommand fromCommand, string alias)
             => fromCommand.To<AliasOperator>().As(alias);
+
+        /// <summary>
+        /// OrderBy to query
+        /// </summary>
+        /// /// <param name="fromCommand">From command instance</param>
+        /// <param name="columns">Columns</param>
+        /// <returns></returns>
+        public static ISort OrderBy(this IFromCommand fromCommand, params string[] columns)
+            => fromCommand.To<Sort>().OrderBy(columns);
+
+        /// <summary>
+        /// OrderBy descending to query
+        /// </summary>
+        /// /// <param name="fromCommand">From command instance</param>
+        /// <param name="columns">Columns</param>
+        /// <returns></returns>
+        public static ISort OrderByDesc(this IFromCommand fromCommand, params string[] columns)
+            => fromCommand.To<Sort>().OrderByDesc(columns);
     }
 }
