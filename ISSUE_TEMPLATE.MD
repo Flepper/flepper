@@ -9,8 +9,3 @@ Description of current behavior
   1. 
   1.
   1.
-
-## Specifications
-  - Version:
-  - Platform:
-  - Subsystem:
