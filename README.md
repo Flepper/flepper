@@ -1,11 +1,10 @@
 ![Flepper Logo](https://s26.postimg.org/u1hn213qh/frog_128.png)
 
 
-| Branch  | status |
-| ------- | ------ |
-| Master  | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=master)
-| Development | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=development)  |
-
+| Branch  | status(windows) | status(unix) | coverage
+| ------- | ------ | ------ |------ |
+| Master | [![Build status](https://ci.appveyor.com/api/projects/status/81gjbxxtwit9uqkx/branch/master?svg=true)](https://ci.appveyor.com/project/AlbertoMonteiro/flepper/branch/master) | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/nicolastakashi/flepper/badge.svg?branch=master)](https://coveralls.io/github/nicolastakashi/flepper?branch=master) 
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/81gjbxxtwit9uqkx/branch/development?svg=true)](https://ci.appveyor.com/project/AlbertoMonteiro/flepper/branch/development) | ![](https://travis-ci.org/nicolastakashi/flepper.svg?branch=development)  | [![Coverage Status](https://coveralls.io/repos/github/nicolastakashi/flepper/badge.svg?branch=development)](https://coveralls.io/github/nicolastakashi/flepper?branch=development) 
 
 # Flepper
 > A SQL query builder that is flexible and fun to use!
