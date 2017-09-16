@@ -5,7 +5,6 @@ dotnet: 2.0.0
 git:
   depth: 3
 script:
-  - cd ./build/
   - ./build.sh -target=Tests
 notifications:
   slack:
