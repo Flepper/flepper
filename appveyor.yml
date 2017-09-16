@@ -8,6 +8,7 @@ branches:
 image: Visual Studio 2017
 environment:
   COVERALLS_REPO_TOKEN: AcN0gpsByT9yr0hAhaqBfFWZqNnbyVupI
+  CODECOV_TOKEN-uuid: 91777c7f-9b5b-4c9f-931b-6e26c1e614a0
 nuget:
   disable_publish_on_pr: true
 build_script:
