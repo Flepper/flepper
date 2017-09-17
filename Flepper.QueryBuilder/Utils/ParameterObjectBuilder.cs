@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -18,22 +17,23 @@ namespace Flepper.QueryBuilder.Utils
             ModuleBuilder = assembly.DefineDynamicModule("MainModule");
         }
 
-        public static object CreateObject(IDictionary<string, object> parameters)
+        public static object CreateObjectWithValues(IDictionary<string, object> parameters)
+        {
+            var objType = CreateClass(parameters);
+            var obj = Activator.CreateInstance(objType);
+            foreach (var prop in objType.GetProperties())
+                prop.SetValue(obj, parameters[$"@{prop.Name}"]);
+
+            return obj;
+        }
+
+        internal static Type CreateClass(IDictionary<string, object> parameters)
         {
             var type = ModuleBuilder.DefineType(Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
             type.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
-            var propertiesAndValues = (from parameter in parameters
-                                       let parameterValue = parameter.Value
-                                       let propertyType = parameterValue.GetType()
-                                       let property = CreateProperty(type, parameter.Key.Replace("@", ""), propertyType)
-                                       select (property: property.Name, parameterValue: parameterValue))
-                                       .ToDictionary(t => t.property, t => t.parameterValue);
-            var objType = type.CreateTypeInfo().AsType();
-            var obj = Activator.CreateInstance(objType);
-            foreach (var prop in objType.GetProperties())
-                prop.SetValue(obj, propertiesAndValues[prop.Name]);
-
-            return obj;
+            foreach (var parameter in parameters)
+                CreateProperty(type, parameter.Key.Replace("@", ""), parameter.Value.GetType());
+            return type.CreateTypeInfo().AsType();
         }
 
         private static PropertyBuilder CreateProperty(TypeBuilder typeBuilder, string propertyName, Type propertyType)

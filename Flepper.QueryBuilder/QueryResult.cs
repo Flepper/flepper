@@ -1,4 +1,9 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System.Runtime.CompilerServices;
+
+//Using this, I can access members that are "internal" in the Test assembly
+[assembly: InternalsVisibleTo("Flepper.Tests.Unit")]
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Query Result

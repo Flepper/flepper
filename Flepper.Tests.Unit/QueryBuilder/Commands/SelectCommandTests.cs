@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Flepper.QueryBuilder;
+using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
 
@@ -49,7 +51,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
-        public void ShoudCreateSelectWithColumnsOfType()
+        public void ShouldCreateSelectWithColumnsOfType()
         {
             FlepperQueryBuilder
                 .Select<UserDto>()
@@ -58,6 +60,66 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithColumnsOfAnonymousType()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => new { user.Id, user.Name })
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name] FROM [user]");
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Id", "Name");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithColumnsOfPropertyExpression()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Name] FROM [user]");
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenConstructionNonAnonymousObject()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<UserDto>(user => new UserDto { Id = user.Id, Name = user.Name })
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenPassingOtherKindOfExpression()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<UserDto>(user => user.Id.ToString())
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
         }
 
         [Fact]

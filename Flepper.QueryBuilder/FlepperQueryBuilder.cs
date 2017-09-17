@@ -1,4 +1,6 @@
-﻿using Flepper.QueryBuilder.Utils;
+﻿using System;
+using System.Linq.Expressions;
+using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder
 {
@@ -29,6 +31,14 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ISelectCommand Select<T>() where T : class
             => new SelectCommand(Cache.GetDtoProperties<T>());
+
+        /// <summary>
+        /// Create Select Command
+        /// </summary>
+        /// <typeparam name="T">Object</typeparam>
+        /// <returns></returns>
+        public static ISelectCommand Select<T>(Expression<Func<T, object>> newExpression) where T : class
+            => new SelectCommand(Cache.GetPropertiesFromExpression(newExpression));
 
         /// <summary>
         /// Create Insert Command
