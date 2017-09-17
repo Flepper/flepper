@@ -30,15 +30,15 @@ namespace Flepper.QueryBuilder
         /// <typeparam name="T">Object</typeparam>
         /// <returns></returns>
         public static ISelectCommand Select<T>() where T : class
-            => new SelectCommand(Cache.GetDtoProperties<T>());
+            => new SelectCommand(Cache.GetTypeProperties<T>());
 
         /// <summary>
         /// Create Select Command
         /// </summary>
         /// <typeparam name="T">Object</typeparam>
         /// <returns></returns>
-        public static ISelectCommand Select<T>(Expression<Func<T, object>> newExpression) where T : class
-            => new SelectCommand(Cache.GetPropertiesFromExpression(newExpression));
+        public static ISelectCommand Select<T>(Expression<Func<T, object>> expression) where T : class
+            => new SelectCommand(Cache.GetPropertiesFromExpression(expression));
 
         /// <summary>
         /// Create Insert Command

@@ -8,8 +8,11 @@ using Xunit;
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
     [Collection("CommandTests")]
-    public class SelectCommandTests
+    public class SelectCommandTests : IDisposable
     {
+        public SelectCommandTests()
+            => Cache.DtoProperties.Clear();
+
         [Fact]
         public void ShouldCreateSelectStatementForAllColumns()
         {
@@ -63,6 +66,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenConstructionNonAnonymousObject()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<UserDto>(user => new UserDto { Id = user.Id, Name = user.Name })
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
+        }
+
+        [Fact]
         public void ShouldCreateSelectWithColumnsOfAnonymousType()
         {
             FlepperQueryBuilder
@@ -93,18 +111,20 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
-        public void ShouldThrowNoSupportedExcetionWhenConstructionNonAnonymousObject()
+        public void ShouldCreateOnlyOneEntryInCacheWhenUsingPropertyExpression()
         {
-            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
-            {
-                FlepperQueryBuilder
-                    .Select<UserDto>(user => new UserDto { Id = user.Id, Name = user.Name })
-                    .From("user")
-                    .Build();
-            });
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build();
 
-            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
-            Cache.DtoProperties.Should().BeEmpty();
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build();
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
         }
 
         [Fact]
@@ -192,6 +212,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             Assert.Equal("Nicolas", parameters.@p0);
         }
+
+        public void Dispose()
+            => Cache.DtoProperties.Clear();
     }
 
     public class UserDto

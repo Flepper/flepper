@@ -12,18 +12,12 @@ namespace Flepper.QueryBuilder.Utils
         internal static readonly ConcurrentDictionary<Type, string[]> DtoProperties = new ConcurrentDictionary<Type, string[]>();
         internal const string NOT_SUPPORTED_MESSAGE = "The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }";
 
-        internal static string[] GetDtoProperties<T>()
+        internal static string[] GetTypeProperties<T>()
             where T : class
-            => GetDtoProperties(typeof(T));
+            => GetTypeProperties(typeof(T));
 
-        internal static string[] GetDtoProperties(Type type)
-        {
-            if (DtoProperties.TryGetValue(type, out string[] data)) return data;
-
-            data = type.GetProperties().Select(x => x.Name).ToArray();
-            DtoProperties.TryAdd(type, data);
-            return data;
-        }
+        internal static string[] GetTypeProperties(Type type)
+            => GetTypeProperties(ref type, () => GetPropertiesNameFromType(type));
 
         internal static string[] GetPropertiesFromExpression<T>(Expression<Func<T, object>> newLambdaExpression)
             where T : class
@@ -32,22 +26,38 @@ namespace Flepper.QueryBuilder.Utils
                 return HandleNewExpression(newExpression);
 
             if (newLambdaExpression.Body is MemberExpression memberExpression && memberExpression.Member is PropertyInfo propertyInfo)
-                return HandleProperty(propertyInfo);
+                return HandleProperty(propertyInfo, newLambdaExpression.ToString());
 
             throw new NotSupportedException(NOT_SUPPORTED_MESSAGE);
         }
 
-        private static string[] HandleProperty(PropertyInfo propertyInfo)
+        private static string[] GetTypeProperties(ref Type type, Func<string[]> getProperties)
         {
-            var propertyType = propertyInfo.PropertyType;
-            if (propertyType.IsValueType == false && propertyType != typeof(string))
-                throw new NotSupportedException("Only string's or value types expression are supported");
+            if (type != null && DtoProperties.TryGetValue(type, out string[] data)) return data;
 
-            var @class = ParameterObjectBuilder.CreateClass(new Dictionary<string, object>
+            data = getProperties();
+            DtoProperties.TryAdd(type, data);
+            return data;
+        }
+
+        private static string[] HandleProperty(PropertyInfo propertyInfo, string className)
+        {
+            var type = ParameterObjectBuilder.GetTypeFromName(className);
+
+            string[] GetProperties()
             {
-                [propertyInfo.Name] = propertyType.IsValueType ? Activator.CreateInstance(propertyType) : ""
-            });
-            return GetDtoProperties(@class);
+                var propertyType = propertyInfo.PropertyType;
+                if (propertyType.IsValueType == false && propertyType != typeof(string))
+                    throw new NotSupportedException("Only string's or value types expression are supported");
+
+                type = ParameterObjectBuilder.CreateClass(new Dictionary<string, object>
+                {
+                    [propertyInfo.Name] = propertyType.IsValueType ? Activator.CreateInstance(propertyType) : ""
+                }, className);
+                return GetPropertiesNameFromType(type);
+            }
+
+            return GetTypeProperties(ref type, GetProperties);
         }
 
         private static string[] HandleNewExpression(NewExpression newExpression)
@@ -56,7 +66,10 @@ namespace Flepper.QueryBuilder.Utils
             if (type.FullName.Contains("Anonymous") == false)
                 throw new NotSupportedException("The given expression is not supported, you must pass a expression that return an anonymous object, something like that: () => new { dto.Property1, dto.Property2 }");
 
-            return GetDtoProperties(type);
+            return GetTypeProperties(type);
         }
+
+        private static string[] GetPropertiesNameFromType(Type type)
+            => type.GetProperties().Select(x => x.Name).ToArray();
     }
 }
