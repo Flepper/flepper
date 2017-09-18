@@ -30,12 +30,5 @@ namespace Flepper.QueryBuilder
         /// Query Parameters
         /// </summary>
         public object Parameters { get; }
-
-        /// <summary>
-        /// Implicit Operator
-        /// </summary>
-        /// <param name="queryResult"></param>
-        public static implicit operator string(QueryResult queryResult)
-            => queryResult.Query;
     }
 }

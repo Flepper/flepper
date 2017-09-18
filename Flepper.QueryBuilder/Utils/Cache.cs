@@ -48,7 +48,7 @@ namespace Flepper.QueryBuilder.Utils
             {
                 var propertyType = propertyInfo.PropertyType;
                 if (propertyType.IsValueType == false && propertyType != typeof(string))
-                    throw new NotSupportedException("Only string's or value types expression are supported");
+                    throw new NotSupportedException("Only strings or value types expression are supported");
 
                 type = ParameterObjectBuilder.CreateClass(new Dictionary<string, object>
                 {

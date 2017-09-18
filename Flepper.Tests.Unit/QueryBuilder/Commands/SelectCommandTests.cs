@@ -71,12 +71,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var notSupportedException = Assert.Throws<NotSupportedException>(() =>
             {
                 FlepperQueryBuilder
-                    .Select<UserDto>(user => new UserDto { Id = user.Id, Name = user.Name })
+                    .Select<UserDto>(user => new OtherUser(user.Name))
                     .From("user")
                     .Build();
             });
 
-            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymous object, something like that: () => new { dto.Property1, dto.Property2 }");
             Cache.DtoProperties.Should().BeEmpty();
         }
 
@@ -139,6 +139,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             });
 
             notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenPassingPropertyExpressionThatDoesNotReturnAStrirgOrValueType()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<OtherUser>(user => user.OtherProperty)
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("Only strings or value types expression are supported");
             Cache.DtoProperties.Should().BeEmpty();
         }
 
@@ -224,5 +239,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public string Name { get; set; }
 
         public DateTime Birthday { get; set; }
+    }
+
+    public class OtherUser
+    {
+        public OtherUser()
+        {
+
+        }
+
+        public OtherUser(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; set; }
+        public OtherUser OtherProperty { get; set; }
     }
 }
