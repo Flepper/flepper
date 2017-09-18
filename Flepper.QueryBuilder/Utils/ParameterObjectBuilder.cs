@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -11,29 +11,36 @@ namespace Flepper.QueryBuilder.Utils
         const MethodAttributes METHOD_ATTRIBUTES = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
 
         private static readonly ModuleBuilder ModuleBuilder;
+        private static readonly ConcurrentDictionary<string, Type> Types = new ConcurrentDictionary<string, Type>();
 
         static ParameterObjectBuilder()
         {
-            var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Flepper.ParameterObjects"), AssemblyBuilderAccess.Run);
-            ModuleBuilder = assembly.DefineDynamicModule("MainModule");
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Flepper.ParameterObjects"), AssemblyBuilderAccess.RunAndCollect);
+            ModuleBuilder = assemblyBuilder.DefineDynamicModule("MainModule");
         }
 
-        public static object CreateObject(IDictionary<string, object> parameters)
+        public static object CreateObjectWithValues(IDictionary<string, object> parameters)
         {
-            var type = ModuleBuilder.DefineType(Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
-            type.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
-            var propertiesAndValues = (from parameter in parameters
-                                       let parameterValue = parameter.Value
-                                       let propertyType = parameterValue.GetType()
-                                       let property = CreateProperty(type, parameter.Key.Replace("@", ""), propertyType)
-                                       select (property: property.Name, parameterValue: parameterValue))
-                                       .ToDictionary(t => t.property, t => t.parameterValue);
-            var objType = type.CreateTypeInfo().AsType();
+            var objType = CreateClass(parameters);
             var obj = Activator.CreateInstance(objType);
             foreach (var prop in objType.GetProperties())
-                prop.SetValue(obj, propertiesAndValues[prop.Name]);
+                prop.SetValue(obj, parameters[$"@{prop.Name}"]);
 
             return obj;
+        }
+
+        internal static Type CreateClass(IDictionary<string, object> parameters, string className = null)
+        {
+            if (string.IsNullOrWhiteSpace(className) == false && Types.ContainsKey(className))
+                return Types[className];
+
+            var typeBuilder = ModuleBuilder.DefineType(className ?? Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
+            typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
+            foreach (var parameter in parameters)
+                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), parameter.Value.GetType());
+            var type = typeBuilder.CreateTypeInfo().AsType();
+            Types.TryAdd(type.FullName, type);
+            return type;
         }
 
         private static PropertyBuilder CreateProperty(TypeBuilder typeBuilder, string propertyName, Type propertyType)
@@ -70,5 +77,8 @@ namespace Flepper.QueryBuilder.Utils
             bodyWriter(methodBuilder.GetILGenerator());
             return methodBuilder;
         }
+
+        public static Type GetTypeFromName(string className)
+            => Types.ContainsKey(className) ? Types[className] : null;
     }
 }
