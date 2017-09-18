@@ -228,6 +228,22 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal("Nicolas", parameters.@p0);
         }
 
+        [Fact]
+        public void ShouldCreateSelectStatementWithGroupBy()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("Name", "Age")
+                .From("User")
+                .GroupBy("Age")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]");
+        }
+
         public void Dispose()
             => Cache.DtoProperties.Clear();
     }
