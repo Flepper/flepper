@@ -1,4 +1,7 @@
-﻿namespace Flepper.QueryBuilder
+﻿using Flepper.QueryBuilder.Operators.Grouping;
+using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// From Command extensions
@@ -40,5 +43,13 @@
         /// <returns></returns>
         public static IAliasOperator As(this IFromCommand fromCommand, string alias)
             => fromCommand.To<AliasOperator>().As(alias);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fromCommand">From command stance</param>
+        /// <param name="column">column used on group</param>
+        public static IGrouping GroupBy(this IFromCommand fromCommand, string column)
+            => fromCommand.To<Grouping>().GroupBy(column);
     }
 }
