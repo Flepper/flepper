@@ -45,7 +45,7 @@ namespace Flepper.QueryBuilder
             => fromCommand.To<AliasOperator>().As(alias);
 
         /// <summary>
-        /// 
+        /// Add Group by to query
         /// </summary>
         /// <param name="fromCommand">From command stance</param>
         /// <param name="column">column used on group</param>
