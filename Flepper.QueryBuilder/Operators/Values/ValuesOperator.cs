@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Flepper.QueryBuilder.Base;
+﻿using System.Linq;
 
-namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder.Base
 {
-    internal class ValuesOperator : BaseQueryBuilder, IValuesOperator
+    internal partial class BaseQueryBuilder : IValuesOperator
     {
-        public ValuesOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IValuesOperator Values(params object[] values)
         {
             Command.AppendFormat("VALUES ({0})", string.Join(", ", Parameters.Skip(AddParameters(values)).Select(p => p.Key)));

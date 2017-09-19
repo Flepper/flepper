@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder.Base
 {
-    internal class AliasOperator : BaseQueryBuilder, IAliasOperator
+    internal partial class BaseQueryBuilder : IAliasOperator
     {
-        public AliasOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IAliasOperator As(string alias)
         {
             Command.AppendFormat("{0} ", alias);

@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder.Base
 {
-    internal class WhereFilter : BaseQueryBuilder, IWhereFilter
+    internal partial class BaseQueryBuilder : IWhereFilter
     {
-        public WhereFilter(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IWhereFilter Where(string field)
         {
             Command.AppendFormat("WHERE [{0}] ", field);

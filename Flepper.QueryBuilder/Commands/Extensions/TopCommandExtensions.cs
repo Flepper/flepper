@@ -13,7 +13,7 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this ITopCommand topCommand, string schema, string table)
-            => topCommand.To((s, p) => new FromCommand(s, p, schema, table));
+            => topCommand is IFromCommand command ? command.FromCommand(schema, table) : null;
 
         /// <summary>
         /// Add From to query
@@ -22,6 +22,6 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this ITopCommand topCommand, string table)
-            => topCommand.To((s, p) => new FromCommand(s, p, table));
+            => topCommand is IFromCommand command ? command.FromCommand(table) : null;
     }
 }
