@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IJoinComparisonOperators
+    internal partial class QueryBuilder : IJoinComparisonOperators
     {
         public IJoinComparisonOperators Equal(string tableAlias, string column)
         {

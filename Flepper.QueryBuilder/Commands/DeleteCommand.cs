@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IDeleteCommand
+    internal partial class QueryBuilder : IDeleteCommand
     {
         public IDeleteCommand DeleteCommand()
         {

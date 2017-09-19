@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IAliasOperator
+    internal partial class QueryBuilder : IAliasOperator
     {
         public IAliasOperator As(string alias)
         {

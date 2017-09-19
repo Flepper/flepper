@@ -1,9 +1,8 @@
-﻿using Flepper.QueryBuilder.Base;
-using Flepper.QueryBuilder.Utils.Extensions;
+﻿using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : ISelectCommand
+    internal partial class QueryBuilder : ISelectCommand
     {
         public ISelectCommand SelectCommand()
         {
