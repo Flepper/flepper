@@ -5,18 +5,18 @@ using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder.Base
 {
-    internal abstract class BaseQueryBuilder : IQueryCommand
+    internal partial class BaseQueryBuilder : IQueryCommand
     {
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
 
-        protected BaseQueryBuilder()
+        internal BaseQueryBuilder()
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
         }
 
-        protected BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters)
+        internal BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters)
         {
             Command = command;
             Parameters = parameters;
@@ -27,13 +27,6 @@ namespace Flepper.QueryBuilder.Base
 
         public QueryResult BuildWithParameters()
             => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObjectWithValues(Parameters));
-
-        public TEnd To<TEnd>()
-            where TEnd : IQueryCommand
-            => (TEnd)Activator.CreateInstance(typeof(TEnd), Command, Parameters);
-
-        public TEnd To<TEnd>(Func<StringBuilder, IDictionary<string, object>, TEnd> creator)
-            => creator(Command, Parameters);
 
         protected int AddParameters(params object[] values)
         {

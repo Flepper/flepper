@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿
+namespace Flepper.QueryBuilder.Base
 {
-    internal class SetOperator : BaseQueryBuilder, ISetOperator
+    internal partial class BaseQueryBuilder : ISetOperator
     {
-        public SetOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public ISetOperator Set<T>(string column, T value)
         {
             var parametersCount = AddParameters(value);

@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder.Base
 {
-    internal class Join : BaseQueryBuilder, IJoin
+    internal partial class BaseQueryBuilder : IJoin
     {
-        public Join(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IJoin InnerJoin(string table)
         {
             Command.AppendFormat("INNER JOIN [{0}] ", table);

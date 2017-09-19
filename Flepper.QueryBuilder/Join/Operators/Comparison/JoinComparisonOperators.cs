@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder.Base
 {
-    internal class JoinComparisonOperators : BaseQueryBuilder, IJoinComparisonOperators
+    internal partial class BaseQueryBuilder : IJoinComparisonOperators
     {
-        public JoinComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IJoinComparisonOperators Equal(string tableAlias, string column)
         {
             Command.AppendFormat("= {0}.[{1}] ", tableAlias, column);

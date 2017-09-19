@@ -12,6 +12,6 @@
         /// <param name="field">Column Name</param>
         /// <returns></returns>
         public static IWhereFilter Where(this ISetOperator fromCommand, string field)
-            => fromCommand.To<WhereFilter>().Where(field);
+            => fromCommand is IWhereFilter command ? command.Where(field) : null;
     }
 }
