@@ -35,6 +35,17 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
+        {
+            FlepperQueryBuilder.Select("Id", "Name as MyName", "Birthday")
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name] AS MyName,[Birthday] FROM [user]");
+        }
+
+        [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
             var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
