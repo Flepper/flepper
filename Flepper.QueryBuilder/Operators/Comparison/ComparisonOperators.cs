@@ -1,6 +1,6 @@
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IComparisonOperators
+    internal partial class QueryBuilder : IComparisonOperators
     {
         public IComparisonOperators EqualTo(object value)
         {

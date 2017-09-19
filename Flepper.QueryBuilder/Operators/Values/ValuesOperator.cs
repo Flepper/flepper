@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IValuesOperator
+    internal partial class QueryBuilder : IValuesOperator
     {
         public IValuesOperator Values(params object[] values)
         {

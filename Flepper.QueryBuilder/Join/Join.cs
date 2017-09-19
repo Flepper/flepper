@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IJoin
+    internal partial class QueryBuilder : IJoin
     {
         public IJoin InnerJoin(string table)
         {

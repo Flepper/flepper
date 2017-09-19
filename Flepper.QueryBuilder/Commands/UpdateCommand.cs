@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IUpdateCommand
+    internal partial class QueryBuilder : IUpdateCommand
     {
         public IUpdateCommand UpdateCommand(string table)
         {
