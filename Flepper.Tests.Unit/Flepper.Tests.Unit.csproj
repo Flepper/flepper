@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Flepper.QueryBuilder.DapperExtensions\Flepper.QueryBuilder.DapperExtensions.csproj" />
     <ProjectReference Include="..\Flepper.QueryBuilder\Flepper.QueryBuilder.csproj" />
   </ItemGroup>
 
