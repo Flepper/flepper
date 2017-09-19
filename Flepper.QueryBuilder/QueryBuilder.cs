@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Flepper.QueryBuilder.Utils;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Flepper.QueryBuilder.DapperExtensions")]
 namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IQueryCommand
