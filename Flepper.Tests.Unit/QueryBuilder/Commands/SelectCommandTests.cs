@@ -4,6 +4,7 @@ using Flepper.QueryBuilder;
 using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
+using Flepper.QueryBuilder.Operators.Counting;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
@@ -253,6 +254,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithCount()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1",new Count("column2","cl2"))
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],COUNT([column2]) AS cl2 FROM [User] GROUP BY [Age]");
         }
 
         public void Dispose()
