@@ -3,7 +3,7 @@
     /// <summary>
     /// From Command Interface
     /// </summary>
-    public interface IFromCommand : IQueryCommand
+    public interface IFromCommand : IQueryCommand, ISortCommand
     {
     }
 }
