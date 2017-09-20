@@ -29,6 +29,6 @@ namespace Flepper.QueryBuilder
 
         public ISelectCommand SelectCommand<T>(Expression<Func<T, object>> expression)
             where T : class
-            => SelectCommand(Cache.GetTypeProperties<T>());
+            => SelectCommand(Cache.GetPropertiesFromExpression(expression));
     }
 }
