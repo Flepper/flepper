@@ -46,6 +46,16 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldThrowAnExceptionWhenSomeColumnNameIsNull()
+        {
+            var argumentNullException = Assert.Throws<ArgumentNullException>(() => FlepperQueryBuilder.Select("Id", "Name as MyName", null)
+                .From("user")
+                .Build());
+
+            argumentNullException.Message.Should().Be("All columns names should not be null\r\nParameter name: columns");
+        }
+
+        [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
             var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
