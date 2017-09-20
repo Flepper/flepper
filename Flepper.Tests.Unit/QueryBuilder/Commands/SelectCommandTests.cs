@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Linq;
 using Flepper.QueryBuilder;
+using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
     [Collection("CommandTests")]
-    public class SelectCommandTests
+    public class SelectCommandTests : IDisposable
     {
+        public SelectCommandTests()
+            => Cache.DtoProperties.Clear();
+
         [Fact]
         public void ShouldCreateSelectStatementForAllColumns()
         {
@@ -30,6 +35,27 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
+        {
+            FlepperQueryBuilder.Select("Id", "Name as MyName", "Birthday")
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name] AS MyName,[Birthday] FROM [user]");
+        }
+
+        [Fact]
+        public void ShouldThrowAnExceptionWhenSomeColumnNameIsNull()
+        {
+            var argumentNullException = Assert.Throws<ArgumentNullException>(() => FlepperQueryBuilder.Select("Id", "Name as MyName", null)
+                .From("user")
+                .Build());
+
+            argumentNullException.Message.Should().Be($"All columns names should not be null{Environment.NewLine}Parameter name: columns");
+        }
+
+        [Fact]
         public void ShouldCreteSelectWithWhereCondition()
         {
             var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
@@ -49,7 +75,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
-        public void ShoudCreateSelectWithColumnsOfType()
+        public void ShouldCreateSelectWithColumnsOfType()
         {
             FlepperQueryBuilder
                 .Select<UserDto>()
@@ -58,6 +84,98 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenConstructionNonAnonymousObject()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<UserDto>(user => new OtherUser(user.Name))
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymous object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithColumnsOfAnonymousType()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => new { user.Id, user.Name })
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name] FROM [user]");
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Id", "Name");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithColumnsOfPropertyExpression()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Name] FROM [user]");
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
+        }
+
+        [Fact]
+        public void ShouldCreateOnlyOneEntryInCacheWhenUsingPropertyExpression()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build();
+
+            FlepperQueryBuilder
+                .Select<UserDto>(user => user.Name)
+                .From("user")
+                .Build();
+
+            Cache.DtoProperties.Should().HaveCount(1);
+            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenPassingOtherKindOfExpression()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<UserDto>(user => user.Id.ToString())
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("The given expression is not supported, you must pass a expression that return an anonymou object, something like that: () => new { dto.Property1, dto.Property2 }");
+            Cache.DtoProperties.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void ShouldThrowNoSupportedExcetionWhenPassingPropertyExpressionThatDoesNotReturnAStrirgOrValueType()
+        {
+            var notSupportedException = Assert.Throws<NotSupportedException>(() =>
+            {
+                FlepperQueryBuilder
+                    .Select<OtherUser>(user => user.OtherProperty)
+                    .From("user")
+                    .Build();
+            });
+
+            notSupportedException.Message.Should().Be("Only strings or value types expression are supported");
+            Cache.DtoProperties.Should().BeEmpty();
         }
 
         [Fact]
@@ -130,6 +248,25 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             Assert.Equal("Nicolas", parameters.@p0);
         }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithGroupBy()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("Name", "Age")
+                .From("User")
+                .GroupBy("Age")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]");
+        }
+
+        public void Dispose()
+            => Cache.DtoProperties.Clear();
     }
 
     public class UserDto
@@ -139,5 +276,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public string Name { get; set; }
 
         public DateTime Birthday { get; set; }
+    }
+
+    public class OtherUser
+    {
+        public OtherUser()
+        {
+
+        }
+
+        public OtherUser(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; set; }
+        public OtherUser OtherProperty { get; set; }
     }
 }

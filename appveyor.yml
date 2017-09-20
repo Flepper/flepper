@@ -13,8 +13,6 @@ nuget:
   disable_publish_on_pr: true
 build_script:
 - ps: >-
-    cd .\build
-
     .\build.ps1 -Target CiBuild
 test: off
 deploy:

@@ -26,7 +26,7 @@ namespace Flepper.QueryBuilder.Base
             => Command.ToString();
 
         public QueryResult BuildWithParameters()
-            => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObject(Parameters));
+            => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObjectWithValues(Parameters));
 
         public TEnd To<TEnd>()
             where TEnd : IQueryCommand
