@@ -1,16 +1,16 @@
-﻿namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// OrderBy Sort Interface
     /// </summary>
-    public interface ISort : IQueryCommand
+    public interface ISortThen : IQueryCommand
     {
         /// <summary>
         /// OrderBy Contract
         /// </summary>
         /// <param name="column">Column</param>
         /// <returns></returns>
-        ISortThen OrderBy(string column);
+        ISortThen ThenBy(string column);
 
         /// <summary>
         /// OrderBy Contract
@@ -18,14 +18,14 @@
         /// <param name="tableAlias">Table Alias</param>
         /// <param name="column">Column Name</param>
         /// <returns></returns>
-        ISortThen OrderBy(string tableAlias, string column);
+        ISortThen ThenBy(string tableAlias, string column);
 
         /// <summary>
         /// OrderBy Contract
         /// </summary>
         /// <param name="column">Column</param>
         /// <returns></returns>
-        ISortThen OrderByDescending(string column);
+        ISortThen ThenByDescending(string column);
 
         /// <summary>
         /// OrderBy Contract
@@ -33,6 +33,6 @@
         /// <param name="tableAlias">Table Alias</param>
         /// <param name="column">Column Name</param>
         /// <returns></returns>
-        ISortThen OrderByDescending(string tableAlias, string column);
+        ISortThen ThenByDescending(string tableAlias, string column);
     }
 }

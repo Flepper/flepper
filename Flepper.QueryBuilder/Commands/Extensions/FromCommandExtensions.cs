@@ -50,7 +50,7 @@ namespace Flepper.QueryBuilder
         /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="column">Column</param>
         /// <returns></returns>
-        public static ISort OrderBy(this ISortCommand sortCommand, string column)
+        public static ISortThen OrderBy(this ISortCommand sortCommand, string column)
             => sortCommand.To<Sort>().OrderBy(column);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Flepper.QueryBuilder
         /// <param name="tableAlias">Table Alias</param>
         /// <param name="column">Column Name</param>        
         /// <returns></returns>
-        public static ISort OrderBy(this ISortCommand sortCommand, string tableAlias, string column)
+        public static ISortThen OrderBy(this ISortCommand sortCommand, string tableAlias, string column)
             => sortCommand.To<Sort>().OrderBy(tableAlias, column);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Flepper.QueryBuilder
         /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="column">Column</param>
         /// <returns></returns>
-        public static ISort OrderByDescending(this ISortCommand sortCommand, string column)
+        public static ISortThen OrderByDescending(this ISortCommand sortCommand, string column)
             => sortCommand.To<Sort>().OrderByDescending(column);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Flepper.QueryBuilder
         /// <param name="tableAlias">Table Alias</param>
         /// <param name="column">Column Name</param>        
         /// <returns></returns>
-        public static ISort OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
+        public static ISortThen OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
             => sortCommand.To<Sort>().OrderByDescending(tableAlias, column);
 
         /// <summary>

@@ -58,17 +58,17 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectBirthdayWithWhereAndMultipleOrderBy()
         {
             var queryResult = FlepperQueryBuilder.Select<UserDto>(user => new { user.Id, user.Name, user.Birthday })
-               .From("user")
+               .From("user").As("t1")
                .Where("Name").EqualTo("Fabio")
                .OrderBy("Name")
-               .OrderBy("Birthday")
+               .ThenBy("t1", "Birthday")
                .BuildWithParameters();
 
             queryResult
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0 ORDER BY [Name],[Birthday]");
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user] t1 WHERE [Name] = @p0 ORDER BY [Name], [t1].[Birthday]");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -82,14 +82,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("user")
                 .Where("Name").EqualTo("Fabio")
                 .OrderByDescending("Birthday")
-                .OrderBy("Name")                
+                .ThenBy("Name")                
                 .BuildWithParameters();
 
             queryResult
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0 ORDER BY [Birthday] DESC,[Name]");
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user] WHERE [Name] = @p0 ORDER BY [Birthday] DESC, [Name]");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -110,7 +110,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY t1.[Name]");
+                .Be("SELECT [Id],[Name] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name]");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -125,14 +125,14 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                .InnerJoin("address").As("t2").On("t2", "column1").EqualTo("t1", "column2")
                .Where("Name").EqualTo("Fabio")
                .OrderByDescending("t1", "Name")
-               .OrderByDescending("t1", "Birthday")
+               .ThenByDescending("t1", "Birthday")
                .BuildWithParameters();
 
             queryResult
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY t1.[Name],t1.[Birthday] DESC");
+                .Be("SELECT [Id],[Name],[Birthday] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name] DESC, [t1].[Birthday] DESC");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -145,14 +145,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select<UserDto>(user => new { user.Id, user.Name, user.Birthday })
                .From("user")
                .OrderBy("Name")
-               .OrderByDescending("Birthday")
+               .ThenByDescending("Birthday")
                .Build()
                .Trim()
                .Should()
-               .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name],[Birthday] DESC");
+               .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name], [Birthday] DESC");
         }
     }    
 }
-
-//SELECT [Id],[Name],[Age] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Age] = @p0 ORDER BY t1.[Name],t1.[Age] DESC
-//SELECT [Id],[Name],[Birthday] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Age] = @p0 ORDER BY t1.[Name],t1.[Age] DESC
