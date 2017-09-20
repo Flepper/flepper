@@ -6,10 +6,11 @@ namespace Flepper.QueryBuilder.DapperExtensions
 {
     public static class DbConnectionExtensions
     {
+        public static IQueryCommand FlepperQuery(this IDbConnection dbConnection) => new FlepperDapperQuery(dbConnection);
+
         /// <summary>
         /// Create Select Command
         /// </summary>
-        /// <param name="dbConnection">DbConnection Instance</param>
         /// <returns></returns>
         public static ISelectCommand Select(this IDbConnection dbConnection)
             => new FlepperDapperQuery(dbConnection).SelectCommand();
@@ -38,6 +39,8 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <param name="expression"></param>
         /// <param name="dbConnection">DbConnection Instance</param>
         /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expression"></param>
         /// <returns></returns>
         public static ISelectCommand Select<T>(this IDbConnection dbConnection, Expression<Func<T, object>> expression) where T : class
             => new FlepperDapperQuery(dbConnection).SelectCommand(expression);
@@ -76,7 +79,5 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <returns></returns>
         public static IUpdateCommand Update(this IDbConnection dbConnection, string schema, string table)
             => new FlepperDapperQuery(dbConnection).UpdateCommand(schema, table);
-
-
     }
 }

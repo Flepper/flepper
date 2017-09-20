@@ -75,6 +75,5 @@ namespace Flepper.QueryBuilder.DapperExtensions
             }
             throw new NotSupportedException("Only instances of FlepperDapperQuery can execute this method.");
         }
-
     }
 }
