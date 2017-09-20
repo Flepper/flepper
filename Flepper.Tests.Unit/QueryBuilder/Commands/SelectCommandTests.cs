@@ -52,7 +52,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("user")
                 .Build());
 
-            argumentNullException.Message.Should().Be("All columns names should not be null\r\nParameter name: columns");
+            argumentNullException.Message.Should().Be($"All columns names should not be null{Environment.NewLine}Parameter name: columns");
         }
 
         [Fact]
