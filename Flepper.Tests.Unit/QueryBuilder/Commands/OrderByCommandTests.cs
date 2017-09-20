@@ -1,5 +1,6 @@
 ﻿using Flepper.QueryBuilder;
 using FluentAssertions;
+using System;
 using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
@@ -10,13 +11,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithOrderBy()
         {
-             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
-                .From("user")         
-                .OrderBy("Name")
-                .Build()
-                .Trim()
-                .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name]");
+            FlepperQueryBuilder.Select<UserDto>(user => new { user.Id, user.Name })
+               .From("user")
+               .OrderBy("Name")
+               .Build()
+               .Trim()
+               .Should()
+               .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name]");
+
+            FlepperQueryBuilder
+               .Select<UserDto>(user => new { user.Id, user.Name })
+               .From("user")
+               .Build()
+               .Trim()
+               .Should()
+               .Be("SELECT [Id],[Name] FROM [user]");
         }
         
         [Fact]
@@ -24,11 +33,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                .From("user")
-               .OrderBy("Name", true)
+               .OrderByDescending("Birthday")
                .Build()
                .Trim()
                .Should()
-               .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name] DESC");
+               .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Birthday] DESC");
         }
        
         [Fact]
@@ -78,7 +87,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
                 .Where("Age").LessThan(29)
-                .OrderBy("Birthday", true)
+                .OrderByDescending("Birthday")
                 .OrderBy("Name")                
                 .BuildWithParameters();
 
@@ -121,14 +130,15 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                .From("user").As("t1")
                .InnerJoin("address").As("t2").On("t2", "column1").EqualTo("t1", "column2")
                .Where("Age").EqualTo(29)
-               .OrderBy("t1", "Name", true)
+               .OrderByDescending("t1", "Name")
+               .OrderByDescending("t1", "Age")
                .BuildWithParameters();
 
             queryResult
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Age] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Age] = @p0 ORDER BY t1.[Name] DESC");
+                .Be("SELECT [Id],[Name],[Age] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Age] = @p0 ORDER BY t1.[Name],t1.[Age] DESC");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -141,11 +151,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                .From("user")
                .OrderBy("Name")
-               .OrderBy("Birthday", true)
+               .OrderByDescending("Birthday")
                .Build()
                .Trim()
                .Should()
                .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name],[Birthday] DESC");
         }
-    }
+    }    
 }

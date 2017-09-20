@@ -46,21 +46,37 @@
         /// </summary>
         /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="column">Column</param>
-        /// <param name="descending">Descending Order</param>
         /// <returns></returns>
-        public static ISort OrderBy(this ISortCommand sortCommand, string column, bool descending = false)
-            => sortCommand.To<Sort>().OrderBy(column, descending);
+        public static ISort OrderBy(this ISortCommand sortCommand, string column)
+            => sortCommand.To<Sort>().OrderBy(column);
 
         /// <summary>
         /// OrderBy to query
         /// </summary>
         /// /// <param name="sortCommand">Sort command instance</param>
         /// <param name="tableAlias">Table Alias</param>
-        /// <param name="column">Column Name</param>
-        /// <param name="descending">Descending Order</param>
+        /// <param name="column">Column Name</param>        
         /// <returns></returns>
-        public static ISort OrderBy(this ISortCommand sortCommand, string tableAlias, string column, bool descending = false)
-            => sortCommand.To<Sort>().OrderBy(tableAlias, column, descending);
-       
+        public static ISort OrderBy(this ISortCommand sortCommand, string tableAlias, string column)
+            => sortCommand.To<Sort>().OrderBy(tableAlias, column);
+
+        /// <summary>
+        /// OrderBy Descending to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="column">Column</param>
+        /// <returns></returns>
+        public static ISort OrderByDescending(this ISortCommand sortCommand, string column)
+            => sortCommand.To<Sort>().OrderByDescending(column);
+
+        /// <summary>
+        /// OrderBy Descending to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>        
+        /// <returns></returns>
+        public static ISort OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
+            => sortCommand.To<Sort>().OrderByDescending(tableAlias, column);
     }
 }

@@ -9,17 +9,30 @@
         /// OrderBy Contract
         /// </summary>
         /// <param name="column">Column</param>
-        /// <param name="descending">Descending</param>
         /// <returns></returns>
-        ISort OrderBy(string column, bool descending = false);
+        ISort OrderBy(string column);
 
         /// <summary>
         /// OrderBy Contract
         /// </summary>
         /// <param name="tableAlias">Table Alias</param>
         /// <param name="column">Column Name</param>
-         /// <param name="descending">Descending</param>
         /// <returns></returns>
-        ISort OrderBy(string tableAlias, string column, bool descending = false);    
+        ISort OrderBy(string tableAlias, string column);
+
+        /// <summary>
+        /// OrderBy Contract
+        /// </summary>
+        /// <param name="column">Column</param>
+        /// <returns></returns>
+        ISort OrderByDescending(string column);
+
+        /// <summary>
+        /// OrderBy Contract
+        /// </summary>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>
+        /// <returns></returns>
+        ISort OrderByDescending(string tableAlias, string column);
     }
 }
