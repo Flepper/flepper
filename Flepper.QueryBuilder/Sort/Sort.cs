@@ -4,61 +4,57 @@ using System.Text;
 
 namespace Flepper.QueryBuilder
 {
-    internal class Sort : BaseQueryBuilder, ISort
+    internal class Sort : BaseQueryBuilder, ISort, ISortThen
     {
         public Sort(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
         {
         }
 
-        public ISort OrderBy(string column)
+        public ISortThen OrderBy(string column)
         {
-            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
-                ? ",[{0}]"
-                : "ORDER BY [{0}]", column);
-
+            Command.AppendFormat("ORDER BY [{0}]", column);
             return this;
         }
 
-        public ISort OrderBy(string tableAlias, string column)
+        public ISortThen OrderBy(string tableAlias, string column)
         {
-            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
-               ? ",{0}.[{1}]"
-               : "ORDER BY {0}.[{1}]", tableAlias, column);
-
+            Command.AppendFormat("ORDER BY [{0}].[{1}]", tableAlias, column);
             return this;
         }
 
-        public ISort OrderByDescending(string column)
+        public ISortThen OrderByDescending(string column)
         {
-            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
-                ? ",[{0}]"
-                : "ORDER BY [{0}]", column);
-
-            var findClause = Command.ToString()
-                .LastIndexOf(" DESC");
-
-            if (findClause > 0)
-                Command.Remove(findClause, 5);
-
-            Command.Append(" DESC");
-
+            Command.AppendFormat("ORDER BY [{0}] DESC", column);
             return this;
         }
 
-        public ISort OrderByDescending(string tableAlias, string column)
+        public ISortThen OrderByDescending(string tableAlias, string column)
         {
-            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
-               ? ",{0}.[{1}]"
-               : "ORDER BY {0}.[{1}]", tableAlias, column);
+            Command.AppendFormat("ORDER BY [{0}].[{1}] DESC", tableAlias, column);
+            return this;
+        }
 
-            var findClause = Command.ToString()
-                .LastIndexOf(" DESC");
+        public ISortThen ThenBy(string column)
+        {
+            Command.AppendFormat(", [{0}]", column);
+            return this;
+        }
 
-            if (findClause > 0)
-                Command.Remove(findClause, 5);
+        public ISortThen ThenBy(string tableAlias, string column)
+        {
+            Command.AppendFormat(", [{0}].[{1}]", tableAlias, column);
+            return this;
+        }
 
-            Command.Append(" DESC");
+        public ISortThen ThenByDescending(string column)
+        {
+            Command.AppendFormat(", [{0}] DESC", column);
+            return this;
+        }
 
+        public ISortThen ThenByDescending(string tableAlias, string column)
+        {
+            Command.AppendFormat(", [{0}].[{1}] DESC", tableAlias, column);
             return this;
         }
     }
