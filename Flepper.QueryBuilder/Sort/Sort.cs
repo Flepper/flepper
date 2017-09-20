@@ -1,5 +1,4 @@
 ﻿using Flepper.QueryBuilder.Base;
-using Flepper.QueryBuilder.Utils.Extensions;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,15 +10,29 @@ namespace Flepper.QueryBuilder
         {
         }
 
-        public ISort OrderBy(params string[] columns)
+        public ISort OrderBy(string column, bool descending)
         {
-            Command.AppendFormat("ORDER BY {0}", columns.JoinColumns());
+            column = descending
+               ? string.Concat($"[{column}]", " DESC")
+               : $"[{column}]";
+
+            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
+                ? ",{0}"
+                : "ORDER BY {0}", column);
+
             return this;
         }
 
-        public ISort OrderByDesc(params string[] columns)
+        public ISort OrderBy(string tableAlias, string column, bool descending)
         {
-            Command.AppendFormat("ORDER BY {0} DESC", columns.JoinColumns().Trim());
+            column = descending
+                ? string.Concat($"[{column}]", " DESC")
+                : $"[{column}]";
+
+            Command.AppendFormat(Command.ToString().Contains("ORDER BY")
+               ? ",{0}.{1}"
+               : "ORDER BY {0}.{1}", tableAlias, column);
+
             return this;
         }
     }
