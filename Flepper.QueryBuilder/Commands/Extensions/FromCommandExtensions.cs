@@ -45,7 +45,6 @@ namespace Flepper.QueryBuilder
             => fromCommand.To<AliasOperator>().As(alias);
 
         /// <summary>
-<<<<<<< HEAD
         /// OrderBy to query
         /// </summary>
         /// /// <param name="sortCommand">Sort command instance</param>
@@ -82,13 +81,13 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ISort OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
             => sortCommand.To<Sort>().OrderByDescending(tableAlias, column);
-=======
+
+        /// <summary>
         /// Add Group by to query
         /// </summary>
         /// <param name="fromCommand">From command stance</param>
         /// <param name="column">column used on group</param>
         public static IGrouping GroupBy(this IFromCommand fromCommand, string column)
             => fromCommand.To<Grouping>().GroupBy(column);
->>>>>>> upstream/development
     }
 }
