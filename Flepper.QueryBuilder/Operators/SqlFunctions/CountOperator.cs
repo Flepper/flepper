@@ -1,10 +1,11 @@
-﻿using System;
-namespace Flepper.QueryBuilder.Operators.Counting
+﻿using Flepper.QueryBuilder.Operators.SqlFunctions.Interfaces;
+using System;
+namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
-    /// 
+    /// Count Operator class
     /// </summary>
-    public class Count
+    internal class CountOperator : ISqlFunction
     {
         /// <summary>
         /// column using in the count function;
@@ -21,7 +22,7 @@ namespace Flepper.QueryBuilder.Operators.Counting
         /// </summary>
         /// <param name="column"></param>
         /// <param name="alias"></param>
-        public Count(string column, string alias)
+        public CountOperator(string column, string alias)
         {
             if (string.IsNullOrEmpty(column) || string.IsNullOrEmpty(alias)) throw new ArgumentNullException($"{nameof(column)} and {nameof(alias)} cannot be null or empty");
             Column = column;
@@ -29,9 +30,9 @@ namespace Flepper.QueryBuilder.Operators.Counting
         }
 
         /// <summary>
-        /// 
+        /// implicit operator to string
         /// </summary>
-        public static implicit operator string(Count count)
+        public static implicit operator string(CountOperator count)
         {
             return $"COUNT([{count.Column}]) AS {count.Alias} ";
         }

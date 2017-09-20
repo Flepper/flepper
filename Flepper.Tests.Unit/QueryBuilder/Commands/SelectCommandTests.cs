@@ -4,7 +4,6 @@ using Flepper.QueryBuilder;
 using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
-using Flepper.QueryBuilder.Operators.Counting;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
@@ -270,7 +269,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCount()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1",new Count("column2","cl2"))
+                .Select()
+                .Column(FlepperQueryFunction.Count("column2","cl2"))
                 .From("User")
                 .BuildWithParameters();
 
