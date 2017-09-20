@@ -17,11 +17,11 @@ running.
 
 Package Manager
 ```shell
-Install-Package Flepper
+Install-Package Flepper.QueryBuilder
 ```
 .NET CLI
 ```shell
-dotnet add package Flepper
+dotnet add package Flepper.QueryBuilder
 ```
 
 After executing one of the commands above you will have the Flepper installed and ready to be used.
