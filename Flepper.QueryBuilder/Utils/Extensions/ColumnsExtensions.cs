@@ -24,16 +24,23 @@ namespace Flepper.QueryBuilder.Utils.Extensions
                     yield return $"[{column}]";
             }
         }
-
+        //TODO:Improve a better way to resolve Sql Function queries.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static string GetColumnWithAlias(string column)
         {
             var (columnName, alias) = column.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries);
+
+            if (IsSqlFunction(alias)) return $"{columnName}{ALIAS}{alias}".Trim();
+
             return $"[{columnName}]{ALIAS}{alias}";
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool ContainsAlias(string source)
             => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsSqlFunction(string source)
+            => source.StartsWith("func_");
     }
 }

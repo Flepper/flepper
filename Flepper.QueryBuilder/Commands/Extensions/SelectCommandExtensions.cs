@@ -1,6 +1,4 @@
-﻿using Flepper.QueryBuilder.Operators.SqlFunctions.Interfaces;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Select Command Extensions
@@ -35,14 +33,5 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ITopCommand Top(this ISelectCommand selectCommand, int size = 1)
             => selectCommand.To((s, p) => new TopCommand(s, p, size));
-
-        /// <summary>
-        /// Add Count Function to query
-        /// </summary>
-        /// <param name="selectCommand"></param>
-        /// <param name="sqlFunction"></param>
-        /// <returns></returns>
-        public static IColumnCommand Column(this ISelectCommand selectCommand, ISqlFunction sqlFunction)
-            => selectCommand.To((s, p) => new ColumnCommand(s,p,sqlFunction));
     }
 }

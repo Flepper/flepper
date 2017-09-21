@@ -269,8 +269,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCount()
         {
             var queryResult = FlepperQueryBuilder
-                .Select()
-                .Column(FlepperQueryFunction.Count("column2","cl2"))
+                .Select(FlepperQueryFunction.Count("column2", "cl2"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -278,7 +277,22 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [column1],COUNT([column2]) AS cl2 FROM [User] GROUP BY [Age]");
+                .Be("SELECT COUNT([column2]) AS func_cl2 FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithCountAndMultipleColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1",FlepperQueryFunction.Count("column2", "cl2"),"column3")
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],COUNT([column2]) AS func_cl2,[column3] FROM [User]");
         }
 
         public void Dispose()
