@@ -45,6 +45,44 @@ namespace Flepper.QueryBuilder
             => fromCommand.To<AliasOperator>().As(alias);
 
         /// <summary>
+        /// OrderBy to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="column">Column</param>
+        /// <returns></returns>
+        public static ISortThen OrderBy(this ISortCommand sortCommand, string column)
+            => sortCommand.To<Sort>().OrderBy(column);
+
+        /// <summary>
+        /// OrderBy to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>        
+        /// <returns></returns>
+        public static ISortThen OrderBy(this ISortCommand sortCommand, string tableAlias, string column)
+            => sortCommand.To<Sort>().OrderBy(tableAlias, column);
+
+        /// <summary>
+        /// OrderBy Descending to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="column">Column</param>
+        /// <returns></returns>
+        public static ISortThen OrderByDescending(this ISortCommand sortCommand, string column)
+            => sortCommand.To<Sort>().OrderByDescending(column);
+
+        /// <summary>
+        /// OrderBy Descending to query
+        /// </summary>
+        /// /// <param name="sortCommand">Sort command instance</param>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>        
+        /// <returns></returns>
+        public static ISortThen OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
+            => sortCommand.To<Sort>().OrderByDescending(tableAlias, column);
+
+        /// <summary>
         /// Add Group by to query
         /// </summary>
         /// <param name="fromCommand">From command stance</param>

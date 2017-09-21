@@ -17,18 +17,18 @@ running.
 
 Package Manager
 ```shell
-Install-Package Flepper
+Install-Package Flepper.QueryBuilder
 ```
 .NET CLI
 ```shell
-dotnet add package Flepper
+dotnet add package Flepper.QueryBuilder
 ```
 
 After executing one of the commands above you will have the Flepper installed and ready to be used.
 
 ### More about
 
-Access [Wiki](https://github.com/nicolastakashi/flepper/wiki/Get-Started#creating-queries) to learn more.
+Access [Wiki](https://github.com/Flepper/flepper/wiki/Get-Started#creating-queries) to learn more.
 
 ## Developing
 
@@ -36,7 +36,7 @@ Here's a brief intro about what a developer must do in order to start developing
 the project further:
 
 ```shell
-git clone https://github.com/nicolastakashi/flepper
+git clone https://github.com/Flepper/flepper
 cd flepper/
 dotnet restore
 dotnet build
@@ -52,9 +52,9 @@ Currently supported databases
 
 ## Contributing
 
-Hey, are you in the mood to contribute to Flepper? Then take a look at our file where it explains how to [contribute](https://github.com/nicolastakashi/flepper/blob/contributing-md/CONTRIBUTING.md) and we love receiving feedback and pull requests.
+Hey, are you in the mood to contribute to Flepper? Then take a look at our file where it explains how to [contribute](https://github.com/Flepper/flepper/blob/development/CONTRIBUTING.md) and we love receiving feedback and pull requests.
 
 ## Licensing
 "The code in this project is licensed under [MIT] license."
 
-[MIT]:<https://github.com/nicolastakashi/flepper/blob/master/LICENSE>
+[MIT]:<https://github.com/Flepper/flepper/blob/development/LICENSE>
