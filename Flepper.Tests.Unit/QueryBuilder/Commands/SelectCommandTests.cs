@@ -4,7 +4,7 @@ using Flepper.QueryBuilder;
 using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
-
+using static Flepper.QueryBuilder.FlepperQueryFunction;
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
     [Collection("CommandTests")]
@@ -269,7 +269,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCount()
         {
             var queryResult = FlepperQueryBuilder
-                .Select(FlepperQueryFunction.Count("column2", "cl2"))
+                .Select(Count("column2", "cl2"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -284,7 +284,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCountAndMultipleColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1",FlepperQueryFunction.Count("column2", "cl2"),"column3")
+                .Select("column1", Count("column2", "cl2"),"column3")
                 .From("User")
                 .BuildWithParameters();
 

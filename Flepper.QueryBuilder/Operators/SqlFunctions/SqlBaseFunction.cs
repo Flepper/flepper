@@ -1,5 +1,5 @@
 ﻿using System;
-
+using static System.String;
 namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
@@ -16,7 +16,7 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
        
         internal SqlBaseFunction(string column)
         {
-            if (string.IsNullOrEmpty(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
+            if (IsNullOrEmpty(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
             Column = $"[{column}]";
         }
 

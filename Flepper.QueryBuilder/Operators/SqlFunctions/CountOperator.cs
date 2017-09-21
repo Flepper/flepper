@@ -1,10 +1,11 @@
 ﻿using System;
+using static System.String;
 namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
     /// Count Operator class
     /// </summary>
-    public class CountOperator : SqlBaseFunction
+    public sealed class CountOperator : SqlBaseFunction
     {
 
         /// <summary>
@@ -14,7 +15,7 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         /// <param name="alias">alias to column. All alias start with func_</param>
         public CountOperator(string column, string alias)
         {
-            if (string.IsNullOrEmpty(column) || string.IsNullOrEmpty(alias)) throw new ArgumentNullException($"{nameof(column)} and {nameof(alias)} cannot be null or empty");
+            if (IsNullOrWhiteSpace(column) || IsNullOrWhiteSpace(alias)) throw new ArgumentNullException($"{nameof(column)} and {nameof(alias)} cannot be null or empty");
 
             Column = $"COUNT([{column}]) AS func_{alias} ";
         }
