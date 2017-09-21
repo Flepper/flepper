@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Dapper;
 using System;
 
 namespace Flepper.QueryBuilder.DapperExtensions
@@ -72,6 +71,16 @@ namespace Flepper.QueryBuilder.DapperExtensions
             if (queryCommand is FlepperDapperQuery flepperDapperQuery)
             {
                 return flepperDapperQuery.Query(map, transaction, buffered, splitOn, commandTimeout, commandType);
+            }
+            throw new NotSupportedException("Only instances of FlepperDapperQuery can execute this method.");
+        }
+
+        public static IEnumerable<TReturn> Query<TReturn>(this IQueryCommand queryCommand, Type[] types, Func<object[], TReturn> map, IDbTransaction transaction = null,
+            bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
+        {
+            if (queryCommand is FlepperDapperQuery flepperDapperQuery)
+            {
+                return flepperDapperQuery.Query(types, map, transaction, buffered, splitOn, commandTimeout, commandType);
             }
             throw new NotSupportedException("Only instances of FlepperDapperQuery can execute this method.");
         }
