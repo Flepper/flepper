@@ -10,41 +10,41 @@
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators EqualTo(object value);
+        IComparisonOperators EqualTo<T>(T value);
 
         /// <summary>
         /// Greater Than Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators GreaterThan(int value);
+        IComparisonOperators GreaterThan<T>(T value);
 
         /// <summary>
         /// Less Than Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators LessThan(int value);
+        IComparisonOperators LessThan<T>(T value);
 
         /// <summary>
         /// Greater Than Or Equal Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators GreaterThanOrEqualTo(int value);
+        IComparisonOperators GreaterThanOrEqualTo<T>(T value);
 
         /// <summary>
         /// Less Than Or Equal Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators LessThanOrEqualTo(int value);
+        IComparisonOperators LessThanOrEqualTo<T>(T value);
 
         /// <summary>
         /// Not equal Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
-        IComparisonOperators NotEqualTo(object value);
+        IComparisonOperators NotEqualTo<T>(T value);
     }
 }

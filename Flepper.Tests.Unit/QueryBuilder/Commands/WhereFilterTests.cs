@@ -65,23 +65,36 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldContainsWhereWithLogicalOperatorWithComparisonOperators()
         {
             var queryResult = FlepperQueryBuilder.Select()
-                .From("user")
-                .Where("name")
-                .EqualTo("gustavo")
-                .And("age")
-                .EqualTo(26)
+                .From("project")
+                .Where("name").EqualTo("flepper")
+                .And("age").GreaterThan(1)
+                .And("csharpverson").GreaterThanOrEqualTo(7)
+                .And("highcomplexmethods").LessThan(10)
+                .And("highlocmethods").LessThanOrEqualTo(30)
+                .And("repositoryhostedon").EqualTo("github")
+                .And("active").NotEqualTo(false)
                 .BuildWithParameters();
 
             queryResult
                 .Query
                 .Trim()
                 .Should()
-                .Contain("WHERE [name] = @p0 AND [age] = @p1");
+                .Be("SELECT * FROM [project] WHERE [name] = @p0 AND [age] > @p1 " +
+                    "AND [csharpverson] >= @p2 " +
+                    "AND [highcomplexmethods] < @p3 " +
+                    "AND [highlocmethods] <= @p4 " +
+                    "AND [repositoryhostedon] = @p5 " +
+                    "AND [active] <> @p6");
 
             dynamic parameters = queryResult.Parameters;
 
-            Assert.Equal("gustavo", parameters.@p0);
-            Assert.Equal(26, parameters.@p1);
+            Assert.Equal("flepper", parameters.@p0);
+            Assert.Equal(1, parameters.@p1);
+            Assert.Equal(7, parameters.@p2);
+            Assert.Equal(10, parameters.@p3);
+            Assert.Equal(30, parameters.@p4);
+            Assert.Equal("github", parameters.@p5);
+            Assert.Equal(false, parameters.@p6);
         }
 
         [Fact]
@@ -203,7 +216,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select()
                 .From("table")
-                .Where("field").EqualTo(null)
+                .Where("field").EqualTo<object>(null)
                 .Build()
                 .Trim()
                 .Should()
@@ -215,7 +228,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder.Select()
                 .From("table")
-                .Where("field").NotEqualTo(null)
+                .Where("field").NotEqualTo<object>(null)
                 .Build()
                 .Trim()
                 .Should()

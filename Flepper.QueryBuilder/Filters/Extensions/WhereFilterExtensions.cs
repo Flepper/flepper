@@ -11,16 +11,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators EqualTo(this IWhereFilter whereFilter, string value)
-            => whereFilter.To<ComparisonOperators>().EqualTo(value);
-
-        /// <summary>
-        /// Add Equal to query
-        /// </summary>
-        /// <param name="whereFilter">Where Filter instance</param>
-        /// <param name="value">Value to filter</param>
-        /// <returns></returns>
-        public static IComparisonOperators EqualTo(this IWhereFilter whereFilter, int value)
+        public static IComparisonOperators EqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().EqualTo(value);
 
         /// <summary>
@@ -29,7 +20,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators GreaterThan(this IWhereFilter whereFilter, int value)
+        public static IComparisonOperators GreaterThan<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().GreaterThan(value);
 
         /// <summary>
@@ -38,7 +29,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators LessThan(this IWhereFilter whereFilter, int value)
+        public static IComparisonOperators LessThan<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().LessThan(value);
 
         /// <summary>
@@ -47,7 +38,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators GreaterThanOrEqualTo(this IWhereFilter whereFilter, int value)
+        public static IComparisonOperators GreaterThanOrEqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().GreaterThanOrEqualTo(value);
 
         /// <summary>
@@ -56,7 +47,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators LessThanOrEqualTo(this IWhereFilter whereFilter, int value)
+        public static IComparisonOperators LessThanOrEqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().LessThanOrEqualTo(value);
 
         /// <summary>
@@ -65,16 +56,7 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-        public static IComparisonOperators NotEqualTo(this IWhereFilter whereFilter, int value)
-            => whereFilter.To<ComparisonOperators>().NotEqualTo(value);
-
-        /// <summary>
-        /// Add Not Equal to query
-        /// </summary>
-        /// <param name="whereFilter">Where Filter instance</param>
-        /// <param name="value">Value to filter</param>
-        /// <returns></returns>
-        public static IComparisonOperators NotEqualTo(this IWhereFilter whereFilter, string value)
+        public static IComparisonOperators NotEqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().NotEqualTo(value);
     }
 }
