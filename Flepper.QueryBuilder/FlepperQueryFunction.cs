@@ -13,7 +13,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column"></param>
         /// <param name="alias"></param>
         /// <returns></returns>
-        public static SqlFunction Count(string column, string alias)
+        public static SqlColumn Count(string column, string alias)
             => new CountOperator(column,alias);
     }
 }
