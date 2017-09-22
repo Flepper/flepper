@@ -1,6 +1,5 @@
 ﻿using Flepper.QueryBuilder;
 using FluentAssertions;
-using System;
 using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
@@ -10,7 +9,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
     {
         [Fact]
         public void ShouldCreateSelectStatementWithOrderBy()
-        {            
+        {
             FlepperQueryBuilder
                 .Select<UserDto>(user => new { user.Id, user.Name })
                 .From("user")
@@ -19,21 +18,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT [Id],[Name] FROM [user]");
         }
-        
+
         [Fact]
         public void ShouldCreateSelectStatementWithOrderByDesc()
         {
             FlepperQueryBuilder
                 .Select()
                 .Top(1)
-                .From("user")
+                .From("dbo", "user")
                 .OrderByDescending("Birthday")
                 .Build()
                 .Trim()
                 .Should()
-                .Be("SELECT TOP 1 * FROM [user] ORDER BY [Birthday] DESC");
+                .Be("SELECT TOP 1 * FROM [dbo].[user] ORDER BY [Birthday] DESC");
         }
-       
+
         [Fact]
         public void ShouldCreateSelectBirthdayWithWhereAndOrderBy()
         {
@@ -115,7 +114,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             dynamic parameters = queryResult.Parameters;
 
             Assert.Equal("Fabio", parameters.@p0);
-        }      
+        }
 
         [Fact]
         public void ShouldCreateSelectWithWhereAndInnerJoinOrderByDescStatement()

@@ -12,16 +12,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators EqualTo(this ILogicalOperators logicalOperators, string value)
-            => logicalOperators.To<ComparisonOperators>().EqualTo(value);
-
-        /// <summary>
-        /// Add Equal Operator to query
-        /// </summary>
-        /// <param name="logicalOperators">Logical Operators instance</param>
-        /// <param name="value">Value</param>
-        /// <returns></returns>
-        public static IComparisonOperators EqualTo(this ILogicalOperators logicalOperators, int value)
+        public static IComparisonOperators EqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().EqualTo(value);
 
         /// <summary>
@@ -30,7 +21,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators GreaterThan(this ILogicalOperators logicalOperators, int value)
+        public static IComparisonOperators GreaterThan<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().GreaterThan(value);
 
         /// <summary>
@@ -39,7 +30,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators LessThan(this ILogicalOperators logicalOperators, int value)
+        public static IComparisonOperators LessThan<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().LessThan(value);
 
         /// <summary>
@@ -48,7 +39,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators GreaterThanOrEqualTo(this ILogicalOperators logicalOperators, int value)
+        public static IComparisonOperators GreaterThanOrEqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().GreaterThanOrEqualTo(value);
 
         /// <summary>
@@ -57,7 +48,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators LessThanOrEqualTo(this ILogicalOperators logicalOperators, int value)
+        public static IComparisonOperators LessThanOrEqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().LessThanOrEqualTo(value);
 
         /// <summary>
@@ -66,16 +57,7 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators NotEqualTo(this ILogicalOperators logicalOperators, int value)
-            => logicalOperators.To<ComparisonOperators>().NotEqualTo(value);
-
-        /// <summary>
-        /// Add Not Equal Operator to query
-        /// </summary>
-        /// <param name="logicalOperators">Logical Operators instance</param>
-        /// <param name="value">Value</param>
-        /// <returns></returns>
-        public static IComparisonOperators NotEqualTo(this ILogicalOperators logicalOperators, string value)
+        public static IComparisonOperators NotEqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().NotEqualTo(value);
     }
 }
