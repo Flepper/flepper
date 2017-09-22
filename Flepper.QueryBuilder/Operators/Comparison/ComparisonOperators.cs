@@ -10,7 +10,7 @@ namespace Flepper.QueryBuilder
         {
         }
 
-        public IComparisonOperators EqualTo(object value)
+        public IComparisonOperators EqualTo<T>(T value)
         {
             if (value == null)
                 Command.AppendFormat("IS NULL ");
@@ -20,31 +20,31 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
-        public IComparisonOperators GreaterThan(int value)
+        public IComparisonOperators GreaterThan<T>(T value)
         {
             Command.Append($"> @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators GreaterThanOrEqualTo(int value)
+        public IComparisonOperators GreaterThanOrEqualTo<T>(T value)
         {
             Command.Append($">= @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators LessThan(int value)
+        public IComparisonOperators LessThan<T>(T value)
         {
             Command.Append($"< @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators LessThanOrEqualTo(int value)
+        public IComparisonOperators LessThanOrEqualTo<T>(T value)
         {
             Command.Append($"<= @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators NotEqualTo(object value)
+        public IComparisonOperators NotEqualTo<T>(T value)
         {
             if (value == null)
                 Command.AppendFormat("IS NOT NULL ");
