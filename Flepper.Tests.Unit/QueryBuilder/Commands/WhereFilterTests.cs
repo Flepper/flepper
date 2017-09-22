@@ -68,6 +68,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("project")
                 .Where("name").EqualTo("flepper")
                 .And("age").GreaterThan(1)
+                .Or("age").EqualTo(5)
                 .And("csharpverson").GreaterThanOrEqualTo(7)
                 .And("highcomplexmethods").LessThan(10)
                 .And("highlocmethods").LessThanOrEqualTo(30)
@@ -79,22 +80,25 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT * FROM [project] WHERE [name] = @p0 AND [age] > @p1 " +
-                    "AND [csharpverson] >= @p2 " +
-                    "AND [highcomplexmethods] < @p3 " +
-                    "AND [highlocmethods] <= @p4 " +
-                    "AND [repositoryhostedon] = @p5 " +
-                    "AND [active] <> @p6");
+                .Be("SELECT * FROM [project] WHERE [name] = @p0 " +
+                    "AND [age] > @p1 " +
+                    "OR [age] = @p2 " +
+                    "AND [csharpverson] >= @p3 " +
+                    "AND [highcomplexmethods] < @p4 " +
+                    "AND [highlocmethods] <= @p5 " +
+                    "AND [repositoryhostedon] = @p6 " +
+                    "AND [active] <> @p7");
 
             dynamic parameters = queryResult.Parameters;
 
             Assert.Equal("flepper", parameters.@p0);
             Assert.Equal(1, parameters.@p1);
-            Assert.Equal(7, parameters.@p2);
-            Assert.Equal(10, parameters.@p3);
-            Assert.Equal(30, parameters.@p4);
-            Assert.Equal("github", parameters.@p5);
-            Assert.Equal(false, parameters.@p6);
+            Assert.Equal(5, parameters.@p2);
+            Assert.Equal(7, parameters.@p3);
+            Assert.Equal(10, parameters.@p4);
+            Assert.Equal(30, parameters.@p5);
+            Assert.Equal("github", parameters.@p6);
+            Assert.Equal(false, parameters.@p7);
         }
 
         [Fact]

@@ -10,7 +10,7 @@ namespace Flepper.QueryBuilder.Base
     public class SqlColumn
     {
         private const string ALIAS = " AS ";
-        private static readonly string[] AliasSplitter = { ALIAS, " as " };
+        private static readonly string[] AliasSplitter = { ALIAS, " as ", " As " };
 
         /// <summary>
         /// the column name or sql function.
