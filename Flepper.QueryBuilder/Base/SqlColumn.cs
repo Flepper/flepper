@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using static System.String;
-namespace Flepper.QueryBuilder.Operators.SqlFunctions
+namespace Flepper.QueryBuilder.Base
 {
     /// <summary>
     /// Base function class used to improve implicit conversion
@@ -16,13 +16,11 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         /// the column name or sql function.
         /// </summary>
         protected string Column { get; set; }
-
+        
         /// <summary>
         /// the column alias
         /// </summary>
         protected string Alias { get; }
-
-        private readonly string _columnStatement;
 
         internal SqlColumn(string column)
         {
@@ -36,20 +34,18 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         }
 
         /// <summary>
-        /// 
+        /// implicit operator to convert sqlColumn instance to string
         /// </summary>
         /// <param name="column"></param>
         public static implicit operator string(SqlColumn column)
             => column.Column;
 
         /// <summary>
-        /// 
+        /// implicit operator to convert string to sqlColumn instance
         /// </summary>
         /// <param name="column"></param>
         public static implicit operator SqlColumn(string column)
             => new SqlColumn(column);
-
-
 
         /// <summary>
         /// ovveride ToString
@@ -60,6 +56,5 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool ContainsAlias(string source)
             => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
-
     }
 }

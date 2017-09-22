@@ -1,8 +1,8 @@
-﻿using Flepper.QueryBuilder.Base;
+﻿using System;
+using System.Linq;
+using Flepper.QueryBuilder.Base;
 using Flepper.QueryBuilder.Operators.SqlFunctions;
 using Flepper.QueryBuilder.Utils.Extensions;
-using System;
-using System.Linq;
 
 namespace Flepper.QueryBuilder
 {
@@ -15,7 +15,7 @@ namespace Flepper.QueryBuilder
         {
             if (columns.Any(c => c == null))
                 throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
-            Command.AppendFormat("SELECT {0}", columns.Select(c => c?.ToString()).JoinColumns());
+            Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
         }
     }
 }

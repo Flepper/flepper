@@ -1,5 +1,6 @@
 ﻿using System;
 using static System.String;
+using Flepper.QueryBuilder.Base;
 namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
@@ -7,7 +8,6 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
     /// </summary>
     public sealed class CountOperator : SqlColumn
     {
-
         /// <summary>
         /// constructor to Count class
         /// </summary>
@@ -25,19 +25,18 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
 
         }
 
-
         /// <summary>
         /// implicit operator to CountOperator
         /// </summary>
         /// <param name="column">column name</param>
         public static implicit operator CountOperator(string column)
-         => new CountOperator(column);
+            => new CountOperator(column);
 
         /// <summary>
         /// Overwrite ToString
         /// </summary>
         /// <returns></returns>
         public override string ToString()
-         => Column;
+            => Column;
     }
 }

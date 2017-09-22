@@ -1,10 +1,10 @@
-﻿using Flepper.QueryBuilder.Operators.SqlFunctions;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder.Utils
 {

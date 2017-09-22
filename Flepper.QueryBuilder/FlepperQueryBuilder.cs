@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
-using Flepper.QueryBuilder.Operators.SqlFunctions;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {

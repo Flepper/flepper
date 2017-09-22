@@ -1,4 +1,5 @@
-﻿using Flepper.QueryBuilder.Operators.SqlFunctions;
+﻿using Flepper.QueryBuilder.Base;
+using Flepper.QueryBuilder.Operators.SqlFunctions;
 
 namespace Flepper.QueryBuilder
 {
