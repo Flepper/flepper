@@ -4,7 +4,7 @@ using Flepper.QueryBuilder;
 using Flepper.QueryBuilder.Utils;
 using FluentAssertions;
 using Xunit;
-
+using static Flepper.QueryBuilder.FlepperQueryFunction;
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
     [Collection("CommandTests")]
@@ -37,7 +37,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
         {
-            FlepperQueryBuilder.Select("Id", "Name as MyName", "Birthday")
+            FlepperQueryBuilder.Select("Id", "Name AS MyName", "Birthday")
                 .From("user")
                 .Build()
                 .Trim()
@@ -113,7 +113,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT [Id],[Name] FROM [user]");
 
             Cache.DtoProperties.Should().HaveCount(1);
-            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Id", "Name");
+            Cache.DtoProperties.First().Value.Select(x => x.ToString()).Should().BeEquivalentTo("[Id]", "[Name]");
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT [Name] FROM [user]");
 
             Cache.DtoProperties.Should().HaveCount(1);
-            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
+            Cache.DtoProperties.First().Value.Select(x => x.ToString()).Should().BeEquivalentTo("[Name]");
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Build();
 
             Cache.DtoProperties.Should().HaveCount(1);
-            Cache.DtoProperties.First().Value.Should().BeEquivalentTo("Name");
+            Cache.DtoProperties.First().Value.Select(x => x.ToString()).Should().BeEquivalentTo("[Name]");
         }
 
         [Fact]
@@ -263,6 +263,51 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithCount()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Count("column2", "cl2"))
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT COUNT([column2]) AS cl2 FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithCountAndMultipleColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1", Count("column2", "cl2"),"column3")
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],COUNT([column2]) AS cl2,[column3] FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithCountAndMultipleColumnsWithAlias()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1", Count("column2", "cl2"), "column3 As cl3")
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],COUNT([column2]) AS cl2,[column3] AS cl3 FROM [User]");
         }
 
         public void Dispose()

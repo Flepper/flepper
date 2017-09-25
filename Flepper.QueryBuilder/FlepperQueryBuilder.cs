@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
@@ -21,7 +22,7 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <param name="columns">Columns name</param>
         /// <returns></returns>
-        public static ISelectCommand Select(params string[] columns)
+        public static ISelectCommand Select(params SqlColumn[] columns)
             => new SelectCommand(columns);
 
         /// <summary>

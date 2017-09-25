@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using Flepper.QueryBuilder.Base;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Insert Into Command Interface
@@ -10,6 +12,6 @@
         /// </summary>
         /// <param name="columns"></param>
         /// <returns></returns>
-        IInsertIntoCommand Columns(params string[] columns);
+        IInsertIntoCommand Columns(params SqlColumn[] columns);
     }
 }
