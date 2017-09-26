@@ -26,19 +26,5 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         {
 
         }
-
-        /// <summary>
-        /// implicit operator to MinOperator
-        /// </summary>
-        /// <param name="column">column name</param>
-        public static implicit operator MinOperator(string column)
-            => new MinOperator(column);
-
-        /// <summary>
-        /// Overwrite ToString
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-            => Column;
     }
 }

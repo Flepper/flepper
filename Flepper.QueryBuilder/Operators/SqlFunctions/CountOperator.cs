@@ -24,19 +24,5 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         {
 
         }
-
-        /// <summary>
-        /// implicit operator to CountOperator
-        /// </summary>
-        /// <param name="column">column name</param>
-        public static implicit operator CountOperator(string column)
-            => new CountOperator(column);
-
-        /// <summary>
-        /// Overwrite ToString
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-            => Column;
     }
 }
