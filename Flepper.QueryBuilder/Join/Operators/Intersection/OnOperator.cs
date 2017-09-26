@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class OnOperator : BaseQueryBuilder, IOnOperator
     {
-        public OnOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public OnOperator(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

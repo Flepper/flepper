@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
     {
-        public ComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public ComparisonOperators(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

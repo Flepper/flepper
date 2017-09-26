@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class WhereFilter : BaseQueryBuilder, IWhereFilter
     {
-        public WhereFilter(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public WhereFilter(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

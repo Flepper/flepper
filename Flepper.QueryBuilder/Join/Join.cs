@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class Join : BaseQueryBuilder, IJoin
     {
-        public Join(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public Join(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

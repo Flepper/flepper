@@ -15,16 +15,24 @@ namespace Flepper.QueryBuilder.Base
         /// <summary>
         /// the column name or sql function.
         /// </summary>
-        protected string Column { get; set; }
-        
+        public string Column { get; set; }
+
         /// <summary>
         /// the column alias
         /// </summary>
-        protected string Alias { get; }
+        public string Alias { get; }
+
+        /// <summary>
+        /// the table alias. Ex: [t1].[Column1] t1 the alias of the table
+        /// </summary>
+        public string TableAlias { get; }
 
         internal SqlColumn(string column)
         {
             if (IsNullOrWhiteSpace(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
+
+            TableAlias = GetTableAlias(column);
+
             if (ContainsAlias(column))
                 (Column, Alias) = column.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries);
             else
@@ -56,5 +64,22 @@ namespace Flepper.QueryBuilder.Base
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool ContainsAlias(string source)
             => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
+
+        private static string GetTableAlias(string source)
+        {
+            if (source.Contains("."))
+                return source.Split(new[] { '.' })[0];
+
+            return null;
+        }
+
+        /// <summary>
+        /// Shallow copy of the instance
+        /// </summary>
+        /// <returns></returns>
+        public SqlColumn Clone()
+        {
+            return (SqlColumn)MemberwiseClone();
+        }
     }
 }

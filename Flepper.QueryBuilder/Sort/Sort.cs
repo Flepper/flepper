@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class Sort : BaseQueryBuilder, ISort, ISortThen
     {
-        public Sort(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public Sort(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

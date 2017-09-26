@@ -12,6 +12,6 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this IDeleteCommand deleteCommand, string table)
-            => deleteCommand.To((s, p) => new FromCommand(s, p, table));
+            => deleteCommand.To((s, p, c) => new FromCommand(s, p, c, table));
     }
 }

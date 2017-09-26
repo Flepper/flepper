@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Flepper.QueryBuilder.Base;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder.Utils
 {
@@ -24,10 +24,10 @@ namespace Flepper.QueryBuilder.Utils
             where T : class
         {
             if (newLambdaExpression.Body is NewExpression newExpression)
-                return HandleNewExpression(newExpression);
+                return HandleNewExpression(newExpression).Select(item => item.Clone()).ToArray();
 
             if (newLambdaExpression.Body is MemberExpression memberExpression && memberExpression.Member is PropertyInfo propertyInfo)
-                return HandleProperty(propertyInfo, newLambdaExpression.ToString());
+                return HandleProperty(propertyInfo, newLambdaExpression.ToString()).Select(item => item.Clone()).ToArray();
 
             throw new NotSupportedException(NOT_SUPPORTED_MESSAGE);
         }
@@ -38,6 +38,7 @@ namespace Flepper.QueryBuilder.Utils
 
             data = getProperties();
             DtoProperties.TryAdd(type, data);
+
             return data;
         }
 

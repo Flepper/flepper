@@ -8,7 +8,7 @@ namespace Flepper.QueryBuilder.Operators.Grouping
     internal class Grouping : BaseQueryBuilder, IGrouping
     {
 
-        public Grouping(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public Grouping(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
 
         }

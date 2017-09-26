@@ -7,7 +7,7 @@ namespace Flepper.QueryBuilder
 {
     internal class ValuesOperator : BaseQueryBuilder, IValuesOperator
     {
-        public ValuesOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public ValuesOperator(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 
