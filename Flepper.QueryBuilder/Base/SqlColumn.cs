@@ -2,7 +2,9 @@
 using System.Runtime.CompilerServices;
 using Flepper.QueryBuilder.Utils.Extensions;
 using static System.String;
+
 namespace Flepper.QueryBuilder.Base
+
 {
     /// <summary>
     /// Base function class used to improve implicit conversion
@@ -10,12 +12,15 @@ namespace Flepper.QueryBuilder.Base
     public class SqlColumn
     {
         private const string ALIAS = " AS ";
+        private const string TABLE_ALIAS = ".";
+
         private static readonly string[] AliasSplitter = { ALIAS, " as ", " As " };
+        private static readonly string[] TableAliasSplitter = { TABLE_ALIAS };
 
         /// <summary>
         /// the column name or sql function.
         /// </summary>
-        public string Column { get; set; }
+        public string Column { get; protected set; }
 
         /// <summary>
         /// the column alias
@@ -33,12 +38,37 @@ namespace Flepper.QueryBuilder.Base
 
             TableAlias = GetTableAlias(column);
 
-            if (ContainsAlias(column))
-                (Column, Alias) = column.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries);
-            else
-                Column = $"[{column}]";
+            var containsAlias = ContainsAlias(column);
+            var containsTableAlias = ContainsTableAlias(column);
 
-            if (!IsNullOrWhiteSpace(Alias)) Column = $"[{Column}] AS {Alias}";
+            if (containsAlias && containsTableAlias)
+            {
+                var columnAsAlias = default(string);
+
+                (TableAlias, columnAsAlias) = column.Split(TableAliasSplitter, StringSplitOptions.RemoveEmptyEntries);
+                (Column, Alias) = columnAsAlias.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries); ;
+            }
+            else if (containsAlias)
+            {
+                (Column, Alias) = column.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else if (containsTableAlias)
+            {
+                (TableAlias, Column) = column.Split(TableAliasSplitter, StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                Column = $"[{column}]";
+            }
+
+            if(Column != "*")
+            {
+                if (!Column.StartsWith("[")) Column = $"[{Column}";
+                if(!Column.EndsWith("]")) Column = $"{Column}]";
+            }
+
+            if (!IsNullOrWhiteSpace(Alias) && !Column.Contains(ALIAS)) Column = $"{Column} AS {Alias.Trim()}";
+            if (!IsNullOrWhiteSpace(TableAlias) && !Column.Contains(TABLE_ALIAS)) Column = $"{TableAlias}.{Column}";
         }
 
         /// <summary>
@@ -65,16 +95,12 @@ namespace Flepper.QueryBuilder.Base
         private static bool ContainsAlias(string source)
             => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
 
-        private static string GetTableAlias(string source)
-            => source?.Split('.')[0];
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool ContainsTableAlias(string source)
+            => source.IndexOf(TABLE_ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
 
-        /// <summary>
-        /// Shallow copy of the instance
-        /// </summary>
-        /// <returns></returns>
-        public SqlColumn Clone()
-        {
-            return (SqlColumn)MemberwiseClone();
-        }
+
+        private static string GetTableAlias(string source)
+            => source.Contains(TABLE_ALIAS) ? source?.Split('.')[0] : null;
     }
 }
