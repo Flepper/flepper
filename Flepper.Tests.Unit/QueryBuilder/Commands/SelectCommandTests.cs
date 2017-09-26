@@ -341,6 +341,20 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
 
+        [Fact]
+        public void ShouldCreateSelectStatementWithMin()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Min("column2", "cl2"))
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MIN([column2]) AS cl2 FROM [User]");
+        }
 
         public void Dispose()
             => Cache.DtoProperties.Clear();
