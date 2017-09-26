@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Flepper.QueryBuilder.Base;
 
@@ -12,23 +14,12 @@ namespace Flepper.QueryBuilder
 
         public IAliasOperator As(string alias)
         {
-            var command = new StringBuilder(Command.ToString());
+            Columns = Columns.Select(c => c.TableAlias != null ? c : new SqlColumn($"[{alias}].{c}")).ToArray();
 
-            for (int i = 0; i < Columns.Length; i++)
-            {
-                var c = Columns[i];
-
-                if (c.TableAlias == null)
-                {
-                    var columnWithAlias = $"[{alias}].{c}";
-                    Columns[i] = new SqlColumn(columnWithAlias);
-
-                    command = command.Replace(c, columnWithAlias);
-                }
-            }
+            var command = Command.ToString();
 
             Command.Clear();
-            Command.Append(command.ToString());
+            Command.Append($"SELECT {string.Join(",", Columns.Select(c => c.ToString()))} FROM {command.Split(new[] { "FROM " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim()} ");
 
             Command.AppendFormat("{0} ", alias);
 
