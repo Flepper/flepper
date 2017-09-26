@@ -89,21 +89,20 @@ namespace Flepper.QueryBuilder.DapperExtensions
             return dbConnection.Query(queryResult.Query, map, queryResult.Parameters, transaction, buffered, splitOn, commandTimeout, commandType);
         }
 
-        public IEnumerable<object> Query(Type type, string sql, IDbTransaction transaction = null,
+        public IEnumerable<object> Query(Type type, IDbTransaction transaction = null,
             bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
             return dbConnection.Query(type, queryResult.Query, queryResult.Parameters, transaction, buffered, commandTimeout, commandType);
         }
 
-        public Task<IEnumerable<dynamic>> QueryAsync(string sql, object param = null, IDbTransaction transaction = null,
-            int? commandTimeout = null, CommandType? commandType = null)
+        public Task<IEnumerable<dynamic>> QueryAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
             return dbConnection.QueryAsync(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
 
-        public Task<IEnumerable<TReturn>> QueryAsync<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map,
+        public Task<IEnumerable<TReturn>> QueryAsync<TFirst, TSecond, TReturn>(Func<TFirst, TSecond, TReturn> map,
             IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
@@ -138,14 +137,14 @@ namespace Flepper.QueryBuilder.DapperExtensions
             return dbConnection.QueryAsync(queryResult.Query, map, queryResult.Parameters, transaction, buffered, splitOn, commandTimeout, commandType);
         }
 
-        public Task<IEnumerable<TReturn>> QueryAsync<TReturn>(string sql, Type[] types, Func<object[], TReturn> map, IDbTransaction transaction = null,
+        public Task<IEnumerable<TReturn>> QueryAsync<TReturn>(Type[] types, Func<object[], TReturn> map, IDbTransaction transaction = null,
             bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
             return dbConnection.QueryAsync(queryResult.Query, types, map, queryResult.Parameters, transaction, buffered, splitOn, commandTimeout, commandType);
         }
 
-        public Task<IEnumerable<object>> QueryAsync(Type type, string sql, object param = null, IDbTransaction transaction = null,
+        public Task<IEnumerable<object>> QueryAsync(Type type, IDbTransaction transaction = null,
             int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
@@ -261,16 +260,28 @@ namespace Flepper.QueryBuilder.DapperExtensions
             return dbConnection.QuerySingleAsync<T>(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
 
-        public Task<object> QuerySingleAsync(Type type, string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public Task<object> QuerySingleAsync(Type type, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
             return dbConnection.QuerySingleAsync(type, queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
 
-        public T QuerySingleOrDefault<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public T QuerySingleOrDefault<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
             return dbConnection.QuerySingleOrDefault<T>(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+        }
+
+        public Task<dynamic> QuerySingleOrDefaultAsync(Type type, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            var queryResult = BuildWithParameters();
+            return dbConnection.QuerySingleOrDefaultAsync(type, queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+        }
+
+        public Task<T> QuerySingleOrDefaultAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            var queryResult = BuildWithParameters();
+            return dbConnection.QuerySingleOrDefaultAsync<T>(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
     }
 }
