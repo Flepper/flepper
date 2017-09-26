@@ -66,12 +66,7 @@ namespace Flepper.QueryBuilder.Base
             => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
 
         private static string GetTableAlias(string source)
-        {
-            if (source.Contains("."))
-                return source.Split(new[] { '.' })[0];
-
-            return null;
-        }
+            => source?.Split('.')[0];
 
         /// <summary>
         /// Shallow copy of the instance
