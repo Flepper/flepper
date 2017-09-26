@@ -16,6 +16,38 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldCreateColumnWithAlias()
+        {
+            var column = new SqlColumn("Column as C");
+
+            column.ToString().Should().Be("[Column] AS C");
+        }
+
+        [Fact]
+        public void ShouldCreateColumnWithTableAlias()
+        {
+            var column = new SqlColumn("t1.Column");
+
+            column.ToString().Should().Be("[t1].[Column]");
+        }
+
+        [Fact]
+        public void ShouldCreateColumnWithAliasAndTableAlias()
+        {
+            var column = new SqlColumn("t1.Column as c");
+
+            column.ToString().Should().Be("[t1].[Column] AS c");
+        }
+
+        [Fact]
+        public void ShoudNotAddBracketsWhenColumnIsAsterisk()
+        {
+            var column = new SqlColumn("t1.*");
+
+            column.ToString().Should().Be("[t1].*");
+        }
+
+        [Fact]
         public void ShouldCreateRegularColumnWithAsUpperCamelCase()
         {
             var column = new SqlColumn("Column As cl");
