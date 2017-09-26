@@ -9,7 +9,6 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
     /// </summary>
     public sealed class MinOperator : FunctionOperator
     {
-
         private static string _minFunction = "MIN";
 
         /// <summary>
@@ -18,11 +17,6 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         /// <param name="column">column name</param>
         /// <param name="alias">alias to column. All alias start with func_</param>
         public MinOperator(string column, string alias) : base(column, alias, _minFunction)
-        {
-
-        }
-
-        private MinOperator(string column) : base(column)
         {
 
         }

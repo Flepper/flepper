@@ -19,10 +19,5 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         {
 
         }
-
-        private CountOperator(string column) : base(column)
-        {
-
-        }
     }
 }
