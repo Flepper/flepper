@@ -10,7 +10,7 @@ public sealed class MinOperator : SqlColumn
 {
     
      /// <summary>
-        /// constructor to Count class
+        /// constructor to Min class
         /// </summary>
         /// <param name="column">column name</param>
         /// <param name="alias">alias to column. All alias start with func_</param>
