@@ -24,10 +24,10 @@ namespace Flepper.QueryBuilder.Utils
             where T : class
         {
             if (newLambdaExpression.Body is NewExpression newExpression)
-                return HandleNewExpression(newExpression).Select(item => item.Clone()).ToArray();
+                return HandleNewExpression(newExpression);
 
             if (newLambdaExpression.Body is MemberExpression memberExpression && memberExpression.Member is PropertyInfo propertyInfo)
-                return HandleProperty(propertyInfo, newLambdaExpression.ToString()).Select(item => item.Clone()).ToArray();
+                return HandleProperty(propertyInfo, newLambdaExpression.ToString());
 
             throw new NotSupportedException(NOT_SUPPORTED_MESSAGE);
         }
