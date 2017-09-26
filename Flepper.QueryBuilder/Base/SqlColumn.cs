@@ -67,6 +67,12 @@ namespace Flepper.QueryBuilder.Base
                 if(!Column.EndsWith("]")) Column = $"{Column}]";
             }
 
+            if(TableAlias != null)
+            {
+                if (!TableAlias.StartsWith("[")) TableAlias = $"[{TableAlias}";
+                if (!TableAlias.EndsWith("]")) TableAlias = $"{TableAlias}]";
+            }
+
             if (!IsNullOrWhiteSpace(Alias) && !Column.Contains(ALIAS)) Column = $"{Column} AS {Alias.Trim()}";
             if (!IsNullOrWhiteSpace(TableAlias) && !Column.Contains(TABLE_ALIAS)) Column = $"{TableAlias}.{Column}";
         }
