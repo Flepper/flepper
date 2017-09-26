@@ -1,8 +1,7 @@
-﻿using Flepper.QueryBuilder.Base;
-using Flepper.QueryBuilder.Utils;
-using System;
+﻿using System;
 using System.Linq.Expressions;
-using System.Linq;
+using Flepper.QueryBuilder.Base;
+using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder
 {

@@ -1,6 +1,6 @@
-﻿using Flepper.QueryBuilder.Base;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {

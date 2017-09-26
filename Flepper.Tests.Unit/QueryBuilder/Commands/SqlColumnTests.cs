@@ -1,6 +1,6 @@
-﻿using Flepper.QueryBuilder.Base;
+﻿using System.Linq;
+using Flepper.QueryBuilder.Base;
 using FluentAssertions;
-using System.Linq;
 using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands

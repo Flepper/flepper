@@ -1,6 +1,6 @@
-﻿using Flepper.QueryBuilder.Utils.Extensions;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
+using Flepper.QueryBuilder.Utils.Extensions;
 using static System.String;
 namespace Flepper.QueryBuilder.Base
 {
