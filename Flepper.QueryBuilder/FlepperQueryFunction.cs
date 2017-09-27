@@ -11,10 +11,19 @@ namespace Flepper.QueryBuilder
         /// <summary>
         /// Count Sql Function
         /// </summary>
-        /// <param name="column"></param>
-        /// <param name="alias"></param>
-        /// <returns></returns>
+        /// <param name="column">column used by count function</param>
+        /// <param name="alias">column alias</param>
+        /// <returns>string statement</returns>
         public static SqlColumn Count(string column, string alias)
             => new CountOperator(column,alias);
+
+         /// <summary>
+        /// Min Sql Function
+        /// </summary>
+        /// <param name="column">column used by min function</param>
+        /// <param name="alias">column alias</param>
+        /// <returns>sring statement</returns>
+        public static SqlColumn Min(string column, string alias)
+            => new MinOperator(column,alias);
     }
 }

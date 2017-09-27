@@ -1,21 +1,22 @@
-﻿using System;
+using System;
 using Flepper.QueryBuilder.Base;
 using static System.String;
+
 namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
-    /// Count Operator class
+    /// MIN Operator class
     /// </summary>
-    public sealed class CountOperator : FunctionOperator
+    public sealed class MinOperator : FunctionOperator
     {
-        private static string _countFunction = "COUNT";
+        private static string _minFunction = "MIN";
 
         /// <summary>
-        /// constructor to Count class
+        /// constructor to Min class
         /// </summary>
         /// <param name="column">column name</param>
         /// <param name="alias">alias to column. All alias start with func_</param>
-        public CountOperator(string column, string alias) : base(column, alias, _countFunction)
+        public MinOperator(string column, string alias) : base(column, alias, _minFunction)
         {
 
         }
