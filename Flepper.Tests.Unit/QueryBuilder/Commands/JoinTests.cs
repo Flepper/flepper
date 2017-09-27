@@ -21,6 +21,19 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldReturnInnerJoinStatementWishTableAlias()
+        {
+            FlepperQueryBuilder.Select("t1.c1", "t2.c1")
+               .From("Table1").As("t1")
+               .InnerJoin("Table2").As("t2")
+               .On("t1", "c1").EqualTo("t2", "c1")
+               .Build()
+               .Trim()
+               .Should()
+               .Be("SELECT [t1].[c1],[t2].[c1] FROM [Table1] t1 INNER JOIN [Table2] t2 ON t1.[c1] = t2.[c1]");
+        }
+
+        [Fact]
         public void ShouldReturnInnerJoinWithOnEqualStatement()
         {
             FlepperQueryBuilder.Select()

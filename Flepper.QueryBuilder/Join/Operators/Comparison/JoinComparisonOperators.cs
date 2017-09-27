@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class JoinComparisonOperators : BaseQueryBuilder, IJoinComparisonOperators
     {
-        public JoinComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public JoinComparisonOperators(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
-using static System.String;
 using Flepper.QueryBuilder.Base;
+using static System.String;
 namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>

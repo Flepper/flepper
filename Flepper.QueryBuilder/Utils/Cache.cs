@@ -38,6 +38,7 @@ namespace Flepper.QueryBuilder.Utils
 
             data = getProperties();
             DtoProperties.TryAdd(type, data);
+
             return data;
         }
 

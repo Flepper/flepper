@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
@@ -33,6 +34,6 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <typeparam name="TEnd"></typeparam>
         /// <returns></returns>
-        TEnd To<TEnd>(Func<StringBuilder, IDictionary<string, object>, TEnd> creator);
+        TEnd To<TEnd>(Func<StringBuilder, IDictionary<string, object>, SqlColumn[], TEnd> creator);
     }
 }

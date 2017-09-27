@@ -67,7 +67,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] t1 WHERE [Name] = @p0 ORDER BY [Name], [t1].[Birthday]");
+                .Be("SELECT [t1].[Id],[t1].[Name],[t1].[Birthday] FROM [user] t1 WHERE [Name] = @p0 ORDER BY [Name], [t1].[Birthday]");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -109,7 +109,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name]");
+                .Be("SELECT [t1].[Id],[t1].[Name] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name]");
 
             dynamic parameters = queryResult.Parameters;
 
@@ -131,7 +131,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name],[Birthday] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name] DESC, [t1].[Birthday] DESC");
+                .Be("SELECT [t1].[Id],[t1].[Name],[t1].[Birthday] FROM [user] t1 INNER JOIN [address] t2 ON t2.[column1] = t1.[column2] WHERE [Name] = @p0 ORDER BY [t1].[Name] DESC, [t1].[Birthday] DESC");
 
             dynamic parameters = queryResult.Parameters;
 

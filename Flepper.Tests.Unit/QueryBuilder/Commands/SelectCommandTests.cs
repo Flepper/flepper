@@ -256,13 +256,22 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Select("Name", "Age")
                 .From("User")
                 .GroupBy("Age")
-                .BuildWithParameters();
-
-            queryResult
+                .BuildWithParameters()
                 .Query
                 .Trim()
                 .Should()
-                .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]");
+                .Be("SELECT [Name],[Age] FROM [User] GROUP BY [Age]"); ;
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithTableAliasOnSelectedColumns()
+        {
+            FlepperQueryBuilder.Select("Name")
+                .From("Table1").As("t1")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [t1].[Name] FROM [Table1] t1");
         }
 
         [Fact]

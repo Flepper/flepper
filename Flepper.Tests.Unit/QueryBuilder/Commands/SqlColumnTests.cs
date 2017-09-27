@@ -1,6 +1,6 @@
-﻿using Flepper.QueryBuilder.Base;
+﻿using System.Linq;
+using Flepper.QueryBuilder.Base;
 using FluentAssertions;
-using System.Linq;
 using Xunit;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
@@ -13,6 +13,38 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var column = new SqlColumn("Column");
 
             column.ToString().Should().Be("[Column]");
+        }
+
+        [Fact]
+        public void ShouldCreateColumnWithAlias()
+        {
+            var column = new SqlColumn("Column as C");
+
+            column.ToString().Should().Be("[Column] AS C");
+        }
+
+        [Fact]
+        public void ShouldCreateColumnWithTableAlias()
+        {
+            var column = new SqlColumn("t1.Column");
+
+            column.ToString().Should().Be("[t1].[Column]");
+        }
+
+        [Fact]
+        public void ShouldCreateColumnWithAliasAndTableAlias()
+        {
+            var column = new SqlColumn("t1.Column as c");
+
+            column.ToString().Should().Be("[t1].[Column] AS c");
+        }
+
+        [Fact]
+        public void ShoudNotAddBracketsWhenColumnIsAsterisk()
+        {
+            var column = new SqlColumn("t1.*");
+
+            column.ToString().Should().Be("[t1].*");
         }
 
         [Fact]

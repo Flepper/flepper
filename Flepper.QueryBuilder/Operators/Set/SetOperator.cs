@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class SetOperator : BaseQueryBuilder, ISetOperator
     {
-        public SetOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public SetOperator(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 

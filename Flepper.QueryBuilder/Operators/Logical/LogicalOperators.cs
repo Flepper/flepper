@@ -6,7 +6,7 @@ namespace Flepper.QueryBuilder
 {
     internal class LogicalOperators : BaseQueryBuilder, ILogicalOperators
     {
-        public LogicalOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
+        public LogicalOperators(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
         {
         }
 
