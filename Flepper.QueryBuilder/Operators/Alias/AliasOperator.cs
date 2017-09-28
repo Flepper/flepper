@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Flepper.QueryBuilder
+=======
+﻿namespace Flepper.QueryBuilder
+>>>>>>> Change Namespaces and Class Name
 {
     internal partial class QueryBuilder : IAliasOperator
     {
