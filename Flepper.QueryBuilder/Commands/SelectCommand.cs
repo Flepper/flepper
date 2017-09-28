@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
-using Flepper.QueryBuilder.Base;
+using System.Linq.Expressions;
+using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
 
 namespace Flepper.QueryBuilder
@@ -21,5 +21,13 @@ namespace Flepper.QueryBuilder
             Columns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
         }
+
+        public ISelectCommand SelectCommand<T>()
+            where T : class
+            => SelectCommand(Cache.GetTypeProperties<T>());
+
+        public ISelectCommand SelectCommand<T>(Expression<Func<T, object>> expression)
+            where T : class
+            => SelectCommand(Cache.GetTypeProperties<T>());
     }
 }
