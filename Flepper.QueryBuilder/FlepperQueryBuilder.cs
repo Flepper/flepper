@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder
 {
@@ -29,7 +30,7 @@ namespace Flepper.QueryBuilder
         /// <typeparam name="T">Object</typeparam>
         /// <returns></returns>
         public static ISelectCommand Select<T>() where T : class
-            => new QueryBuilder().SelectCommand<T>();
+            => new QueryBuilder().SelectCommand<T>(Cache.GetTypeProperties<T>());
 
         /// <summary>
         /// Create Select Command
@@ -38,7 +39,7 @@ namespace Flepper.QueryBuilder
         /// <param name="expression"></param>
         /// <returns></returns>
         public static ISelectCommand Select<T>(Expression<Func<T, object>> expression) where T : class
-            => new QueryBuilder().SelectCommand(expression);
+            => new QueryBuilder().SelectCommand(Cache.GetPropertiesFromExpression<T>(expression));
 
         /// <summary>
         /// Create Insert Command
