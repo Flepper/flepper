@@ -14,8 +14,9 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         /// constructor to Count class
         /// </summary>
         /// <param name="column">column name</param>
-        /// <param name="alias">alias to column. All alias start with func_</param>
-        public CountOperator(string column, string alias) : base(column, alias, _countFunction)
+        /// <param name="alias">alias to column. All alias start with</param>
+        /// <param name="tableAlias">used for internal process to set a table alias to column</param>
+        public CountOperator(string column, string alias, string tableAlias = "") : base(column, alias, _countFunction, tableAlias)
         {
 
         }

@@ -290,10 +290,26 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldCreateSelectStatementWithCountAndTableAlias()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Count("column2", "cl2"))
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT COUNT([usr].[column2]) AS cl2 FROM [User] usr");
+        }
+
+        [Fact]
         public void ShouldCreateSelectStatementWithCountAndMultipleColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Count("column2", "cl2"),"column3")
+                .Select("column1", Count("column2", "cl2"), "column3")
                 .From("User")
                 .BuildWithParameters();
 
@@ -319,11 +335,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT [column1],COUNT([column2]) AS cl2,[column3] AS cl3 FROM [User]");
         }
 
-         [Fact]
+        [Fact]
         public void ShouldCreateSelectStatementWithMinAndMultipleColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Min("column2", "cl2"),"column3")
+                .Select("column1", Min("column2", "cl2"), "column3")
                 .From("User")
                 .BuildWithParameters();
 
@@ -363,6 +379,69 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT MIN([column2]) AS cl2 FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMinAndTableAlias()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Min("column2", "cl2"))
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MIN([usr].[column2]) AS cl2 FROM [User] usr");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMax()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Max("column2", "cl2"))
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MAX([column2]) AS cl2 FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMaxWithTableAlias()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Max("column2", "cl2"))
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MAX([usr].[column2]) AS cl2 FROM [User] usr");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMaxWithTableAliasAndMultipleColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(Max("column2", "cl2"), "column3")
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MAX([usr].[column2]) AS cl2,[usr].[column3] FROM [User] usr");
         }
 
         public void Dispose()

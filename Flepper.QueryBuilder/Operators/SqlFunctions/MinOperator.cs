@@ -15,8 +15,9 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         /// constructor to Min class
         /// </summary>
         /// <param name="column">column name</param>
-        /// <param name="alias">alias to column. All alias start with func_</param>
-        public MinOperator(string column, string alias) : base(column, alias, _minFunction)
+        /// <param name="alias">alias to column.</param>
+        /// <param name="tableAlias">used for internal process to set a table alias to column</param>
+        public MinOperator(string column, string alias,string tableAlias = "") : base(column, alias, _minFunction,tableAlias)
         {
 
         }

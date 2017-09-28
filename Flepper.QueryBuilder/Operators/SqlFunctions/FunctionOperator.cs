@@ -8,11 +8,11 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
     ///</summary>
     public class FunctionOperator : SqlColumn
     {
-        internal FunctionOperator(string column, string alias, string function) : base(column)
+        internal FunctionOperator(string column, string alias, string function,string tableAlias = "") : base(column,alias)
         {
             if (IsNullOrWhiteSpace(column) || IsNullOrWhiteSpace(alias)) throw new ArgumentNullException($"{nameof(column)} and {nameof(alias)} cannot be null or empty");
 
-            Column = $"{function}([{column}]) AS {alias}";
+            Column = IsNullOrWhiteSpace(tableAlias) ? $"{function}([{column}]) AS {alias}" :  $"{function}([{tableAlias}].[{column}]) AS {alias}";
         }
 
 
