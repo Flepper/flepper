@@ -13,6 +13,6 @@ namespace Flepper.QueryBuilder
         /// <param name="alias">Table Alias</param>
         /// <returns></returns>
         public static IAliasOperator As(this IJoin join, string alias)
-            => join.To<AliasOperator>().As(alias);
+            => join is IAliasOperator command ? command.As(alias) : null;
     }
 }

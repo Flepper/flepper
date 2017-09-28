@@ -1,15 +1,7 @@
-using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder.Base
 {
-    internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
+    internal partial class BaseQueryBuilder : IComparisonOperators
     {
-        public ComparisonOperators(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
-        {
-        }
-
         public IComparisonOperators EqualTo<T>(T value)
         {
             if (value == null)

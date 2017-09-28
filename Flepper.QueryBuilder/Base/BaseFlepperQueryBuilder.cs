@@ -5,19 +5,19 @@ using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder.Base
 {
-    internal abstract class BaseQueryBuilder : IQueryCommand
+    internal partial class BaseQueryBuilder : IQueryCommand
     {
         protected SqlColumn[] Columns;
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
 
-        protected BaseQueryBuilder()
+        internal BaseQueryBuilder()
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
         }
 
-        protected BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
+        internal BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
         {
             Command = command;
             Parameters = parameters;

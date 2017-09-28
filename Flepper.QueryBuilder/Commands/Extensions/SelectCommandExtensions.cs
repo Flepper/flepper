@@ -13,7 +13,7 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this ISelectCommand selectCommand, string schema, string table)
-            => selectCommand.To((s, p, c) => new FromCommand(s, p, c, schema, table));
+            => selectCommand is IFromCommand command ? command.FromCommand(schema, table) : null;
 
 
         /// <summary>
@@ -23,7 +23,7 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this ISelectCommand selectCommand, string table)
-            => selectCommand.To((s, p, c) => new FromCommand(s, p, c, table));
+            => selectCommand is IFromCommand command ? command.FromCommand(table) : null;
 
         /// <summary>
         /// Add Top Command
@@ -32,6 +32,6 @@
         /// <param name="size">Size of records</param>
         /// <returns></returns>
         public static ITopCommand Top(this ISelectCommand selectCommand, int size = 1)
-            => selectCommand.To((s, p, c) => new TopCommand(s, p, c, size));
+            => selectCommand is ITopCommand command ? command.TopCommand(size) : null;
     }
 }

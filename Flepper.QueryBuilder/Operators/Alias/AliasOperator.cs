@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,8 @@ using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
-    internal class AliasOperator : BaseQueryBuilder, IAliasOperator
+    internal partial class BaseQueryBuilder : IAliasOperator
     {
-        public AliasOperator(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
-        {
-        }
-
         public IAliasOperator As(string alias)
         {
             Columns = Columns.Select(c => c.TableAlias != null ? c : new SqlColumn($"[{alias}].{c}")).ToArray();
