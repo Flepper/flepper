@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
@@ -9,7 +10,7 @@ namespace Flepper.QueryBuilder
     {
         public ISelectCommand SelectCommand()
         {
-            Columns = new[] { (SqlColumn)"*" };
+            QueryColumns = new[] { (SqlColumn)"*" };
             Command.Append("SELECT * ");
             return this;
         }
@@ -18,8 +19,9 @@ namespace Flepper.QueryBuilder
         {
             if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
 
-            Columns = columns;
+            QueryColumns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
+            return this;
         }
 
         public ISelectCommand SelectCommand<T>()

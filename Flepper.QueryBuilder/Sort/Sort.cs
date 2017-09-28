@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : ISort, ISortThen
     {

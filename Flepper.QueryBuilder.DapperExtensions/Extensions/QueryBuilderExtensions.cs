@@ -2,10 +2,7 @@
 using System.Data;
 using System.Threading.Tasks;
 using System;
-<<<<<<< HEAD
 using static Dapper.SqlMapper;
-=======
->>>>>>> 8442d37b6296be4f9b44dbf91193a2ff2d60c70a
 
 namespace Flepper.QueryBuilder.DapperExtensions
 {

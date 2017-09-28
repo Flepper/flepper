@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Text;
-
 namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : ISetOperator

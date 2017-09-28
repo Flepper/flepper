@@ -179,7 +179,8 @@ namespace Flepper.QueryBuilder.DapperExtensions
         public T QueryFirst<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
-            return dbConnection.QueryFirst(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+            return dbConnection.QueryFirst<T>(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+
         }
 
         public Task<object> QueryFirstAsync(Type type, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)

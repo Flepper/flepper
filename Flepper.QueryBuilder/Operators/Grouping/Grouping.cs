@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 
 namespace Flepper.QueryBuilder

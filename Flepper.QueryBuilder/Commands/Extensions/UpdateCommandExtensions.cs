@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Update Command Extension

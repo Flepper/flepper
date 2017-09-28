@@ -8,9 +8,9 @@ namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IQueryCommand
     {
-        protected SqlColumn[] Columns;
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
+        protected SqlColumn[] QueryColumns;
 
         internal QueryBuilder()
         {
@@ -22,7 +22,7 @@ namespace Flepper.QueryBuilder
         {
             Command = command;
             Parameters = parameters;
-            Columns = columns;
+            QueryColumns = columns;
         }
 
         public string Build()
@@ -30,13 +30,6 @@ namespace Flepper.QueryBuilder
 
         public QueryResult BuildWithParameters()
             => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObjectWithValues(Parameters));
-
-        public TEnd To<TEnd>()
-            where TEnd : IQueryCommand
-            => (TEnd)Activator.CreateInstance(typeof(TEnd), Command, Parameters, Columns);
-
-        public TEnd To<TEnd>(Func<StringBuilder, IDictionary<string, object>, SqlColumn[], TEnd> creator)
-            => creator(Command, Parameters, Columns);
 
         protected int AddParameters(params object[] values)
         {
