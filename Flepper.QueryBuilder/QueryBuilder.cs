@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Flepper.QueryBuilder.Utils;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IQueryCommand
+    internal partial class QueryBuilder : IQueryCommand
     {
         protected SqlColumn[] Columns;
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
 
-        internal BaseQueryBuilder()
+        internal QueryBuilder()
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
         }
 
-        internal BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
+        internal QueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
         {
             Command = command;
             Parameters = parameters;

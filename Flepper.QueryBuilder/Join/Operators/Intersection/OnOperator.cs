@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IOnOperator
+    internal partial class QueryBuilder : IOnOperator
     {
         public IOnOperator On(string tableAlias, string column)
         {

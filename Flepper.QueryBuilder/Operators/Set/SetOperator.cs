@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
-using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : ISetOperator
+    internal partial class QueryBuilder : ISetOperator
     {
         public ISetOperator Set<T>(string column, T value)
         {

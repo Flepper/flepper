@@ -4,9 +4,9 @@ using Flepper.QueryBuilder.Base;
 using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IGrouping
+    internal partial class QueryBuilder : IGrouping
     {
         /// <summary>
         /// Group select statement by column
