@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <version>1.0.0</version>
+    <description>Extension methods to aid in the execution with Dapper of queries written with Flepper..</description>
+    <authors>Nicolas Takashi, Gustavo Fontes, Alberto Monteiro</authors>
+    <owners>Nicolas Takashi, Gustavo Fontes, Alberto Monteiro</owners>
+    <licenseUrl>https://github.com/nicolastakashi/flepper/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nicolastakashi/flepper</projectUrl>
+    <iconUrl>https://camo.githubusercontent.com/6a76ee7c5821ba36f91d2443c53bf141d1d53d77/68747470733a2f2f7332362e706f7374696d672e6f72672f7531686e32313371682f66726f675f3132382e706e67</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Extension methods to aid in the execution with Dapper of queries written with Flepper.</summary>
+    <releaseNotes>Dapper Extension Methods</releaseNotes>
+    <copyright>Copyright 2017 (c) Flepper. All rights reserved.</copyright>
+    <language>en-US</language>
+    <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
