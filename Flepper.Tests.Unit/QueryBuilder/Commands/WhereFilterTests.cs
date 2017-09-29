@@ -250,11 +250,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             result.Query
                 .Trim()
                 .Should()
-                .Contain("LIKE");
-
-            result.Query
-                .Trim()
-                .Should()
                 .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
 
             dynamic parameters = result.Parameters;
@@ -274,11 +269,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
 
-            result.Query
-                .Trim()
-                .Should()
-                .Contain("LIKE");
-
             dynamic parameters = result.Parameters;
             Assert.Equal("%abc", parameters.@p0);
         }
@@ -296,11 +286,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
 
-            result.Query
-                .Trim()
-                .Should()
-                .Contain("LIKE");
-
             dynamic parameters = result.Parameters;
             Assert.Equal("abc%", parameters.@p0);
         }
@@ -313,21 +298,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Where("field1").Contains("abc1")
                 .And("field2").StartsWith("abc2")
                 .And("field3").EndsWith("abc3")
-                .BuildWithParameters();               
-
-            result.Query.Should()
-                .Contain("@p0");
-            result.Query.Should()
-                .Contain("@p1");
-            result.Query.Should()
-                .Contain("@p2");
-
-            result.Query.Should()
-                .Contain("[field1]");
-            result.Query.Should()
-                .Contain("[field2]");
-            result.Query.Should()
-                .Contain("[field3]");
+                .BuildWithParameters();                           
 
             result.Query
                 .Trim()
@@ -348,17 +319,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Where("field").Between(10, 20)
                 .BuildWithParameters();
 
-            result.Query.Trim()
-                .Contains("BETWEEN");
-            result.Query.Trim()
-                .Contains("@p0");
-            result.Query.Trim()
-                .Contains("@p1");
-            result.Query.Trim()
-                .Contains("[table]");
-            result.Query.Trim()
-                .Contains("[field]");
-
             result.Query
                 .Trim()
                 .Should()
@@ -377,19 +337,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Where("field").NotEqualTo(9)
                 .And("field").Between(10, 20)
                 .BuildWithParameters();
-
-            result.Query.Trim()
-                .Contains("BETWEEN");
-            result.Query.Trim()
-                .Contains("@p0");
-            result.Query.Trim()
-                .Contains("@p1");
-            result.Query.Trim()
-                .Contains("@p2");
-            result.Query.Trim()
-                .Contains("[table]");
-            result.Query.Trim()
-                .Contains("[field]");
 
             result.Query
                 .Trim()
