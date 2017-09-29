@@ -64,7 +64,7 @@ Task("NugetPack").IsDependentOn("Build").Does(() =>
     DotNetCorePack("./Flepper.QueryBuilder/Flepper.QueryBuilder.csproj", settings);
 });
 
-Task("Tests").IsDependentOn("Build").Does(() =>
+Task("Tests").IsDependentOn("Integration-Tests").IsDependentOn("Build").Does(() =>
 {
     DotNetCoreTest(testProject, testSettings);
 });
