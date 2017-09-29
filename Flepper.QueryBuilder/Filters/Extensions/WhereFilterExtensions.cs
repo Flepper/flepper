@@ -92,13 +92,13 @@
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
         /// <param name="whereFilter"></param>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public static IComparisonOperators Between<T1, T2>(this IWhereFilter whereFilter, T1 from, T2 to)
+        public static IComparisonOperators Between<TFrom, TTo>(this IWhereFilter whereFilter, TFrom from, TTo to)
             => whereFilter.To<ComparisonOperators>().Between(from, to);
 
     }
