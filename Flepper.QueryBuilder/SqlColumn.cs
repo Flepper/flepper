@@ -57,7 +57,7 @@ namespace Flepper.QueryBuilder
             }
             else
             {
-                Column = $"[{column}]";
+                Column = $"{column}";
             }
 
             if(Column != "*")

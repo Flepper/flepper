@@ -6,6 +6,7 @@ using FluentAssertions;
 
 namespace Flepper.Tests.Integration
 {
+    [Collection("IntegrationTests")]
     public class InsertTests : IClassFixture<DatabaseFixture>
     {
         private readonly DatabaseFixture databaseFixture;
