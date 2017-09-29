@@ -339,5 +339,67 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal("%abc2", parameters.@p1);
             Assert.Equal("abc3%", parameters.@p2);
         }
+
+        [Fact] //ShoulContainWhereWithNotEqualTo()
+        public void ShoulContainWhereWithBetween()
+        {
+            QueryResult result = FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").Between(10, 20)
+                .BuildWithParameters();
+
+            result.Query.Trim()
+                .Contains("BETWEEN");
+            result.Query.Trim()
+                .Contains("@p0");
+            result.Query.Trim()
+                .Contains("@p1");
+            result.Query.Trim()
+                .Contains("[table]");
+            result.Query.Trim()
+                .Contains("[field]");
+
+            result.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field] BETWEEN @p0 AND @p1");
+
+            dynamic parameters = result.Parameters;
+            Assert.Equal(10, parameters.@p0);
+            Assert.Equal(20, parameters.@p1);
+        }
+
+        [Fact]
+        public void ShoulContainWhereWithNotEqualToAndWhereWithBetween()
+        {
+            QueryResult result = FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").NotEqualTo(9)
+                .And("field").Between(10, 20)
+                .BuildWithParameters();
+
+            result.Query.Trim()
+                .Contains("BETWEEN");
+            result.Query.Trim()
+                .Contains("@p0");
+            result.Query.Trim()
+                .Contains("@p1");
+            result.Query.Trim()
+                .Contains("@p2");
+            result.Query.Trim()
+                .Contains("[table]");
+            result.Query.Trim()
+                .Contains("[field]");
+
+            result.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field] <> @p0 AND [field] BETWEEN @p1 AND @p2");
+
+            dynamic parameters = result.Parameters;
+            Assert.Equal(9, parameters.@p0);
+            Assert.Equal(10, parameters.@p1);
+            Assert.Equal(20, parameters.@p2);
+        }
     }
 }

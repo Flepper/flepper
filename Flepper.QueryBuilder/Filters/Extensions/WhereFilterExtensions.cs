@@ -89,5 +89,17 @@
         public static IComparisonOperators EndsWith<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().EndsWith(value);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Between<T1, T2>(this IWhereFilter whereFilter, T1 from, T2 to)
+            => whereFilter.To<ComparisonOperators>().Between(from, to);
+
     }
 }

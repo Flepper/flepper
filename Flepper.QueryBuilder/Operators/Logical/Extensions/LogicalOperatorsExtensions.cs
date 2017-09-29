@@ -89,5 +89,18 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators EndsWith<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().EndsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Between<TFrom, TTo>(this ILogicalOperators logicalOperators, TFrom from, TTo to)
+            => logicalOperators.To<ComparisonOperators>().Between(from, to);
+
     }
 }

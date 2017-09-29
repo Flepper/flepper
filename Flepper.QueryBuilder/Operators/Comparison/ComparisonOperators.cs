@@ -71,5 +71,11 @@ namespace Flepper.QueryBuilder
             Command.Append($"LIKE @p{AddParameters($"{value}%")}  ");
             return this;
         }
+
+        public IComparisonOperators Between<TFrom, TTo>(TFrom from, TTo to)
+        {
+            Command.Append($"BETWEEN @p{AddParameters(from)} AND @p{AddParameters(to)} ");
+            return this;
+        }
     }
 }

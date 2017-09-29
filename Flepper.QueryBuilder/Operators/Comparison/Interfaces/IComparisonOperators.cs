@@ -70,5 +70,15 @@
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
         IComparisonOperators EndsWith<T>(T value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        IComparisonOperators Between<T1, T2>(T1 from, T2 to);
     }
 }
