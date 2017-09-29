@@ -74,11 +74,11 @@
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        IComparisonOperators Between<T1, T2>(T1 from, T2 to);
+        IComparisonOperators Between<TFrom, TTo>(TFrom from, TTo to);
     }
 }
