@@ -59,5 +59,35 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().NotEqualTo(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Contains<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().Contains(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators StartsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().StartsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators EndsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().EndsWith(value);
     }
 }

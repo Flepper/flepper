@@ -53,5 +53,23 @@ namespace Flepper.QueryBuilder
 
             return this;
         }
+
+        public IComparisonOperators Contains<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"%{value}%")}  ");
+            return this;
+        }
+
+        public IComparisonOperators StartsWith<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"%{value}")}  ");
+            return this;
+        }
+
+        public IComparisonOperators EndsWith<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"{value}%")}  ");
+            return this;
+        }
     }
 }

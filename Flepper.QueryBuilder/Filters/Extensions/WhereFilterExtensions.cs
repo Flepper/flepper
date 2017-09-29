@@ -58,5 +58,36 @@
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().NotEqualTo(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Contains<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().Contains(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators StartsWith<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().StartsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators EndsWith<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().EndsWith(value);
+
     }
 }
