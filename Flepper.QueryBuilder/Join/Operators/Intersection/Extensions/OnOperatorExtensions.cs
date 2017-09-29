@@ -14,7 +14,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>
         /// <returns></returns>
         public static IJoinComparisonOperators EqualTo(this IOnOperator onOperator, string tableAlias, string column)
-            => onOperator.To<JoinComparisonOperators>().Equal(tableAlias, column);
+            => onOperator is IJoinComparisonOperators command ? command.Equal(tableAlias, column) : null;
 
         /// <summary>
         /// Add Mot Equal Operator to query
@@ -24,6 +24,6 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>
         /// <returns></returns>
         public static IJoinComparisonOperators NotEqualTo(this IOnOperator onOperator, string tableAlias, string column)
-            => onOperator.To<JoinComparisonOperators>().NotEqual(tableAlias, column);
+            => onOperator is IJoinComparisonOperators command ? command.NotEqual(tableAlias, column) : null;
     }
 }

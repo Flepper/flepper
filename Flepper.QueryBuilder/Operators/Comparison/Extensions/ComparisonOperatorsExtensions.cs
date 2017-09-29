@@ -13,7 +13,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>
         /// <returns></returns>
         public static ILogicalOperators And(this IComparisonOperators comparisonOperators, string column)
-            => comparisonOperators.To<LogicalOperators>().And(column);
+            => comparisonOperators is ILogicalOperators command ? command.And(column) : null;
 
         /// <summary>
         /// Add Or Comparison Operator to query
@@ -22,6 +22,6 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>
         /// <returns></returns>
         public static ILogicalOperators Or(this IComparisonOperators comparisonOperators, string column)
-            => comparisonOperators.To<LogicalOperators>().Or(column);
+            => comparisonOperators is ILogicalOperators command ? command.Or(column) : null;
     }
 }

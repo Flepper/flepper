@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Set Operator Interface

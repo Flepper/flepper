@@ -1,7 +1,4 @@
-﻿using System;
-using Flepper.QueryBuilder.Base;
-using static System.String;
-namespace Flepper.QueryBuilder.Operators.SqlFunctions
+﻿namespace Flepper.QueryBuilder.Operators.SqlFunctions
 {
     /// <summary>
     /// Count Operator class

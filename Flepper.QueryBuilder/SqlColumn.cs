@@ -3,8 +3,7 @@ using System.Runtime.CompilerServices;
 using Flepper.QueryBuilder.Utils.Extensions;
 using static System.String;
 
-namespace Flepper.QueryBuilder.Base
-
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Base function class used to improve implicit conversion
@@ -58,7 +57,7 @@ namespace Flepper.QueryBuilder.Base
             }
             else
             {
-                Column = $"[{column}]";
+                Column = $"{column}";
             }
 
             if(Column != "*")
