@@ -242,60 +242,87 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulContainLikeContains()
         {
-            FlepperQueryBuilder.Select()
+            QueryResult result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").Contains("abc")
-                .Build()
+                .BuildWithParameters();
+
+            result.Query
                 .Trim()
                 .Should()
                 .Contain("LIKE");
+
+            dynamic parameters = result.Parameters;
+            Assert.Equal("%abc%", parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainLikeStartsWith()
         {
-            FlepperQueryBuilder.Select()
+            QueryResult result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").StartsWith("abc")
-                .Build()
+                .BuildWithParameters();
+
+            result.Query
                 .Trim()
                 .Should()
                 .Contain("LIKE");
+
+            dynamic parameters = result.Parameters;
+            Assert.Equal("%abc", parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainLikeEndsWith()
         {
-            FlepperQueryBuilder.Select()
+            QueryResult result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").EndsWith("abc")
-                .Build()
+                .BuildWithParameters();
+
+            result.Query
                 .Trim()
                 .Should()
                 .Contain("LIKE");
+
+            dynamic parameters = result.Parameters;
+            Assert.Equal("abc%", parameters.@p0);
         }
 
         [Fact]
         public void ShoulContainLikeContainsAndStartsWithAndEndsWith()
         {
-            var result = FlepperQueryBuilder.Select()
+            QueryResult result = FlepperQueryBuilder.Select()
                 .From("table")
-                .Where("field1").Contains("abc")
-                .And("field2").StartsWith("abc")
-                .And("field3").EndsWith("abc")
-                .Build()
+                .Where("field1").Contains("abc1")
+                .And("field2").StartsWith("abc2")
+                .And("field3").EndsWith("abc3")
+                .BuildWithParameters();               
+
+            result.Query.Should()
+                .Contain("@p0");
+            result.Query.Should()
+                .Contain("@p1");
+            result.Query.Should()
+                .Contain("@p2");
+
+            result.Query.Should()
+                .Contain("[field1]");
+            result.Query.Should()
+                .Contain("[field2]");
+            result.Query.Should()
+                .Contain("[field3]");
+
+            result.Query
                 .Trim()
-                .Should();
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field1] LIKE @p0  AND [field2] LIKE @p1  AND [field3] LIKE @p2");
 
-            result.Contain("@p0");
-            result.Contain("@p1");
-            result.Contain("@p2");
-
-            result.Contain("[field1]");
-            result.Contain("[field2]");
-            result.Contain("[field3]");
-
-            result.Be("SELECT * FROM [table] WHERE [field1] LIKE @p0  AND [field2] LIKE @p1  AND [field3] LIKE @p2");
+            dynamic parameters = result.Parameters;
+            Assert.Equal("%abc1%", parameters.@p0);
+            Assert.Equal("%abc2", parameters.@p1);
+            Assert.Equal("abc3%", parameters.@p2);
         }
     }
 }
