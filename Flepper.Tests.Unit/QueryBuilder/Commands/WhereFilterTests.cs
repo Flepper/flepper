@@ -252,6 +252,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Contain("LIKE");
 
+            result.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
+
             dynamic parameters = result.Parameters;
             Assert.Equal("%abc%", parameters.@p0);
         }
@@ -263,6 +268,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("table")
                 .Where("field").StartsWith("abc")
                 .BuildWithParameters();
+
+            result.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
 
             result.Query
                 .Trim()
@@ -280,6 +290,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .From("table")
                 .Where("field").EndsWith("abc")
                 .BuildWithParameters();
+
+            result.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [table] WHERE [field] LIKE @p0");
 
             result.Query
                 .Trim()
