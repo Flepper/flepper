@@ -6,6 +6,7 @@
 
 var target = Argument("target", "Default");
 var testProject = "./Flepper.Tests.Unit/Flepper.Tests.Unit.csproj";
+var integrationTestProject = "./Flepper.Tests.Integration/Flepper.Tests.Integration.csproj";
 var testSettings = new DotNetCoreTestSettings { Configuration = "Release", NoBuild = true };
 
 Task("Default").Does(() =>
@@ -66,6 +67,11 @@ Task("NugetPack").IsDependentOn("Build").Does(() =>
 Task("Tests").IsDependentOn("Build").Does(() =>
 {
     DotNetCoreTest(testProject, testSettings);
+});
+
+Task("Integration-Tests").IsDependentOn("Build").Does(() =>
+{
+    DotNetCoreTest(integrationTestProject, testSettings);
 });
 
 Task("Build").Does(() =>
