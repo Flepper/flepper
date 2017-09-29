@@ -238,5 +238,64 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Contain("WHERE [field] IS NOT NULL");
         }
+
+        [Fact]
+        public void ShoulContainLikeContains()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").Contains("abc")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("LIKE");
+        }
+
+        [Fact]
+        public void ShoulContainLikeStartsWith()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").StartsWith("abc")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("LIKE");
+        }
+
+        [Fact]
+        public void ShoulContainLikeEndsWith()
+        {
+            FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field").EndsWith("abc")
+                .Build()
+                .Trim()
+                .Should()
+                .Contain("LIKE");
+        }
+
+        [Fact]
+        public void ShoulContainLikeContainsAndStartsWithAndEndsWith()
+        {
+            var result = FlepperQueryBuilder.Select()
+                .From("table")
+                .Where("field1").Contains("abc")
+                .And("field2").StartsWith("abc")
+                .And("field3").EndsWith("abc")
+                .Build()
+                .Trim()
+                .Should();
+
+            result.Contain("@p0");
+            result.Contain("@p1");
+            result.Contain("@p2");
+
+            result.Contain("[field1]");
+            result.Contain("[field2]");
+            result.Contain("[field3]");
+
+            result.Be("SELECT * FROM [table] WHERE [field1] LIKE @p0  AND [field2] LIKE @p1  AND [field3] LIKE @p2");
+        }
     }
 }
