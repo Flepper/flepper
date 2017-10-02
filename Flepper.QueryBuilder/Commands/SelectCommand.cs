@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder.Base
 {
     internal partial class QueryBuilder : ISelectCommand
     {

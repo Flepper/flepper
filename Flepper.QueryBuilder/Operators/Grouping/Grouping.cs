@@ -1,4 +1,3 @@
-using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 
 namespace Flepper.QueryBuilder
 {

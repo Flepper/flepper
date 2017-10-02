@@ -1,5 +1,7 @@
 using System;
 using System.Linq.Expressions;
+using Flepper.QueryBuilder.Base;
+using Flepper.QueryBuilder.Utils;
 
 namespace Flepper.QueryBuilder
 {
@@ -13,7 +15,7 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <returns></returns>
         public static ISelectCommand Select()
-            => new QueryBuilder().SelectCommand();
+            => new BaseQueryBuilder().SelectCommand();
 
         /// <summary>
         /// Create Select Command
@@ -21,7 +23,7 @@ namespace Flepper.QueryBuilder
         /// <param name="columns">Columns name</param>
         /// <returns></returns>
         public static ISelectCommand Select(params string[] columns)
-            => new QueryBuilder().SelectCommand(columns);
+            => new BaseQueryBuilder().SelectCommand(columns);
 
         /// <summary>
         /// Create Select Command
@@ -29,7 +31,7 @@ namespace Flepper.QueryBuilder
         /// <typeparam name="T">Object</typeparam>
         /// <returns></returns>
         public static ISelectCommand Select<T>() where T : class
-            => new QueryBuilder().SelectCommand<T>();
+            => new BaseQueryBuilder().SelectCommand(Cache.GetTypeProperties<T>());
 
         /// <summary>
         /// Create Select Command
@@ -38,21 +40,21 @@ namespace Flepper.QueryBuilder
         /// <param name="expression"></param>
         /// <returns></returns>
         public static ISelectCommand Select<T>(Expression<Func<T, object>> expression) where T : class
-            => new QueryBuilder().SelectCommand(expression);
+            => new BaseQueryBuilder().SelectCommand(Cache.GetPropertiesFromExpression<T>(expression));
 
         /// <summary>
         /// Create Insert Command
         /// </summary>
         /// <returns></returns>
         public static IInsertCommand Insert()
-            => new QueryBuilder();
+            => new BaseQueryBuilder();
 
         /// <summary>
         /// Create Delete Command
         /// </summary>
         /// <returns></returns>
         public static IDeleteCommand Delete()
-            => new QueryBuilder().DeleteCommand();
+            => new BaseQueryBuilder().DeleteCommand();
 
         /// <summary>
         /// Create Update Command
@@ -60,7 +62,7 @@ namespace Flepper.QueryBuilder
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IUpdateCommand Update(string table)
-            => new QueryBuilder().UpdateCommand(table);
+            => new BaseQueryBuilder().UpdateCommand(table);
 
         /// <summary>
         /// Create Update Command
@@ -69,6 +71,6 @@ namespace Flepper.QueryBuilder
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IUpdateCommand Update(string schema, string table)
-            => new QueryBuilder().UpdateCommand(schema, table);
+            => new BaseQueryBuilder().UpdateCommand(schema, table);
     }
 }

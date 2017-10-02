@@ -6,19 +6,19 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Flepper.QueryBuilder.DapperExtensions")]
 namespace Flepper.QueryBuilder
 {
-    internal partial class QueryBuilder : IQueryCommand
+    internal partial class BaseQueryBuilder : IQueryCommand
     {
         protected SqlColumn[] Columns;
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
 
-        internal QueryBuilder()
+        internal BaseQueryBuilder()
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
         }
 
-        internal QueryBuilder(StringBuilder command, IDictionary<string, object> parameters)
+        internal BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters)
         {
             Command = command;
             Parameters = parameters;

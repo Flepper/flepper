@@ -1,4 +1,4 @@
-﻿namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : ILogicalOperators
     {

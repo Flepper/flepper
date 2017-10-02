@@ -1,9 +1,8 @@
-﻿
 using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder.Base
 {
-    internal partial class QueryBuilder : IInsertCommand, IInsertIntoCommand
+    internal partial class BaseQueryBuilder : IInsertCommand, IInsertIntoCommand
     {
         public IInsertIntoCommand Into(string table)
         {
