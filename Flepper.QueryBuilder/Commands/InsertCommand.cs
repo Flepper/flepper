@@ -1,6 +1,6 @@
 using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IInsertCommand, IInsertIntoCommand
     {
