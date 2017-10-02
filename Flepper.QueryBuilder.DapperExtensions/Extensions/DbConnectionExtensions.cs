@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 using System;
-=======
-﻿using System;
->>>>>>> 402cc3b2c146ed3b90b4fafb3712b29ec2b2b998
 using System.Data;
 using System.Linq.Expressions;
 
@@ -80,10 +76,5 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <returns></returns>
         public static IUpdateCommand Update(this IDbConnection dbConnection, string schema, string table)
             => new FlepperDapperQuery(dbConnection).UpdateCommand(schema, table);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 402cc3b2c146ed3b90b4fafb3712b29ec2b2b998
     }
 }

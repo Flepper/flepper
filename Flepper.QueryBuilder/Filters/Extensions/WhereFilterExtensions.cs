@@ -11,13 +11,8 @@
         /// <param name="whereFilter">Where Filter instance</param>
         /// <param name="value">Value to filter</param>
         /// <returns></returns>
-<<<<<<< HEAD
-        public static IComparisonOperators EqualTo(this IWhereFilter whereFilter, string value)
-            => whereFilter is IComparisonOperators command ? command.EqualTo(value) : null;
-=======
         public static IComparisonOperators EqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter is IComparisonOperators command ? command.EqualTo<T>(value) : null;
->>>>>>> 402cc3b2c146ed3b90b4fafb3712b29ec2b2b998
 
         /// <summary>
         /// Add Equal to query

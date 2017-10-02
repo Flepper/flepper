@@ -2,7 +2,7 @@ namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IComparisonOperators
     {
-        public IComparisonOperators EqualTo(object value)
+        public IComparisonOperators EqualTo<T>(T value)
         {
             if (value == null)
                 Command.AppendFormat("IS NULL ");

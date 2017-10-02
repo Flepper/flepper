@@ -1,4 +1,6 @@
 
+using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
+
 namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IGrouping
