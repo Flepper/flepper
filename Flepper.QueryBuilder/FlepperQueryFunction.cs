@@ -15,15 +15,24 @@ namespace Flepper.QueryBuilder
         /// <param name="alias">column alias</param>
         /// <returns>string statement</returns>
         public static SqlColumn Count(string column, string alias)
-            => new CountOperator(column,alias);
+            => new CountOperator(column, alias);
 
-         /// <summary>
+        /// <summary>
         /// Min Sql Function
         /// </summary>
         /// <param name="column">column used by min function</param>
         /// <param name="alias">column alias</param>
         /// <returns>sring statement</returns>
         public static SqlColumn Min(string column, string alias)
-            => new MinOperator(column,alias);
+            => new MinOperator(column, alias);
+
+        /// <summary>
+        /// Max Sql Function
+        /// </summary>
+        /// <param name="column">column used by max function</param>
+        /// <param name="alias">column alias</param>
+        /// <returns>sring statement</returns>
+        public static SqlColumn Max(string column, string alias)
+            => new MaxOperator(column, alias);
     }
 }

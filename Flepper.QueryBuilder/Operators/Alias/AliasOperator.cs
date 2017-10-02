@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Flepper.QueryBuilder.Base;
+using Flepper.QueryBuilder.Operators.SqlFunctions;
 
 namespace Flepper.QueryBuilder
 {
@@ -14,8 +15,17 @@ namespace Flepper.QueryBuilder
 
         public IAliasOperator As(string alias)
         {
-            Columns = Columns.Select(c => c.TableAlias != null ? c : new SqlColumn($"[{alias}].{c}")).ToArray();
+            var withoutFunctions = Columns
+                .Where(c => !c.GetType().IsSubclassOf(typeof(FunctionOperator)))
+                .Select(c => c.TableAlias != null ? c : new SqlColumn($"[{alias}].{c}")).ToArray();
+            
+            var withFunctions = Columns
+                .Where(c => c.GetType().IsSubclassOf(typeof(FunctionOperator)))
+                .Select(c => c.TableAlias != null 
+                    ? c 
+                    : (SqlColumn)Activator.CreateInstance(c.GetType(),$"{extractColumnFromFunction(c)}",c.Alias,alias)).ToArray();
 
+            Columns = withFunctions.Concat(withoutFunctions).ToArray();
             var command = Command.ToString();
 
             Command.Clear();
@@ -25,5 +35,9 @@ namespace Flepper.QueryBuilder
 
             return this;
         }
+
+        private string extractColumnFromFunction(SqlColumn c)
+            => $"{c.Column.Split('[')[1].ToString().Split(']')[0]}";
+        
     }
 }

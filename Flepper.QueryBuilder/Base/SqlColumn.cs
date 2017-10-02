@@ -32,8 +32,9 @@ namespace Flepper.QueryBuilder.Base
         /// </summary>
         public string TableAlias { get; }
 
-        internal SqlColumn(string column)
+        internal SqlColumn(string column,string alias = "")
         {
+            Alias = alias;
             if (IsNullOrWhiteSpace(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
 
             TableAlias = GetTableAlias(column);
@@ -43,7 +44,7 @@ namespace Flepper.QueryBuilder.Base
 
             if (containsAlias && containsTableAlias)
             {
-                var columnAsAlias = default(string);
+                var columnAsAlias = Alias;
 
                 (TableAlias, columnAsAlias) = column.Split(TableAliasSplitter, StringSplitOptions.RemoveEmptyEntries);
                 (Column, Alias) = columnAsAlias.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries); ;
