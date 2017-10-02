@@ -58,5 +58,48 @@
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo<T>(this IWhereFilter whereFilter, T value)
             => whereFilter.To<ComparisonOperators>().NotEqualTo(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Contains<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().Contains(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators StartsWith<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().StartsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators EndsWith<T>(this IWhereFilter whereFilter, T value)
+            => whereFilter.To<ComparisonOperators>().EndsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
+        /// <param name="whereFilter"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Between<TFrom, TTo>(this IWhereFilter whereFilter, TFrom from, TTo to)
+            => whereFilter.To<ComparisonOperators>().Between(from, to);
+
     }
 }

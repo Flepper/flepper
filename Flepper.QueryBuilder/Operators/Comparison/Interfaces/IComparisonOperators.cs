@@ -46,5 +46,39 @@
         /// <param name="value">Value used to compare</param>
         /// <returns></returns>
         IComparisonOperators NotEqualTo<T>(T value);
+
+        /// <summary>
+        /// Contains
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">Value used to compare</param>
+        /// <returns></returns>
+        IComparisonOperators Contains<T>(T value);
+
+        /// <summary>
+        /// StartsWith
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">Value used to compare</param>
+        /// <returns></returns>
+        IComparisonOperators StartsWith<T>(T value);
+
+        /// <summary>
+        /// EndsWith
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">Value used to compare</param>
+        /// <returns></returns>
+        IComparisonOperators EndsWith<T>(T value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        IComparisonOperators Between<TFrom, TTo>(TFrom from, TTo to);
     }
 }

@@ -59,5 +59,48 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators.To<ComparisonOperators>().NotEqualTo(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Contains<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().Contains(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators StartsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().StartsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators EndsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators.To<ComparisonOperators>().EndsWith(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Between<TFrom, TTo>(this ILogicalOperators logicalOperators, TFrom from, TTo to)
+            => logicalOperators.To<ComparisonOperators>().Between(from, to);
+
     }
 }
