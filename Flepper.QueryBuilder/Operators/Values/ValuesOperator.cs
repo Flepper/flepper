@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IValuesOperator
     {

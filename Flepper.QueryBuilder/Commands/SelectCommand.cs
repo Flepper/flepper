@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder.Base
+namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : ISelectCommand
     {
