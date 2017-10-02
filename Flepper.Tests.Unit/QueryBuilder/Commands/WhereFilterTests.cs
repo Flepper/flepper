@@ -73,7 +73,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .And("highcomplexmethods").LessThan(10)
                 .And("highlocmethods").LessThanOrEqualTo(30)
                 .And("repositoryhostedon").EqualTo("github")
-                .And("active").NotEqualTo(false)
+                .And("active").NotEqualTo<bool>(false)
                 .BuildWithParameters();
 
             queryResult
@@ -201,7 +201,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             var queryResult = FlepperQueryBuilder.Select()
                 .From("table")
-                .Where("field").NotEqualTo(1)
+                .Where("field").NotEqualTo<int>(1)
                 .BuildWithParameters();
 
             queryResult

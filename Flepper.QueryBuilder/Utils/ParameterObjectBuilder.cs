@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -21,11 +22,16 @@ namespace Flepper.QueryBuilder.Utils
 
         public static object CreateObjectWithValues(IDictionary<string, object> parameters)
         {
+            object obj = null;
+
+            if (parameters.Any() == false) goto end;
+
             var objType = CreateClass(parameters);
-            var obj = Activator.CreateInstance(objType);
+            obj = Activator.CreateInstance(objType);
             foreach (var prop in objType.GetProperties())
                 prop.SetValue(obj, parameters[$"@{prop.Name}"]);
 
+            end:
             return obj;
         }
 

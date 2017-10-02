@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
-    internal class Sort : BaseQueryBuilder, ISort, ISortThen
+    internal partial class QueryBuilder : ISort, ISortThen
     {
-        public Sort(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
-        {
-        }
-
         public ISortThen OrderBy(string column)
         {
             Command.AppendFormat("ORDER BY [{0}]", column);

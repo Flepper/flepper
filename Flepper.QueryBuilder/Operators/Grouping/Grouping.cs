@@ -1,18 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
+
 using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 
-namespace Flepper.QueryBuilder.Operators.Grouping
+namespace Flepper.QueryBuilder
 {
-    internal class Grouping : BaseQueryBuilder, IGrouping
+    internal partial class QueryBuilder : IGrouping
     {
-
-        public Grouping(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns) : base(command, parameters, columns)
-        {
-
-        }
-
         /// <summary>
         /// Group select statement by column
         /// </summary>

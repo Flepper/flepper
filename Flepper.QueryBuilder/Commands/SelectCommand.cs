@@ -1,27 +1,35 @@
-﻿using System;
-using System.Linq;
-using Flepper.QueryBuilder.Base;
+using System;
+using System.Linq.Expressions;
+using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
+using System.Linq;
 
 namespace Flepper.QueryBuilder
 {
-    internal class SelectCommand : BaseQueryBuilder, ISelectCommand
+    internal partial class QueryBuilder : ISelectCommand
     {
-        public SelectCommand()
+        public ISelectCommand SelectCommand()
         {
-            Columns = new[] { (SqlColumn)"*" };
+            QueryColumns = new[] { (SqlColumn)"*" };
             Command.Append("SELECT * ");
+            return this;
         }
 
-
-        public SelectCommand(params SqlColumn[] columns)
+        public ISelectCommand SelectCommand(params SqlColumn[] columns)
         {
-            if (columns.Any(c => c == null))
-                throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
+            if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
 
-            Columns = columns;
-
+            QueryColumns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
+            return this;
         }
+
+        public ISelectCommand SelectCommand<T>()
+            where T : class
+            => SelectCommand(Cache.GetTypeProperties<T>());
+
+        public ISelectCommand SelectCommand<T>(Expression<Func<T, object>> expression)
+            where T : class
+            => SelectCommand(Cache.GetPropertiesFromExpression(expression));
     }
 }
