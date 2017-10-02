@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using Flepper.QueryBuilder.Utils;
 using Flepper.QueryBuilder.Utils.Extensions;
+using System.Linq;
 
 namespace Flepper.QueryBuilder
 {
@@ -18,7 +19,7 @@ namespace Flepper.QueryBuilder
         {
             if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
 
-            Columns = columns;
+            QueryColumns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
             return this;
         }

@@ -77,5 +77,45 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo(this ILogicalOperators logicalOperators, string value)
             => logicalOperators is IComparisonOperators command ? command.NotEqualTo(value) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Contains<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators is IComparisonOperators command ? command.Contains(value) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators StartsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators is IComparisonOperators command ? command.StartsWith(value) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="logicalOperators"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IComparisonOperators EndsWith<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators is IComparisonOperators command ? command.EndsWith(value) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalOperators"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static IComparisonOperators Between<TFrom, TTo>(this ILogicalOperators logicalOperators, TFrom from, TTo to)
+            => logicalOperators is IComparisonOperators command ? command.Between(from, to) : null;
     }
 }
