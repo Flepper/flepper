@@ -8,9 +8,9 @@ namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IQueryCommand
     {
-        protected SqlColumn[] Columns;
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
+        protected SqlColumn[] QueryColumns;
 
         internal QueryBuilder()
         {
@@ -22,7 +22,7 @@ namespace Flepper.QueryBuilder
         {
             Command = command;
             Parameters = parameters;
-            Columns = columns;
+            QueryColumns = columns;
         }
 
         public string Build()

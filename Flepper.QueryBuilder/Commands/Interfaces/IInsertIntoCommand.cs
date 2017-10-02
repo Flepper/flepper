@@ -1,6 +1,4 @@
-﻿using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Insert Into Command Interface

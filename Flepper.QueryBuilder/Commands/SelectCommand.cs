@@ -9,17 +9,18 @@ namespace Flepper.QueryBuilder
     {
         public ISelectCommand SelectCommand()
         {
-            Columns = new[] { (SqlColumn)"*" };
+            QueryColumns = new[] { (SqlColumn)"*" };
             Command.Append("SELECT * ");
             return this;
         }
 
-        public SelectCommand(params SqlColumn[] columns)
+        public ISelectCommand SelectCommand(params SqlColumn[] columns)
         {
             if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
 
             Columns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
+            return this;
         }
 
         public ISelectCommand SelectCommand<T>()

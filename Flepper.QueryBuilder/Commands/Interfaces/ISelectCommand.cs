@@ -19,7 +19,7 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <param name="columns"></param>
         /// <returns></returns>
-        ISelectCommand SelectCommand(params string[] columns);
+        ISelectCommand SelectCommand(params SqlColumn[] columns);
 
         /// <summary>
         /// Select Command Contract

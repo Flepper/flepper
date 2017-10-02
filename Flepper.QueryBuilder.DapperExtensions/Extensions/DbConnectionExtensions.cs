@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using System;
+=======
+﻿using System;
+>>>>>>> 402cc3b2c146ed3b90b4fafb3712b29ec2b2b998
 using System.Data;
 using System.Linq.Expressions;
 
@@ -20,7 +24,7 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <param name="columns">Columns name</param>
         /// <param name="dbConnection">DbConnection Instance</param>
         /// <returns></returns>
-        public static ISelectCommand Select(this IDbConnection dbConnection, params string[] columns)
+        public static ISelectCommand Select(this IDbConnection dbConnection, params SqlColumn[] columns)
             => new FlepperDapperQuery(dbConnection).SelectCommand(columns);
 
         /// <summary>
@@ -35,9 +39,9 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <summary>
         /// Create Select Command
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="dbConnection">DbConnection Instance</param>
         /// <typeparam name="T"></typeparam>
+        /// <param name="dbConnection"></param>
+        /// <param name="expression"></param>
         /// <returns></returns>
         public static ISelectCommand Select<T>(this IDbConnection dbConnection, Expression<Func<T, object>> expression) where T : class
             => new FlepperDapperQuery(dbConnection).SelectCommand(expression);
@@ -76,7 +80,10 @@ namespace Flepper.QueryBuilder.DapperExtensions
         /// <returns></returns>
         public static IUpdateCommand Update(this IDbConnection dbConnection, string schema, string table)
             => new FlepperDapperQuery(dbConnection).UpdateCommand(schema, table);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 402cc3b2c146ed3b90b4fafb3712b29ec2b2b998
     }
 }

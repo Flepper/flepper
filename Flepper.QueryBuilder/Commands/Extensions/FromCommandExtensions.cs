@@ -1,5 +1,4 @@
-﻿using Flepper.QueryBuilder.Operators.Grouping;
-using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
+﻿using Flepper.QueryBuilder.Operators.Grouping.Interfaces;
 
 namespace Flepper.QueryBuilder
 {
@@ -51,7 +50,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column</param>
         /// <returns></returns>
         public static ISortThen OrderBy(this ISortCommand sortCommand, string column)
-            => sortCommand.To<Sort>().OrderBy(column);
+            => sortCommand is ISort command ? command.OrderBy(column) : null;
 
         /// <summary>
         /// OrderBy to query
@@ -61,7 +60,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>        
         /// <returns></returns>
         public static ISortThen OrderBy(this ISortCommand sortCommand, string tableAlias, string column)
-            => sortCommand.To<Sort>().OrderBy(tableAlias, column);
+            => sortCommand is ISort command ? command.OrderBy(tableAlias, column) : null;
 
         /// <summary>
         /// OrderBy Descending to query
@@ -70,7 +69,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column</param>
         /// <returns></returns>
         public static ISortThen OrderByDescending(this ISortCommand sortCommand, string column)
-            => sortCommand.To<Sort>().OrderByDescending(column);
+            => sortCommand is ISort command ? command.OrderByDescending(column) : null;
 
         /// <summary>
         /// OrderBy Descending to query
@@ -80,7 +79,7 @@ namespace Flepper.QueryBuilder
         /// <param name="column">Column Name</param>        
         /// <returns></returns>
         public static ISortThen OrderByDescending(this ISortCommand sortCommand, string tableAlias, string column)
-            => sortCommand.To<Sort>().OrderByDescending(tableAlias, column);
+            => sortCommand is ISort command ? command.OrderByDescending(tableAlias, column) : null;
 
         /// <summary>
         /// Add Group by to query

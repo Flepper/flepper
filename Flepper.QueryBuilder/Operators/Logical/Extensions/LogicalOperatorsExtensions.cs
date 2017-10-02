@@ -66,15 +66,14 @@ namespace Flepper.QueryBuilder
         /// <param name="logicalOperators">Logical Operators instance</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public static IComparisonOperators NotEqualTo(this ILogicalOperators logicalOperators, int value)
-            => logicalOperators is IComparisonOperators command ? command.NotEqualTo(value) : null;
+        public static IComparisonOperators NotEqualTo<T>(this ILogicalOperators logicalOperators, T value)
+            => logicalOperators is IComparisonOperators command ? command.NotEqualTo<T>(value) : null;
 
         /// <summary>
-        /// 
+        /// Add Not Equal Operator to query
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="logicalOperators"></param>
-        /// <param name="value"></param>
+        /// <param name="logicalOperators">Logical Operators instance</param>
+        /// <param name="value">Value</param>
         /// <returns></returns>
         public static IComparisonOperators NotEqualTo(this ILogicalOperators logicalOperators, string value)
             => logicalOperators is IComparisonOperators command ? command.NotEqualTo(value) : null;

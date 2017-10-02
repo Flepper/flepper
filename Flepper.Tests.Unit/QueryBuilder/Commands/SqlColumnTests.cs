@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using Xunit;
+using Flepper.QueryBuilder;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
