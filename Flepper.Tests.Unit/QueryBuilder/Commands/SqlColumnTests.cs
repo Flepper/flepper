@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Flepper.QueryBuilder.Base;
 using FluentAssertions;
 using Xunit;
 

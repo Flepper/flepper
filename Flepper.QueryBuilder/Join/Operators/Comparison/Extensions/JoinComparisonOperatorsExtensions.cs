@@ -12,7 +12,7 @@
         /// <param name="field">Column Name</param>
         /// <returns></returns>
         public static IWhereFilter Where(this IJoinComparisonOperators joinComparisonOperators, string field)
-            => joinComparisonOperators.To<WhereFilter>().Where(field);
+            => joinComparisonOperators is IWhereFilter command ? command.Where(field) : null;
 
         /// <summary>
         /// Add Where to query
@@ -22,6 +22,6 @@
         /// <param name="field">Column Name</param>
         /// <returns></returns>
         public static IWhereFilter Where(this IJoinComparisonOperators joinComparisonOperators, string tableAlias, string field)
-            => joinComparisonOperators.To<WhereFilter>().Where(tableAlias, field);
+            => joinComparisonOperators is IWhereFilter command ? command.Where(tableAlias, field) : null;
     }
 }

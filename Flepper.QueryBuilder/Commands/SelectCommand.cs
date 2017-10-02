@@ -3,16 +3,15 @@ using System.Linq;
 using Flepper.QueryBuilder.Base;
 using Flepper.QueryBuilder.Utils.Extensions;
 
-namespace Flepper.QueryBuilder
+namespace Flepper.QueryBuilder.Base
 {
-    internal class SelectCommand : BaseQueryBuilder, ISelectCommand
+    internal partial class BaseQueryBuilder : ISelectCommand
     {
         public SelectCommand()
         {
             Columns = new[] { (SqlColumn)"*" };
             Command.Append("SELECT * ");
         }
-
 
         public SelectCommand(params SqlColumn[] columns)
         {
