@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IFromCommand
+    internal partial class QueryBuilder : IFromCommand
     {
         public IFromCommand FromCommand(string schema, string table)
         {

@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : ITopCommand
+    internal partial class QueryBuilder : ITopCommand
     {
         public ITopCommand TopCommand(int size = 1)
         {

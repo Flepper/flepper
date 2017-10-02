@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : ILogicalOperators
+    internal partial class QueryBuilder : ILogicalOperators
     {
         public ILogicalOperators And(string column)
         {

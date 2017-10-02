@@ -1,6 +1,6 @@
-﻿namespace Flepper.QueryBuilder.Base
+﻿namespace Flepper.QueryBuilder
 {
-    internal partial class BaseQueryBuilder : IWhereFilter
+    internal partial class QueryBuilder : IWhereFilter
     {
         public IWhereFilter Where(string field)
         {
