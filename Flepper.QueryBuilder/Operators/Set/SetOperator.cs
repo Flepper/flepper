@@ -1,4 +1,3 @@
-﻿
 namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : ISetOperator
