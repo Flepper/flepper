@@ -9,23 +9,23 @@ namespace Flepper.QueryBuilder.DapperExtensions
 {
     internal class FlepperDapperQuery : QueryBuilder
     {
-        private readonly IDbConnection dbConnection;
+        public IDbConnection DbConnection { get; }
 
         public FlepperDapperQuery(IDbConnection dbConnection)
         {
-            this.dbConnection = dbConnection;
+            DbConnection = dbConnection;
         }
 
         public int Execute(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
-            return dbConnection.Execute(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+            return DbConnection.Execute(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
 
         public Task<int> ExecuteAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             var queryResult = BuildWithParameters();
-            return dbConnection.ExecuteAsync(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
+            return DbConnection.ExecuteAsync(queryResult.Query, queryResult.Parameters, transaction, commandTimeout, commandType);
         }
 
         public IEnumerable<TReturn> Query<TFirst, TSecond, TThird, TFourth, TFifth, TSixth, TReturn>(Func<TFirst, TSecond, TThird, TFourth, TFifth, TSixth, TReturn> map,
