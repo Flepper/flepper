@@ -34,6 +34,6 @@ namespace Flepper.QueryBuilder
 
         public ISelectCommand SelectCommand<T>(params SqlColumn[] columns)
          where T : class
-         => SelectCommand(columns);
+            => SelectCommand(columns);
     }
 }

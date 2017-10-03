@@ -36,7 +36,7 @@ namespace Flepper.QueryBuilder
         {
             if (IsNullOrWhiteSpace(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
 
-            Column = column == "*" ? $"{column}" : $"[{column}]";
+            Column = column == "*" ? column : $"[{ column}]";
         }
 
         /// <summary>

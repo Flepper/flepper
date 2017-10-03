@@ -38,7 +38,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
         {
-            FlepperQueryBuilder.Select("Id", As("Name","MyName"), "Birthday")
+            FlepperQueryBuilder.Select("Id", As("Name", "MyName"), "Birthday")
                 .From("user")
                 .Build()
                 .Trim()
@@ -268,7 +268,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectWithTableAliasOnSelectedColumns()
         {
             FlepperQueryBuilder.
-                Select(AsFrom("t1","Name"))
+                Select(AsFrom("t1", "Name"))
                 .From("Table1").As("t1")
                 .Build()
                 .Trim()
@@ -310,7 +310,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCountAndMultipleColumnsWithAlias()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Count("column2", "cl2"), As("column3","cl3"))
+                .Select("column1", Count("column2", "cl2"), As("column3", "cl3"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -340,7 +340,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithMinAndMultipleColumnsWithAlias()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Min("column2", "cl2"), As("column3","cl3"))
+                .Select("column1", Min("column2", "cl2"), As("column3", "cl3"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -385,12 +385,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT MIN([usr].[column2]) AS cl2,[usr].[column3] FROM [User] AS usr");
         }
 
-         [Fact]
+        [Fact]
         public void ShouldCreateSelectStatementWithAsFunction()
         {
             var queryResult = FlepperQueryBuilder
                 .Select(
-                    As("column2","cl2"))
+                    As("column2", "cl2"))
                 .From("User")
                 .As("usr")
                 .BuildWithParameters();
@@ -406,9 +406,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             var queryResult = FlepperQueryBuilder
                 .Select(
-                    As("column2","cl2"),
-                    AsFrom("usr",Min("column3","cl3")),
-                    AsFrom("usr","column4")
+                    As("column2", "cl2"),
+                    AsFrom("usr", Min("column3", "cl3")),
+                    AsFrom("usr", "column4")
                     )
                 .From("User")
                 .As("usr")
@@ -420,9 +420,6 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT [column2] AS cl2, MIN([usr].[column3]) AS cl3, [usr].[column4] FROM [User] AS usr");
         }
-
-
-
         public void Dispose()
             => Cache.DtoProperties.Clear();
     }

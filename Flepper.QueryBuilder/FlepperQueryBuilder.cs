@@ -38,7 +38,7 @@ namespace Flepper.QueryBuilder
         /// <typeparam name="T">Object</typeparam>
         /// <returns></returns>
         public static ISelectCommand Select<T>(params SqlColumn[] columns) where T : class
-           => new QueryBuilder().SelectCommand<T>(columns);
+            => new QueryBuilder().SelectCommand<T>(columns);
 
         /// <summary>
         /// Create Select Command

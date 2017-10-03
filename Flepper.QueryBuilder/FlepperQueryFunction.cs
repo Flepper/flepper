@@ -44,7 +44,7 @@ namespace Flepper.QueryBuilder
         /// <param name="expression">object property used like column</param>
         /// <returns>sring statement</returns>
         public static SqlColumn AsFrom<T>(string alias, Expression<Func<T, object>> expression) where T : class
-       => new AsFromOperator(alias, Cache.GetPropertiesFromExpression(expression)[0]);
+            => new AsFromOperator(alias, Cache.GetPropertiesFromExpression(expression)[0]);
 
         /// <summary>
         /// As Function

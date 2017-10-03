@@ -9,8 +9,6 @@ namespace Flepper.QueryBuilder
     {
         public IAliasOperator As(string alias)
         {
-            // QueryColumns = QueryColumns.Select(c => c.TableAlias != null ? c : new SqlColumn($"[{alias}].{c}")).ToArray();
-
             var command = Command.ToString();
 
             Command.Clear();
