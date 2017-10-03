@@ -10,8 +10,10 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
         internal FunctionOperator(string column, string alias, string function) : base(column)
         {
             if (IsNullOrWhiteSpace(column) || IsNullOrWhiteSpace(alias)) throw new ArgumentNullException($"{nameof(column)} and {nameof(alias)} cannot be null or empty");
-
-            Column = $"{function}([{column}]) AS {alias}";
+            if (column.Contains("."))
+                Column = $"{function}({column}) AS {alias}";
+            else
+                Column = $"{function}([{column}]) AS {alias}";
         }
 
 

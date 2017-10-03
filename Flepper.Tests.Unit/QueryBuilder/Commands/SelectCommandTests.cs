@@ -38,7 +38,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
         {
-            FlepperQueryBuilder.Select("Id", "Name AS MyName", "Birthday")
+            FlepperQueryBuilder.Select("Id", As("Name","MyName"), "Birthday")
                 .From("user")
                 .Build()
                 .Trim()
@@ -267,12 +267,13 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateSelectWithTableAliasOnSelectedColumns()
         {
-            FlepperQueryBuilder.Select("Name")
+            FlepperQueryBuilder.
+                Select(AsFrom("t1","Name"))
                 .From("Table1").As("t1")
                 .Build()
                 .Trim()
                 .Should()
-                .Be("SELECT [t1].[Name] FROM [Table1] t1");
+                .Be("SELECT [t1].[Name] FROM [Table1] AS t1");
         }
 
         [Fact]
@@ -294,7 +295,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCountAndMultipleColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Count("column2", "cl2"),"column3")
+                .Select("column1", Count("column2", "cl2"), "column3")
                 .From("User")
                 .BuildWithParameters();
 
@@ -309,7 +310,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithCountAndMultipleColumnsWithAlias()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Count("column2", "cl2"), "column3 As cl3")
+                .Select("column1", Count("column2", "cl2"), As("column3","cl3"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -320,11 +321,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT [column1],COUNT([column2]) AS cl2,[column3] AS cl3 FROM [User]");
         }
 
-         [Fact]
+        [Fact]
         public void ShouldCreateSelectStatementWithMinAndMultipleColumns()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Min("column2", "cl2"),"column3")
+                .Select("column1", Min("column2", "cl2"), "column3")
                 .From("User")
                 .BuildWithParameters();
 
@@ -339,7 +340,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         public void ShouldCreateSelectStatementWithMinAndMultipleColumnsWithAlias()
         {
             var queryResult = FlepperQueryBuilder
-                .Select("column1", Min("column2", "cl2"), "column3 As cl3")
+                .Select("column1", Min("column2", "cl2"), As("column3","cl3"))
                 .From("User")
                 .BuildWithParameters();
 
@@ -365,6 +366,62 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Should()
                 .Be("SELECT MIN([column2]) AS cl2 FROM [User]");
         }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMinAlias()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(
+                    Min(AsFrom("usr", "column2"), "cl2"),
+                    AsFrom("usr", "column3"))
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT MIN([usr].[column2]) AS cl2,[usr].[column3] FROM [User] AS usr");
+        }
+
+         [Fact]
+        public void ShouldCreateSelectStatementWithAsFunction()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(
+                    As("column2","cl2"))
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column2] AS cl2 FROM [User] AS usr");
+        }
+
+        public void ShouldCreateSelectStatementWithAsAndMinAndAsFromFunction()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select(
+                    As("column2","cl2"),
+                    AsFrom("usr",Min("column3","cl3")),
+                    AsFrom("usr","column4")
+                    )
+                .From("User")
+                .As("usr")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column2] AS cl2, MIN([usr].[column3]) AS cl3, [usr].[column4] FROM [User] AS usr");
+        }
+
+
 
         public void Dispose()
             => Cache.DtoProperties.Clear();

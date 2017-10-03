@@ -4,7 +4,7 @@ namespace Flepper.QueryBuilder
     {
         public IOnOperator On(string tableAlias, string column)
         {
-            Command.AppendFormat("ON {0}.[{1}] ", tableAlias, column);
+            Command.AppendFormat("ON [{0}].[{1}] ", tableAlias, column);
             return this;
         }
     }

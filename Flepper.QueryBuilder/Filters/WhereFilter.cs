@@ -10,7 +10,7 @@
 
         public IWhereFilter Where(string tableAlias, string field)
         {
-            Command.AppendFormat("WHERE {0}.[{1}] ", tableAlias, field);
+            Command.AppendFormat("WHERE [{0}].[{1}] ", tableAlias, field);
             return this;
         }
     }
