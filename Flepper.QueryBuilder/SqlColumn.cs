@@ -31,49 +31,12 @@ namespace Flepper.QueryBuilder
         /// </summary>
         public string TableAlias { get; }
 
+
         internal SqlColumn(string column)
         {
             if (IsNullOrWhiteSpace(column)) throw new ArgumentNullException($"{nameof(column)} cannot be null or empty");
 
-            TableAlias = GetTableAlias(column);
-
-            var containsAlias = ContainsAlias(column);
-            var containsTableAlias = ContainsTableAlias(column);
-
-            if (containsAlias && containsTableAlias)
-            {
-                var columnAsAlias = default(string);
-
-                (TableAlias, columnAsAlias) = column.Split(TableAliasSplitter, StringSplitOptions.RemoveEmptyEntries);
-                (Column, Alias) = columnAsAlias.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries); ;
-            }
-            else if (containsAlias)
-            {
-                (Column, Alias) = column.Split(AliasSplitter, StringSplitOptions.RemoveEmptyEntries);
-            }
-            else if (containsTableAlias)
-            {
-                (TableAlias, Column) = column.Split(TableAliasSplitter, StringSplitOptions.RemoveEmptyEntries);
-            }
-            else
-            {
-                Column = $"{column}";
-            }
-
-            if(Column != "*")
-            {
-                if (!Column.StartsWith("[")) Column = $"[{Column}";
-                if(!Column.EndsWith("]")) Column = $"{Column}]";
-            }
-
-            if(TableAlias != null)
-            {
-                if (!TableAlias.StartsWith("[")) TableAlias = $"[{TableAlias}";
-                if (!TableAlias.EndsWith("]")) TableAlias = $"{TableAlias}]";
-            }
-
-            if (!IsNullOrWhiteSpace(Alias) && !Column.Contains(ALIAS)) Column = $"{Column} AS {Alias.Trim()}";
-            if (!IsNullOrWhiteSpace(TableAlias) && !Column.Contains(TABLE_ALIAS)) Column = $"{TableAlias}.{Column}";
+            Column = column == "*" ? column : $"[{ column}]";
         }
 
         /// <summary>
@@ -95,17 +58,5 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <returns></returns>
         public override string ToString() => Column;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool ContainsAlias(string source)
-            => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool ContainsTableAlias(string source)
-            => source.IndexOf(TABLE_ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
-
-
-        private static string GetTableAlias(string source)
-            => source.Contains(TABLE_ALIAS) ? source?.Split('.')[0] : null;
     }
 }

@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Xunit;
 using Flepper.QueryBuilder;
+using static Flepper.QueryBuilder.FlepperQueryFunction;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
@@ -18,7 +19,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateColumnWithAlias()
         {
-            var column = new SqlColumn("Column as C");
+            var column = As("Column","C");
 
             column.ToString().Should().Be("[Column] AS C");
         }
@@ -26,7 +27,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateColumnWithTableAlias()
         {
-            var column = new SqlColumn("t1.Column");
+            var column =  AsFrom("t1","Column");
 
             column.ToString().Should().Be("[t1].[Column]");
         }
@@ -34,7 +35,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateColumnWithAliasAndTableAlias()
         {
-            var column = new SqlColumn("t1.Column as c");
+            var column = As(AsFrom("t1","Column"),"c");
 
             column.ToString().Should().Be("[t1].[Column] AS c");
         }
@@ -42,25 +43,9 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoudNotAddBracketsWhenColumnIsAsterisk()
         {
-            var column = new SqlColumn("t1.*");
+            var column = AsFrom("t1","*");
 
             column.ToString().Should().Be("[t1].*");
-        }
-
-        [Fact]
-        public void ShouldCreateRegularColumnWithAsUpperCamelCase()
-        {
-            var column = new SqlColumn("Column As cl");
-
-            column.ToString().Should().Be("[Column] AS cl");
-        }
-
-        [Fact]
-        public void ShouldCreateRegularColumnWithAsLowerCamelCase()
-        {
-            var column = new SqlColumn("Column as cl");
-
-            column.ToString().Should().Be("[Column] AS cl");
         }
 
         [Fact]

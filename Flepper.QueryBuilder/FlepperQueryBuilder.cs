@@ -31,6 +31,15 @@ namespace Flepper.QueryBuilder
         public static ISelectCommand Select<T>() where T : class
             => new QueryBuilder().SelectCommand<T>();
 
+
+        /// <summary>
+        /// Create Select Command
+        /// </summary>
+        /// <typeparam name="T">Object</typeparam>
+        /// <returns></returns>
+        public static ISelectCommand Select<T>(params SqlColumn[] columns) where T : class
+            => new QueryBuilder().SelectCommand<T>(columns);
+
         /// <summary>
         /// Create Select Command
         /// </summary>
