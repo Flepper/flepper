@@ -5,7 +5,6 @@ namespace Flepper.QueryBuilder.Operators.SqlFunctions
     /// </summary>
     public sealed class AsFromOperator : FunctionOperator
     {
-
         /// <summary>
         /// constructor to AsFromOperator class
         /// </summary>
