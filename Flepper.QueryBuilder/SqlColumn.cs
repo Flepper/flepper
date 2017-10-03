@@ -58,17 +58,5 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <returns></returns>
         public override string ToString() => Column;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool ContainsAlias(string source)
-            => source.IndexOf(ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool ContainsTableAlias(string source)
-            => source.IndexOf(TABLE_ALIAS, StringComparison.OrdinalIgnoreCase) > 0;
-
-
-        private static string GetTableAlias(string source)
-            => source.Contains(TABLE_ALIAS) ? source?.Split('.')[0] : null;
     }
 }
