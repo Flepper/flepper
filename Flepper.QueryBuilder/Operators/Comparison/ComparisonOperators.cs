@@ -1,16 +1,8 @@
-using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
 namespace Flepper.QueryBuilder
 {
-    internal class ComparisonOperators : BaseQueryBuilder, IComparisonOperators
+    internal partial class QueryBuilder : IComparisonOperators
     {
-        public ComparisonOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
-        public IComparisonOperators EqualTo(object value)
+        public IComparisonOperators EqualTo<T>(T value)
         {
             if (value == null)
                 Command.AppendFormat("IS NULL ");
@@ -20,37 +12,61 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
-        public IComparisonOperators GreaterThan(int value)
+        public IComparisonOperators GreaterThan<T>(T value)
         {
             Command.Append($"> @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators GreaterThanOrEqualTo(int value)
+        public IComparisonOperators GreaterThanOrEqualTo<T>(T value)
         {
             Command.Append($">= @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators LessThan(int value)
+        public IComparisonOperators LessThan<T>(T value)
         {
             Command.Append($"< @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators LessThanOrEqualTo(int value)
+        public IComparisonOperators LessThanOrEqualTo<T>(T value)
         {
             Command.Append($"<= @p{AddParameters(value)} ");
             return this;
         }
 
-        public IComparisonOperators NotEqualTo(object value)
+        public IComparisonOperators NotEqualTo<T>(T value)
         {
             if (value == null)
                 Command.AppendFormat("IS NOT NULL ");
             else
                 Command.Append($"<> @p{AddParameters(value)} ");
 
+            return this;
+        }
+
+        public IComparisonOperators Contains<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"%{value}%")}  ");
+            return this;
+        }
+
+        public IComparisonOperators StartsWith<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"%{value}")}  ");
+            return this;
+        }
+
+        public IComparisonOperators EndsWith<T>(T value)
+        {
+            Command.Append($"LIKE @p{AddParameters($"{value}%")}  ");
+            return this;
+        }
+
+        public IComparisonOperators Between<TFrom, TTo>(TFrom from, TTo to)
+        {
+            Command.Append($"BETWEEN @p{AddParameters(from)} AND @p{AddParameters(to)} ");
             return this;
         }
     }

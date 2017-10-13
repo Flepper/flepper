@@ -12,7 +12,7 @@
         /// <param name="field">Column Name</param>
         /// <returns></returns>
         public static IWhereFilter Where(this IAliasOperator aliasOperator, string field)
-            => aliasOperator.To<WhereFilter>().Where(field);
+            => aliasOperator is IWhereFilter command ? command.Where(field) : null;
 
         /// <summary>
         /// Add Inner Join Operator to query
@@ -21,7 +21,7 @@
         /// <param name="table">Column Name</param>
         /// <returns></returns>
         public static IJoin InnerJoin(this IAliasOperator aliasOperator, string table)
-            => aliasOperator.To<Join>().InnerJoin(table);
+            => aliasOperator is IJoin command ? command.InnerJoin(table) : null;
 
         /// <summary>
         /// Add Left Join Operator to query
@@ -30,7 +30,7 @@
         /// <param name="table">Table Name</param>
         /// <returns></returns>
         public static IJoin LeftJoin(this IAliasOperator aliasOperator, string table)
-            => aliasOperator.To<Join>().LeftJoin(table);
+            => aliasOperator is IJoin command ? command.LeftJoin(table) : null;
 
         /// <summary>
         /// Add On Operator to query
@@ -40,6 +40,6 @@
         /// <param name="column">Column Name</param>
         /// <returns></returns>
         public static IOnOperator On(this IAliasOperator aliasOperator, string tableAlias, string column)
-            => aliasOperator.To<OnOperator>().On(tableAlias, column);
+            => aliasOperator is IOnOperator command ? command.On(tableAlias, column) : null;
     }
 }

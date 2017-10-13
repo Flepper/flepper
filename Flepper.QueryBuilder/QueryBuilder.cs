@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Flepper.QueryBuilder.Utils;
+using System.Runtime.CompilerServices;
 
-namespace Flepper.QueryBuilder.Base
+[assembly: InternalsVisibleTo("Flepper.QueryBuilder.DapperExtensions")]
+namespace Flepper.QueryBuilder
 {
-    internal abstract class BaseQueryBuilder : IQueryCommand
+    internal partial class QueryBuilder : IQueryCommand
     {
         protected readonly StringBuilder Command;
         protected readonly IDictionary<string, object> Parameters;
+        protected SqlColumn[] QueryColumns;
 
-        protected BaseQueryBuilder()
+        internal QueryBuilder()
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
         }
 
-        protected BaseQueryBuilder(StringBuilder command, IDictionary<string, object> parameters)
+        internal QueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
         {
             Command = command;
             Parameters = parameters;
+            QueryColumns = columns;
         }
 
         public string Build()
             => Command.ToString();
 
         public QueryResult BuildWithParameters()
-            => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObject(Parameters));
-
-        public TEnd To<TEnd>()
-            where TEnd : IQueryCommand
-            => (TEnd)Activator.CreateInstance(typeof(TEnd), Command, Parameters);
-
-        public TEnd To<TEnd>(Func<StringBuilder, IDictionary<string, object>, TEnd> creator)
-            => creator(Command, Parameters);
+            => new QueryResult(Command.ToString(), ParameterObjectBuilder.CreateObjectWithValues(Parameters));
 
         protected int AddParameters(params object[] values)
         {

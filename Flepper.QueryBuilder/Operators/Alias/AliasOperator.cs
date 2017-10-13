@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Flepper.QueryBuilder.Base;
 
 namespace Flepper.QueryBuilder
 {
-    internal class AliasOperator : BaseQueryBuilder, IAliasOperator
+    internal partial class QueryBuilder : IAliasOperator
     {
-        public AliasOperator(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public IAliasOperator As(string alias)
         {
-            Command.AppendFormat("{0} ", alias);
+            var command = Command.ToString();
+
+            Command.Clear();
+            Command.Append($"SELECT {string.Join(",", QueryColumns.Select(c => c.ToString()))} FROM {command.Split(new[] { "FROM " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim()} ");
+
+            Command.AppendFormat("AS {0} ", alias);
+
             return this;
         }
     }

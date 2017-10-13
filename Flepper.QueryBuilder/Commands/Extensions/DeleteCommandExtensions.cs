@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Delete command extensions
@@ -12,6 +14,6 @@
         /// <param name="table">Table name</param>
         /// <returns></returns>
         public static IFromCommand From(this IDeleteCommand deleteCommand, string table)
-            => deleteCommand.To((s, p) => new FromCommand(s, p, table));
+            => deleteCommand is IFromCommand command ? command.FromCommand(table) : null;
     }
 }

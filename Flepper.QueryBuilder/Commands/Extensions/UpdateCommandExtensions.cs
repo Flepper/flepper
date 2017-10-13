@@ -15,7 +15,7 @@ namespace Flepper.QueryBuilder
         /// <param name="value">Value to be update</param>
         /// <returns></returns>
         public static ISetOperator Set(this IUpdateCommand updateCommand, string column, string value)
-            => updateCommand.To<SetOperator>().Set(column, value);
+            => updateCommand is ISetOperator command ? command.Set(column, value) : null; 
 
         /// <summary>
         /// Add Set to query
@@ -25,7 +25,7 @@ namespace Flepper.QueryBuilder
         /// <param name="value">Value to be update</param>
         /// <returns></returns>
         public static ISetOperator Set(this IUpdateCommand updateCommand, string column, int value)
-            => updateCommand.To<SetOperator>().Set(column, value);
+            => updateCommand is ISetOperator command ? command.Set(column, value) : null;
 
         /// <summary>
         /// Add Set to query
@@ -35,6 +35,6 @@ namespace Flepper.QueryBuilder
         /// <param name="value">Value to be update</param>
         /// <returns></returns>
         public static ISetOperator Set(this IUpdateCommand updateCommand, string column, DateTime value)
-            => updateCommand.To<SetOperator>().Set(column, value);
+            => updateCommand is ISetOperator command ? command.Set(column, value) : null;
     }
 }

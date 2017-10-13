@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="columns"></param>
         /// <returns></returns>
-        IInsertIntoCommand Columns(params string[] columns);
+        IInsertIntoCommand Columns(params SqlColumn[] columns);
     }
 }

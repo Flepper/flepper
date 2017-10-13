@@ -1,13 +1,17 @@
-﻿using Flepper.QueryBuilder.Base;
-
 namespace Flepper.QueryBuilder
 {
-    internal class UpdateCommand : BaseQueryBuilder, IUpdateCommand
+    internal partial class QueryBuilder : IUpdateCommand
     {
-        public UpdateCommand(string table) 
-            => Command.AppendFormat("UPDATE [{0}] ", table);
+        public IUpdateCommand UpdateCommand(string table)
+        {
+            Command.AppendFormat("UPDATE [{0}] ", table);
+            return this;
+        }
 
-        public UpdateCommand(string schema, string table) 
-            => Command.AppendFormat("UPDATE [{0}].[{1}] ", schema, table);
+        public IUpdateCommand UpdateCommand(string schema, string table)
+        {
+            Command.AppendFormat("UPDATE [{0}].[{1}] ", schema, table);
+            return this;
+        }
     }
 }

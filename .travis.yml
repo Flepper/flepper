@@ -1,11 +1,11 @@
 language: csharp
 solution: Flepper.sln
-mono: none
+mono: latest
 dotnet: 2.0.0
+git:
+  depth: 3
 script:
-  - dotnet restore
-  - dotnet build
-  - dotnet test Flepper.Tests.Unit/Flepper.Tests.Unit.csproj
+  - ./build.sh -target=Tests
 notifications:
   slack:
     rooms:
@@ -17,5 +17,3 @@ notifications:
       - alberto.monteiro@live.com
     on_success: always
     on_failure: always
-
-      

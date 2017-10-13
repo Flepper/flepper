@@ -8,10 +8,10 @@
         /// <summary>
         /// Add values to query
         /// </summary>
-        /// <param name="command">Insert Command instance</param>
+        /// <param name="insertIntoCommand">Insert Command instance</param>
         /// <param name="values">Values to insert</param>
         /// <returns></returns>
-        public static IValuesOperator Values(this IInsertIntoCommand command, params object[] values)
-            => command.To<ValuesOperator>().Values(values);
+        public static IValuesOperator Values(this IInsertIntoCommand insertIntoCommand, params object[] values)
+            => insertIntoCommand is IValuesOperator command ? command.Values(values) : null;
     }
 }

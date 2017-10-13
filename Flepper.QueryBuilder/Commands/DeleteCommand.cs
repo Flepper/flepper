@@ -1,10 +1,11 @@
-﻿using Flepper.QueryBuilder.Base;
-
-namespace Flepper.QueryBuilder
+﻿namespace Flepper.QueryBuilder
 {
-    internal class DeleteCommand : BaseQueryBuilder, IDeleteCommand
+    internal partial class QueryBuilder : IDeleteCommand
     {
-        public DeleteCommand()
-            => Command.Append("DELETE ");
+        public IDeleteCommand DeleteCommand()
+        {
+            Command.Append("DELETE ");
+            return this;
+        }
     }
 }

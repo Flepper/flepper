@@ -3,7 +3,7 @@
     /// <summary>
     /// Where Filter Interface
     /// </summary>
-    public interface IWhereFilter : IQueryCommand
+    public interface IWhereFilter : IQueryCommand, ISortCommand
     {
         /// <summary>
         /// Where Filter Contract

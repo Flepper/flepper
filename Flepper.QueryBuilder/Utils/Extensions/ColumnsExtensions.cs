@@ -1,16 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Flepper.QueryBuilder.Utils.Extensions
 {
     internal static class ColumnsExtensions
     {
-        public static string JoinColumns(this string[] columns)
-        {
-            var fields = columns.Aggregate("", (current, column) => current + $"[{column}],");
+        private const string ALIAS = " AS ";
+        private static readonly string[] AliasSplitter = { ALIAS, " as " };
 
-            fields = fields.Remove(fields.Length - 1, 1) + " ";
-
-            return fields;
-        }
+        public static string JoinColumns(this IEnumerable<string> columns)
+            => string.Join(",", columns) + " ";
     }
 }

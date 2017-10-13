@@ -1,15 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using Flepper.QueryBuilder.Base;
-
 namespace Flepper.QueryBuilder
 {
-    internal class LogicalOperators : BaseQueryBuilder, ILogicalOperators
+    internal partial class QueryBuilder : ILogicalOperators
     {
-        public LogicalOperators(StringBuilder command, IDictionary<string, object> parameters) : base(command, parameters)
-        {
-        }
-
         public ILogicalOperators And(string column)
         {
             Command.AppendFormat("AND [{0}] ", column);
