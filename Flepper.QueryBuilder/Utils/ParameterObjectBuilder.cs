@@ -43,7 +43,7 @@ namespace Flepper.QueryBuilder.Utils
             var typeBuilder = ModuleBuilder.DefineType(className ?? Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
             foreach (var parameter in parameters)
-                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), parameter.Value.GetType());
+                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), parameter.Value is null ? typeof(object) : parameter.Value.GetType());
             var type = typeBuilder.CreateTypeInfo().AsType();
             Types.TryAdd(type.FullName, type);
             return type;
