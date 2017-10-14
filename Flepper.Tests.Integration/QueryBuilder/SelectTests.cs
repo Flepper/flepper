@@ -10,17 +10,17 @@ namespace Flepper.Tests.Integration.QueryBuilder
     [Collection("IntegrationTests")]
     public class SelectTests : IClassFixture<DatabaseFixture>
     {
-        private readonly DatabaseFixture databaseFixture;
+        private readonly DatabaseFixture _databaseFixture;
 
         public SelectTests(DatabaseFixture databaseFixture)
         {
-            this.databaseFixture = databaseFixture;
+            _databaseFixture = databaseFixture;
         }
 
         [Fact]
         public void ShouldSelectAllProfiles()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profiles = connection.Select("Id", "Name")
                     .From("Profile")
@@ -34,7 +34,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public async void ShouldSelectAllProfilesAsync()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profiles = await connection.Select("Id", "Name")
                     .From("Profile")
@@ -48,7 +48,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithWhere()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select("Id", "Name")
                     .From("Profile")
@@ -62,7 +62,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithCount()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select(Count("Id", "Total"))
                     .From("Profile")
@@ -76,7 +76,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithOrderBy()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select("Name")
                     .From("Profile")
@@ -90,7 +90,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithMultiplesOrderBy()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select("Id", "Name")
                     .From("Profile")
@@ -105,7 +105,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithOrderByDescending()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select("Name")
                     .From("Profile")
@@ -119,7 +119,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectProfileWithMultiplesOrderByDescending()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profile = connection.Select("Id", "Name")
                     .From("Profile")
@@ -135,7 +135,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
         [Fact]
         public void ShouldSelectUserWithProfile()
         {
-            using (var connection = databaseFixture.Connection)
+            using (var connection = _databaseFixture.Connection)
             {
                 var profiles = connection.Select()
                     .From("User").As("U")
