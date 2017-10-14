@@ -28,7 +28,7 @@
         /// Add Inner Join Operator to query
         /// </summary>
         /// <param name="joinComparisonOperators">Join Comparison Operator instance</param>
-        /// <param name="table">Column Name</param>
+        /// <param name="table">Table Name</param>
         /// <returns></returns>
         public static IJoin InnerJoin(this IJoinComparisonOperators joinComparisonOperators, string table)
             => joinComparisonOperators is IJoin command ? command.InnerJoin(table) : null;
