@@ -20,6 +20,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Contain("INNER JOIN [Table2] AS t2");
         }
 
+
         [Fact]
         public void ShouldReturnInnerJoinStatementWishTableAlias()
         {
@@ -34,6 +35,22 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                .Trim()
                .Should()
                .Be("SELECT [t1].[c1],[t2].[c1] FROM [Table1] AS t1 INNER JOIN [Table2] AS t2 ON [t1].[c1] = [t2].[c1]");
+        }
+
+        [Fact]
+        public void ShouldReturnInnerJoinsStatement()
+        {
+            FlepperQueryBuilder
+                .Select()
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2")
+                .On("t1", "c1").EqualTo("t2", "c1")
+                .InnerJoin("Table3").As("t3")
+                .On("t2","c2").EqualTo("t3","c3")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [Table1] AS t1 INNER JOIN [Table2] AS t2 ON [t1].[c1] = [t2].[c1] INNER JOIN [Table3] AS t3 ON [t2].[c2] = [t3].[c3]");
         }
 
         [Fact]
