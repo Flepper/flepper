@@ -16,6 +16,16 @@ namespace Flepper.QueryBuilder
             => comparisonOperators is ILogicalOperators command ? command.And(column) : null;
 
         /// <summary>
+        /// Add And Comparison Operator to query
+        /// </summary>
+        /// <param name="comparisonOperators">Comparison Operators instance</param>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>
+        /// <returns></returns>
+        public static ILogicalOperators And(this IComparisonOperators comparisonOperators, string tableAlias, string column)
+            => comparisonOperators is ILogicalOperators command ? command.And(tableAlias, column) : null;
+
+        /// <summary>
         /// Add Or Comparison Operator to query
         /// </summary>
         /// <param name="comparisonOperators">Comparison Operators instance</param>
@@ -23,5 +33,15 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ILogicalOperators Or(this IComparisonOperators comparisonOperators, string column)
             => comparisonOperators is ILogicalOperators command ? command.Or(column) : null;
+
+        /// <summary>
+        /// Add Or Comparison Operator to query
+        /// </summary>
+        /// <param name="comparisonOperators">Comparison Operators instance</param>
+        /// <param name="tableAlias">Table Alias</param>
+        /// <param name="column">Column Name</param>
+        /// <returns></returns>
+        public static ILogicalOperators Or(this IComparisonOperators comparisonOperators, string tableAlias, string column)
+            => comparisonOperators is ILogicalOperators command ? command.Or(tableAlias, column) : null;
     }
 }

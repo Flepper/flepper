@@ -101,5 +101,28 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             Assert.Equal("table", parameters.@p0);
         }
+
+        [Fact]
+        public void ShouldReturnInnerJoinWithMultipleWhereStatement()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select()
+                .From("Table1").As("t1")
+                .InnerJoin("Table2").As("t2")
+                .On("t2", "column1")
+                .NotEqualTo("t1", "column2")
+                .Where("t1", "name").EqualTo("table")
+                .And("t2","c2").EqualTo("c2")
+                .Or("t2", "c2").EqualTo("c3")
+                .BuildWithParameters();
+
+            queryResult.Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [Table1] AS t1 INNER JOIN [Table2] AS t2 ON [t2].[column1] <> [t1].[column2] WHERE [t1].[name] = @p0 AND [t2].[c2] = @p1 OR [t2].[c2] = @p2");
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("table", parameters.@p0);
+        }
     }
 }
