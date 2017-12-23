@@ -419,7 +419,28 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT [column2] AS cl2, MIN([usr].[column3]) AS cl3, [usr].[column4] FROM [User] AS usr");
+
         }
+
+
+        [Fact]
+        public void ShouldCreateQueryWithJoinAndWhereFilter()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select()
+                .From("Table").As("A")
+                .InnerJoin("Table").As("B")
+                .Where("A", "Id").EqualTo(0)
+                .And("B", "Id").EqualTo(1)
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [Table] AS A INNER JOIN [Table] AS B WHERE [A].[Id] = @p0 AND [B].[Id] = @p1");
+        }
+
         public void Dispose()
             => Cache.DtoProperties.Clear();
     }

@@ -15,6 +15,16 @@
             => aliasOperator is IWhereFilter command ? command.Where(field) : null;
 
         /// <summary>
+        /// Add Where Operator to query
+        /// </summary>
+        /// <param name="aliasOperator">Alias Operator instance</param>
+        /// <param name="alias">Table Alias</param>
+        /// <param name="field">Column Name</param>
+        /// <returns></returns>
+        public static IWhereFilter Where(this IAliasOperator aliasOperator, string alias, string field)
+            => aliasOperator is IWhereFilter command ? command.Where(alias, field) : null;
+
+        /// <summary>
         /// Add Inner Join Operator to query
         /// </summary>
         /// <param name="aliasOperator">Alias Operator instance</param>
