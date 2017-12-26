@@ -13,10 +13,11 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             FlepperQueryBuilder
                 .Select<UserDto>(user => new { user.Id, user.Name })
                 .From("user")
+                .OrderBy("Id")
                 .Build()
                 .Trim()
                 .Should()
-                .Be("SELECT [Id],[Name] FROM [user]");
+                .Be("SELECT [Id],[Name] FROM [user] ORDER BY [Id]");
         }
 
         [Fact]
@@ -24,7 +25,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         {
             FlepperQueryBuilder
                 .Select()
-                .Top(1)
+                .Top()
                 .From("dbo", "user")
                 .OrderByDescending("Birthday")
                 .Build()
@@ -163,6 +164,20 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                .Trim()
                .Should()
                .Be("SELECT [Id],[Name],[Birthday] FROM [user] ORDER BY [Name], [Birthday] DESC");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithOrderByAndPaginate()
+        {
+            FlepperQueryBuilder
+                .Select<UserDto>(user => new { user.Id, user.Name })
+                .From("user")
+                .OrderBy("Id")
+                .OffSet(10).Fetch(10)
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name] FROM [user] ORDER BY [Id] OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY");
         }
     }
 }

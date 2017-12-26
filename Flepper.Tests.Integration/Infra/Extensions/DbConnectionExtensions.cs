@@ -11,7 +11,7 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             var command = dbConnection.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS `Profile` (
 	                                `Id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	                                `Name`	INTEGER NOT NULL UNIQUE);";
+	                                `Name`	Text NOT NULL UNIQUE);";
 
 
             command.ExecuteNonQuery();
@@ -28,6 +28,7 @@ namespace Flepper.Tests.Integration.Infra.Extensions
 	                                    `Id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	                                    `Name`	TEXT NOT NULL,
 	                                    `Email`	TEXT NOT NULL UNIQUE,
+                                        `Nickname`	TEXT NULL,
                                         `ProfileId`	INTEGER,
                                         FOREIGN KEY(ProfileId) REFERENCES Profile(Id));";
 
