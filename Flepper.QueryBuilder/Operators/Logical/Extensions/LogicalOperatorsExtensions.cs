@@ -61,7 +61,7 @@ namespace Flepper.QueryBuilder
             => logicalOperators is IComparisonOperators command ? command.NotEqualTo<T>(value) : null;
 
         /// <summary>
-        /// 
+        ///Add Like Operator to query 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="logicalOperators"></param>

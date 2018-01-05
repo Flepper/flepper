@@ -1,7 +1,7 @@
 ﻿using Flepper.QueryBuilder;
 using FluentAssertions;
 using Xunit;
-
+using static Flepper.QueryBuilder.FlepperQueryBuilder;
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
     [Collection("CommandTests")]
@@ -10,7 +10,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulCreateUpdateCommand()
         {
-            FlepperQueryBuilder.Update("table")
+            Update("table")
                 .Build()
                 .Trim()
                 .Should()
@@ -20,7 +20,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulCreateUpdateCommandWithTableSchema()
         {
-            FlepperQueryBuilder.Update("dbo", "table")
+            Update("dbo", "table")
                 .Build()
                 .Trim()
                 .Should()
@@ -30,7 +30,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateUpdateCommandWithColumnAndValue()
         {
-            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = Update("dbo", "table")
                 .Set("column", "value")
                 .BuildWithParameters();
 
@@ -48,7 +48,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateUpdateCommandWithTwoColumnAndValues()
         {
-            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = Update("dbo", "table")
                 .Set("column", "value")
                 .Set("column", "value")
                 .BuildWithParameters();
@@ -68,10 +68,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShouldCreateUpdateCommandWithMutiplesColumnAndValues()
         {
-            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = Update("dbo", "table")
                 .Set("column", "value")
-                .Set("column", "value")
-                .Set("column", "value")
+                .Set("column", 1)
+                .Set("column", true)
                 .Set("column", "value")
                 .BuildWithParameters();
 
@@ -84,15 +84,15 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             dynamic parameters = queryResult.Parameters;
 
             Assert.Equal("value", parameters.@p0);
-            Assert.Equal("value", parameters.@p1);
-            Assert.Equal("value", parameters.@p2);
+            Assert.Equal(1, parameters.@p1);
+            Assert.Equal(true, parameters.@p2);
             Assert.Equal("value", parameters.@p3);
         }
 
         [Fact]
         public void ShouldCreateUpdateCommandWithWhereCondition()
         {
-            var queryResult = FlepperQueryBuilder.Update("dbo", "table")
+            var queryResult = Update("dbo", "table")
                 .Set("column", "value")
                 .Where("column").EqualTo("value")
                 .BuildWithParameters();
