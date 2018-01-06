@@ -306,3 +306,4 @@ OpenCover/
 
 # Custom
 reportoutput/
+/coverage.xml

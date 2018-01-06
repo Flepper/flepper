@@ -17,24 +17,6 @@ namespace Flepper.QueryBuilder
             => fromCommand is IWhereFilter command ? command.Where(column) : null;
 
         /// <summary>
-        /// Add Inner Join to query
-        /// </summary>
-        /// <param name="fromCommand">From command instance</param>
-        /// <param name="table">Table name</param>
-        /// <returns></returns>
-        public static IJoin InnerJoin(this IFromCommand fromCommand, string table)
-            => fromCommand is IJoin command ? command.InnerJoin(table) : null;
-
-        /// <summary>
-        /// Add Left Join to query
-        /// </summary>
-        /// <param name="fromCommand">From command instance</param>
-        /// <param name="table">Table name</param>
-        /// <returns></returns>
-        public static IJoin LeftJoin(this IFromCommand fromCommand, string table)
-            => fromCommand is IJoin command ? command.LeftJoin(table) : null;
-
-        /// <summary>
         /// Add As to query
         /// </summary>
         /// <param name="fromCommand">From command instance</param>
