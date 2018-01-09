@@ -37,7 +37,7 @@ namespace Flepper.QueryBuilder
         public static SqlColumn AsFrom(string alias, string column)
             => new AsFromOperator(alias, column);
 
-         /// <summary>
+        /// <summary>
         /// AsFrom Function Generic
         /// </summary>
         /// <param name="alias">alias table</param>
@@ -52,7 +52,17 @@ namespace Flepper.QueryBuilder
         /// <param name="column">column used</param>
         /// <param name="alias">alias column</param>
         /// <returns>sring statement</returns>
-        public static SqlColumn As(string column,string alias)
-            => new AsOperator(column,alias);
+        public static SqlColumn As(string column, string alias)
+            => new AsOperator(column, alias);
+
+
+        /// <summary>
+        /// Max Function
+        /// </summary>
+        /// <param name="column">column name to put into Max function</param>
+        /// <param name="alias">alias to column</param>
+        /// <returns>SqlColumn type</returns>
+        public static SqlColumn Max(string column, string alias)
+            => new MaxOperator(column, alias);
     }
 }

@@ -265,6 +265,21 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
+        public void ShouldCreateSelectStatementWithGroupByAfterWhere()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("Name", "Age")
+                .From("User")
+                .Where("column1").EqualTo(1)
+                .GroupBy("Age")
+                .BuildWithParameters()
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Name],[Age] FROM [User] WHERE [column1] = @p0 GROUP BY [Age]"); ;
+        }
+
+        [Fact]
         public void ShouldCreateSelectWithTableAliasOnSelectedColumns()
         {
             FlepperQueryBuilder.
@@ -439,6 +454,49 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Trim()
                 .Should()
                 .Be("SELECT * FROM [Table] AS A INNER JOIN [Table] AS B WHERE [A].[Id] = @p0 AND [B].[Id] = @p1");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMaxAndMultipleColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1", Max("column2", "cl2"), "column3")
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],MAX([column2]) AS cl2,[column3] FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectStatementWithMaxsAndMultipleColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Select("column1",
+                    Max("column2", "cl2"),
+                    Max("column3", "cl3"))
+                .From("User")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [column1],MAX([column2]) AS cl2,MAX([column3]) AS cl3 FROM [User]");
+        }
+
+        [Fact]
+        public void ShouldCreateSelectDistinctStatementWithSpecificColumns()
+        {
+            FlepperQueryBuilder.SelectWithDistinct("Id", "Name", "Birthday")
+                .From("user")
+                .Build()
+                .Trim()
+                .Should()
+                .Be("SELECT DISTINCT [Id],[Name],[Birthday] FROM [user]");
         }
 
         public void Dispose()
