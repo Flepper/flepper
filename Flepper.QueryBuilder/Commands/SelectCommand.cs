@@ -17,16 +17,17 @@ namespace Flepper.QueryBuilder
 
         public ISelectCommand SelectCommand(params SqlColumn[] columns)
         {
-            if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
+            CheckNullColumnException(columns);
 
             QueryColumns = columns;
             Command.AppendFormat("SELECT {0}", columns.Select(c => c.ToString()).JoinColumns());
             return this;
         }
 
+
         public ISelectCommand SelectCommandWithDistinct(params SqlColumn[] columns)
         {
-            if (columns.Any(c => c == null)) throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
+            CheckNullColumnException(columns);
 
             QueryColumns = columns;
             Command.AppendFormat("SELECT DISTINCT {0}", columns.Select(c => c.ToString()).JoinColumns());
@@ -45,6 +46,11 @@ namespace Flepper.QueryBuilder
          where T : class
             => SelectCommand(columns);
 
-      
+        private static void CheckNullColumnException(SqlColumn[] columns)
+        {
+            if (columns.Any(c => c == null))
+                throw new ArgumentNullException(nameof(columns), "All columns names should not be null");
+        }
+
     }
 }
