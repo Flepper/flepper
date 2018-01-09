@@ -35,10 +35,12 @@ namespace Flepper.QueryBuilder
         /// <summary>
         /// Create Select Command
         /// </summary>
+        /// <param name="columns">SqlColumn arrays. The column name</param>
         /// <typeparam name="T">Object</typeparam>
-        /// <returns></returns>
+        /// <returns>a QueryBuilder instance</returns>
         public static ISelectCommand Select<T>(params SqlColumn[] columns) where T : class
             => new QueryBuilder().SelectCommand<T>(columns);
+
 
         /// <summary>
         /// Create Select Command
@@ -48,6 +50,7 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ISelectCommand Select<T>(Expression<Func<T, object>> expression) where T : class
             => new QueryBuilder().SelectCommand(expression);
+
 
         /// <summary>
         /// Create Insert Command
@@ -79,5 +82,13 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IUpdateCommand Update(string schema, string table)
             => new QueryBuilder().UpdateCommand(schema, table);
+
+        /// <summary>
+        /// Create Select Command
+        /// </summary>
+        /// <param name="columns">SqlColumn arrays. The column name</param>
+        /// <returns>a QueryBuilder instance</returns>
+        public static ISelectCommand SelectWithDistinct(params SqlColumn[] columns)
+            => new QueryBuilder().SelectCommandWithDistinct(columns);
     }
 }
