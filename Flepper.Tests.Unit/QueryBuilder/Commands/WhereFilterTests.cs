@@ -1,6 +1,7 @@
 ﻿using Flepper.QueryBuilder;
 using FluentAssertions;
 using Xunit;
+using static Flepper.QueryBuilder.FlepperQueryBuilder;
 
 namespace Flepper.Tests.Unit.QueryBuilder.Commands
 {
@@ -276,7 +277,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulContainLikeEndsWith()
         {
-            QueryResult result = FlepperQueryBuilder.Select()
+            var result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").EndsWith("abc")
                 .BuildWithParameters();
@@ -293,12 +294,12 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulContainLikeContainsAndStartsWithAndEndsWith()
         {
-            QueryResult result = FlepperQueryBuilder.Select()
+            var result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field1").Contains("abc1")
                 .And("field2").StartsWith("abc2")
                 .And("field3").EndsWith("abc3")
-                .BuildWithParameters();                           
+                .BuildWithParameters();
 
             result.Query
                 .Trim()
@@ -311,10 +312,10 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal("abc3%", parameters.@p2);
         }
 
-        [Fact] //ShoulContainWhereWithNotEqualTo()
+        [Fact]
         public void ShoulContainWhereWithBetween()
         {
-            QueryResult result = FlepperQueryBuilder.Select()
+            var result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").Between(10, 20)
                 .BuildWithParameters();
@@ -332,7 +333,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         [Fact]
         public void ShoulContainWhereWithNotEqualToAndWhereWithBetween()
         {
-            QueryResult result = FlepperQueryBuilder.Select()
+            var result = FlepperQueryBuilder.Select()
                 .From("table")
                 .Where("field").NotEqualTo(9)
                 .And("field").Between(10, 20)
@@ -347,6 +348,23 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal(9, parameters.@p0);
             Assert.Equal(10, parameters.@p1);
             Assert.Equal(20, parameters.@p2);
+        }
+
+        [Fact]
+        public void ShouldAddLikeOperatorToQuery()
+        {
+            var query = Select()
+                    .From("Table1")
+                    .Where("Column1")
+                    .EqualTo(1)
+                    .And("Column2")
+                    .Contains("ABC")
+                    .BuildWithParameters();
+            query
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT * FROM [Table1] WHERE [Column1] = @p0 AND [Column2] LIKE @p1");
         }
     }
 }
