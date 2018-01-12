@@ -90,5 +90,22 @@ namespace Flepper.QueryBuilder
         /// <returns>a QueryBuilder instance</returns>
         public static ISelectCommand SelectWithDistinct(params SqlColumn[] columns)
             => new QueryBuilder().SelectCommandWithDistinct(columns);
+
+        /// <summary>
+        /// Create SoftDelete Command
+        /// </summary>
+        /// <typeparam name="T">class type that contain the flag</typeparam>
+        /// <param name="table">Table name</param>
+        /// <returns></returns>
+        public static ISoftDeleteCommand SoftDelete<T>(string table) where T : class
+            => new QueryBuilder().SoftDeleteCommand<T>(table);
+
+        /// <summary>
+        /// Create SoftDelete command using the class name as table name 
+        /// </summary>
+        /// <typeparam name="T">class type that contain the flag</typeparam>
+        /// <returns></returns>
+        public static ISoftDeleteCommand SoftDelete<T>() where T : class
+                    => new QueryBuilder().SoftDeleteCommand<T>();
     }
 }
