@@ -28,6 +28,18 @@ namespace Flepper.QueryBuilder
 
             _modelsWithSoftDeleteEnabled.Add(modelName, proepryName);
         }
+        /// <summary>
+        /// used to define the property that going to be used by softdelete command by string
+        /// </summary>
+        /// <typeparam name="TClass"></typeparam>
+        /// <param name="expression">The class that you want to enable</param>
+        public static void EnableSoftDelete<TClass>(Expression<Func<string>> expression) where TClass : class
+        {
+            var propertyName =((ConstantExpression)expression.Body).Value.ToString();
+            var modelName = typeof(TClass).Name;
+
+            _modelsWithSoftDeleteEnabled.Add(modelName, propertyName);
+        }
 
         private static string GetPropertyName(UnaryExpression expression)
         {
