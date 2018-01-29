@@ -30,6 +30,7 @@ namespace Flepper.Tests.Integration.Infra.Extensions
 	                                    `Email`	TEXT NOT NULL UNIQUE,
                                         `Nickname`	TEXT NULL,
                                         `ProfileId`	INTEGER,
+                                        `Active` INTEGER,
                                         FOREIGN KEY(ProfileId) REFERENCES Profile(Id));";
 
             command.ExecuteNonQuery();
@@ -54,9 +55,9 @@ namespace Flepper.Tests.Integration.Infra.Extensions
         {
             dbConnection.Open();
             var command = dbConnection.CreateCommand();
-            command.CommandText = @"INSERT INTO User (Name, Email, ProfileId) VALUES ('Nicolas','nicolas@flepper.com', 2);
-                                    INSERT INTO User (Name, Email, ProfileId) VALUES ('Gustavo','gustavo@flepper.com', 1);
-                                    INSERT INTO User (Name, Email, ProfileId) VALUES ('Alberto','alberto@flepper.com', 1);";
+            command.CommandText = @"INSERT INTO User (Name, Email, ProfileId, Active) VALUES ('Nicolas','nicolas@flepper.com', 2, 1);
+                                    INSERT INTO User (Name, Email, ProfileId, Active) VALUES ('Gustavo','gustavo@flepper.com', 1, 1);
+                                    INSERT INTO User (Name, Email, ProfileId, Active) VALUES ('Alberto','alberto@flepper.com', 1, 1);";
 
             command.ExecuteNonQuery();
             dbConnection.Close();

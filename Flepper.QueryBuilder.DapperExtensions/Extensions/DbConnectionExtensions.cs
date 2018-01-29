@@ -59,6 +59,23 @@ namespace Flepper.QueryBuilder.DapperExtensions
             => new FlepperDapperQuery(dbConnection).DeleteCommand();
 
         /// <summary>
+        /// Create SoftDelete Command
+        /// </summary>
+        /// <param name="dbConnection">DbConnection Instance</param>
+        /// <returns></returns>
+        public static ISoftDeleteCommand SoftDelete<T>(this IDbConnection dbConnection) where T : class
+            => new FlepperDapperQuery(dbConnection).SoftDeleteCommand<T>();
+
+        /// <summary>
+        /// Create SoftDelete Command
+        /// </summary>
+        /// <param name="dbConnection">DbConnection Instance</param>
+        /// <param name="table">Table name that the model do reference</param>
+        /// <returns></returns>
+        public static ISoftDeleteCommand SoftDelete<T>(this IDbConnection dbConnection, string table) where T : class
+            => new FlepperDapperQuery(dbConnection).SoftDeleteCommand<T>(table);
+
+        /// <summary>
         /// Create Update Command
         /// </summary>
         /// <param name="table">Table name</param>
