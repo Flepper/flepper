@@ -23,13 +23,22 @@ namespace Flepper.QueryBuilder.DapperExtensions
         public static ISelectCommand Select(this IDbConnection dbConnection, params SqlColumn[] columns)
             => new FlepperDapperQuery(dbConnection).SelectCommand(columns);
 
-        /// <summary>
-        /// Create Select Command
-        /// </summary>
-        /// <param name="dbConnection">DbConnection Instance</param>
-        /// <typeparam name="T">Object</typeparam>
-        /// <returns></returns>
-        public static ISelectCommand Select<T>(this IDbConnection dbConnection) where T : class
+	    /// <summary>
+	    /// Create Select Command
+	    /// </summary>
+	    /// <param name="columns">Columns name</param>
+	    /// <param name="dbConnection">DbConnection Instance</param>
+	    /// <returns></returns>
+	    public static ISelectCommand Select(this IDbConnection dbConnection, string[] columns)
+		    => new FlepperDapperQuery(dbConnection).SelectCommand(columns);
+
+		/// <summary>
+		/// Create Select Command
+		/// </summary>
+		/// <param name="dbConnection">DbConnection Instance</param>
+		/// <typeparam name="T">Object</typeparam>
+		/// <returns></returns>
+		public static ISelectCommand Select<T>(this IDbConnection dbConnection) where T : class
             => new FlepperDapperQuery(dbConnection).SelectCommand<T>();
 
         /// <summary>

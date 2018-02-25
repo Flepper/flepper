@@ -24,8 +24,13 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
+	    public ISelectCommand SelectCommand(string[] columns)
+	    {
+			var sqlColumns = columns.Select(c => new SqlColumn(c)).ToArray();
+		    return SelectCommand(sqlColumns);
+	    }
 
-        public ISelectCommand SelectCommandWithDistinct(params SqlColumn[] columns)
+		public ISelectCommand SelectCommandWithDistinct(params SqlColumn[] columns)
         {
             CheckNullColumnException(columns);
 

@@ -29,7 +29,19 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("INSERT INTO [Test] ([column1],[column2] )");
         }
 
-        [Fact]
+	    [Fact]
+	    public void ShouldCreateInsertStatementWithColumnsArray()
+	    {
+		    FlepperQueryBuilder
+			    .Insert().Into("Test")
+			    .Columns(new[] {"column1", "column2"})
+			    .Build()
+			    .Trim()
+			    .Should()
+			    .Be("INSERT INTO [Test] ([column1],[column2] )");
+	    }
+
+		[Fact]
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
             var queryResult = FlepperQueryBuilder
