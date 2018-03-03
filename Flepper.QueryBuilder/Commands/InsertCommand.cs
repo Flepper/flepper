@@ -17,7 +17,13 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
-        public IValuesOperator WithScopeIdentity()
+	    public IInsertIntoCommand Columns(string[] columns)
+	    {
+		    var sqlColumns = columns.Select(c => new SqlColumn(c)).ToArray();
+		    return Columns(sqlColumns);
+	    }
+
+	    public IValuesOperator WithScopeIdentity()
         {
             Command.AppendFormat("{0}", ";SELECT scope_identity();");
             return this;

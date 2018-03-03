@@ -35,7 +35,18 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
         }
 
-        [Fact]
+	    [Fact]
+	    public void ShouldCreateSelectStatementWithSpecificColumnsArray()
+	    {
+		    FlepperQueryBuilder.Select(new[] {"Id", "Name", "Birthday"})
+			    .From("user")
+			    .Build()
+			    .Trim()
+			    .Should()
+			    .Be("SELECT [Id],[Name],[Birthday] FROM [user]");
+	    }
+
+		[Fact]
         public void ShouldCreateSelectStatementWithSpecificColumnsWithAliases()
         {
             FlepperQueryBuilder.Select("Id", As("Name", "MyName"), "Birthday")

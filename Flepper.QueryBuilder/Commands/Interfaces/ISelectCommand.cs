@@ -21,11 +21,18 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         ISelectCommand SelectCommand(params SqlColumn[] columns);
 
-        /// <summary>
-        /// Select Command Contract
-        /// </summary>
-        /// <returns></returns>
-        ISelectCommand SelectCommand<T>() where T : class;
+	    /// <summary>
+	    /// Select Command Contract
+	    /// </summary>
+	    /// <param name="columns"></param>
+	    /// <returns></returns>
+	    ISelectCommand SelectCommand(string[] columns);
+
+		/// <summary>
+		/// Select Command Contract
+		/// </summary>
+		/// <returns></returns>
+		ISelectCommand SelectCommand<T>() where T : class;
 
         /// <summary>
         /// Select Command Contract
