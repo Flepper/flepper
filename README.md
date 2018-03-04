@@ -28,7 +28,7 @@ After executing one of the commands above you will have the Flepper installed an
 
 ### More about
 
-Access [Wiki](https://github.com/Flepper/flepper/wiki/Get-Started#creating-queries) to learn more.
+Access [Flepper Page](https://flepper.github.io/flepper/#) to learn more.
 
 ## Developing
 
