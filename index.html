@@ -5,70 +5,199 @@
     <meta charset='utf-8'>
 
     <title>Flepper Library</title>
-    <link rel="stylesheet" type="text/css" href="styles/base.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
 </head>
 
 <body>
-    <a href="https://github.com/Flepper/flepper">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-            alt="Fork me on GitHub" />
-    </a>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="https://camo.githubusercontent.com/6a76ee7c5821ba36f91d2443c53bf141d1d53d77/68747470733a2f2f7332362e706f7374696d672e6f72672f7531686e32313371682f66726f675f3132382e706e67"
+                    width="30" height="30" alt="">
+            </a>
+            <ul class="nav justify-content-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Documentation</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#select">Select Queries</a>
+                        <a class="dropdown-item" href="#update">Update Queries</a>
+                        <a class="dropdown-item" href="#delete">Delete Querties</a>
+                        <a class="dropdown-item" href="#insert">Insert Querties</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    &nbsp;
+    <article class="container">
+        <section class="row">
+            <div>
+                <a href="https://github.com/Flepper/flepper">
+                    <img style="z-index:1110; position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+                        alt="Fork me on GitHub" />
+                </a>
 
-    <div id="container">
+        </section>
+        &nbsp;
+        <section class="row">
+            <div class="col-md-12">
+                <h1>
+                    <a href="https://github.com/Flepper/flepper">Flepper Library</a>
+                </h1>
+                <div class="description">
+                    Flepper is a library to facilitate some database interactions that we need to perform in our applications. The initial idea
+                    of Flepper is to provide a query builder for writing SQL queries fluently, improving the readability
+                    of your code.
+                </div>
+            </div>
+            &nbsp;
+            <div class="col-md-12">
 
-        <h1>
-            <a href="https://github.com/Flepper/flepper">Flepper Library</a>
-        </h1>
-        <div class="description">
-            Flepper is a library to facilitate some database interactions that we need to perform in our applications. The initial idea
-            of Flepper is to provide a query builder for writing SQL queries fluently, improving the readability of your
-            code.
-        </div>
+                <h2>Authors</h2>
+                <p>
+                    <a href="https://github.com/nicolastakashi">Nicolas Takashi</a>,
+                    <a href="https://github.com/gustavoferrazfontes">Gustavo Fontes</a>,
+                    <a href="https://github.com/AlbertoMonteiro">Alberto Monteiro</a>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <h2>Download</h2>
 
-        <h2>Authors</h2>
-        <p>
-            <a href="https://github.com/nicolastakashi">Nicolas Takashi</a>,
-            <a href="https://github.com/gustavoferrazfontes">Gustavo Fontes</a>,
-            <a href="https://github.com/AlbertoMonteiro">Alberto Monteiro</a>
-        </p>
+                <p>
+                    You can download this project in either
+                    <a href="https://github.com/Flepper/flepper/zipball/master">zip</a> or
+                    <a href="https://github.com/Flepper/flepper/tarball/master">tar</a> formats.
+                </p>
+            </div>
 
-        <h2>Download</h2>
+            <div class="col-md-12">
+                <p>You can also clone the project with
+                    <a href="http://git-scm.com">Git</a>
+                    by running:
+                    <code>$ git clone https://github.com/Flepper/flepper</code>
+                </p>
+            </div>
 
-        <p>
-            You can download this project in either
-            <a href="https://github.com/Flepper/flepper/zipball/master">zip</a> or
-            <a href="https://github.com/Flepper/flepper/tarball/master">tar</a> formats.
-        </p>
+            <div class="col-md-12">
+                <h2>Installing</h2>
+                <p>
+                    A quick introduction of the minimal setup you need to get a hello world up & running.
+                </p>
+                <p>
+                    Packge Manager:
+                    <code>Install-Package Flepper.QueryBuilder</code>
+                </p>
+                <p> .NET CLI
+                    <code>dotnet add package Flepper.QueryBuilder</code> After executing one of the commands above you will have the Flepper installed and ready to be used.
+                </p>
+            </div>
+        </section>
+        &nbsp;
+        <section id="select">
+            <h2>Create Select Queries</h2>
+            <div class="col-md-12">
+                <p>
+                    To create a simple select statement:
 
-        <p>You can also clone the project with
-            <a href="http://git-scm.com">Git</a>
-            by running:
-            <pre>$ git clone https://github.com/Flepper/flepper</pre>
-        </p>
-
-
-        <h2>Installing / Get Started</h2>
-        <p>
-            A quick introduction of the minimal setup you need to get a hello world up & running.
-            <br>
-            <br> Packge Manager:
-            <br>
-            <pre>Install-Package Flepper.QueryBuilder</pre>
-            <br> .NET CLI
-            <br>
-            <br>
-            <pre>dotnet add package Flepper.QueryBuilder</pre> After executing one of the commands above you will have the Flepper installed and ready to be used.
-        </p>
-
-        <div class="footer">
-            get the source code on GitHub :
-            <a href="https://github.com/Flepper/flepper">Flepper Library</a>
-        </div>
-
-
-    </div>
-
-
+                    <code> Select().From("tableName");</code>
+                </p>
+                <p>
+                    The output query is:
+                    <code>SELECT * FROM [TableName]</code>
+                </p>
+                <h3>Select with Where</h3>
+                <p>
+                    <code>Select()<br>
+                    .From("tableName")<br>
+                    .Where("column1")<br>
+                    .EqualTo("param")<br>
+                    .And("column2")<br>
+                    .NotEqualTo("param2");
+                    </code>
+                </p>
+                <p>The output query is:
+                    <code>SELECT * FROM [tableName] WHERE [column1] = 'param' AND [column2] <> 'param2'</code>
+                </p>
+            </div>
+        </section>
+        &nbsp;
+        <section id="update">
+            <h2>Create Update Queries</h2>
+            <div class="col-md-12">
+                <p>
+                    To create a simple update statement:
+                    <br>
+                    <code>
+                            Update("dbo", "table")<br>
+                            .Set("column", "value")<br>
+                            .Where("column").EqualTo("value");
+                    </code>
+                </p>
+                <p>The output query is:
+                    <br>
+                    <code>
+                            UPDATE [dbo].[table] SET [column] = 'value' WHERE [column] = 'value'
+                    </code>
+                </p>
+            </div>
+        </section>
+        <section id="delete">
+            <h2>Create Delete Queries</h2>
+            <div class="col-md-12">
+                <p>
+                    To create a simple delete statement:
+                    <br>
+                    <code>
+                            Delete().From("Table");
+                    </code>
+                </p>
+                <p>
+                    The output query is:
+                    <code>DELETE FROM [Table]</code>
+                </p>
+            </div>
+        </section>
+        <section id="insert">
+            <h2>Create Insert Queries</h2>
+            <div class="col-md-12">
+                <p>
+                    To create a simple insert statement:
+                    <br>
+                    <code>
+                            Insert("table", "column1", "column2")<br>
+                            .Values("value1", 2)
+                    </code>
+                </p>
+                <p>
+                    The output query is:
+                    <code>INSERT INTO [table] ([column1],[column2] ) VALUES ('value1',2)"
+                    </code>
+                </p>
+            </div>
+        </section>
+        <section>
+            <h3>Building queries</h3>
+            <div class="col-md-12">
+                <p>For All commands, after create a query, use
+                    <code>FlepperQueryBuild.Build()</code> method in order to generate the query
+                </p>
+                <p>Example:
+                    <br>
+                    <code>
+                            Select().From("Table")<br>
+                            .Build()
+                    </code>
+                </p>
+            </div>
+        </section>
+    </article>
 </body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
 </html>
