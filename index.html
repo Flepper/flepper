@@ -20,10 +20,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Documentation</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#select">Select Queries</a>
-                        <a class="dropdown-item" href="#update">Update Queries</a>
-                        <a class="dropdown-item" href="#delete">Delete Querties</a>
-                        <a class="dropdown-item" href="#insert">Insert Querties</a>
+                        <a class="dropdown-item" href="#select">Get Staterd select statement</a>
+                        <a class="dropdown-item" href="#advancedselect">Advanced select statement</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#update">Get Staterd update statement</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#delete">Get Staterd delete statement</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#insert">Get Staterd insert statement</a>
                     </div>
                 </li>
             </ul>
@@ -82,9 +86,6 @@
             <div class="col-md-12">
                 <h2>Installing</h2>
                 <p>
-                    A quick introduction of the minimal setup you need to get a hello world up & running.
-                </p>
-                <p>
                     Packge Manager:
                     <code>Install-Package Flepper.QueryBuilder</code>
                 </p>
@@ -94,99 +95,208 @@
             </div>
         </section>
         &nbsp;
-        <section id="select">
-            <h2>Create Select Queries</h2>
+        <section>
+            <h1>1. Using Flepper Query Builder</h1>
             <div class="col-md-12">
-                <p>
-                    To create a simple select statement:
+                <p>The
+                    <code>FlepperQueryBuilder</code> class contain all necessary implementation that can enable you make your commands.
+                    <br> Bellow, you going to see how to create a simple CRUD statements.
+                </p>
 
-                    <code> Select().From("tableName");</code>
-                </p>
-                <p>
-                    The output query is:
-                    <code>SELECT * FROM [TableName]</code>
-                </p>
-                <h3>Select with Where</h3>
-                <p>
-                    <code>Select()<br>
+            </div>
+            &nbsp;
+            <section id="select">
+                <h2>Create Select Queries</h2>
+                <div class="col-md-12">
+                    <p>
+                        To create a simple select statement:
+
+                        <code> Select().From("tableName");</code>
+                    </p>
+                    <p>
+                        The output query is:
+                        <code>SELECT * FROM [TableName]</code>
+                    </p>
+                    <h3>Select with Where</h3>
+                    <p>
+                        <code>Select()<br>
                     .From("tableName")<br>
                     .Where("column1")<br>
                     .EqualTo("param")<br>
                     .And("column2")<br>
                     .NotEqualTo("param2");
                     </code>
-                </p>
-                <p>The output query is:
-                    <code>SELECT * FROM [tableName] WHERE [column1] = 'param' AND [column2] <> 'param2'</code>
-                </p>
-            </div>
-        </section>
-        &nbsp;
-        <section id="update">
-            <h2>Create Update Queries</h2>
-            <div class="col-md-12">
-                <p>
-                    To create a simple update statement:
-                    <br>
-                    <code>
+                    </p>
+                    <p>The output query is:
+                        <code>SELECT * FROM [tableName] WHERE [column1] = 'param' AND [column2] <> 'param2'</code>
+                    </p>
+                </div>
+            </section>
+            &nbsp;
+            <section id="update">
+                <h2>Create Update Queries</h2>
+                <div class="col-md-12">
+                    <p>
+                        To create a simple update statement:
+                        <br>
+                        <code>
                             Update("dbo", "table")<br>
                             .Set("column", "value")<br>
                             .Where("column").EqualTo("value");
                     </code>
-                </p>
-                <p>The output query is:
-                    <br>
-                    <code>
+                    </p>
+                    <p>The output query is:
+                        <br>
+                        <code>
                             UPDATE [dbo].[table] SET [column] = 'value' WHERE [column] = 'value'
                     </code>
-                </p>
-            </div>
-        </section>
-        <section id="delete">
-            <h2>Create Delete Queries</h2>
-            <div class="col-md-12">
-                <p>
-                    To create a simple delete statement:
-                    <br>
-                    <code>
+                    </p>
+                </div>
+            </section>
+            <section id="delete">
+                <h2>Create Delete Queries</h2>
+                <div class="col-md-12">
+                    <p>
+                        To create a simple delete statement:
+                        <br>
+                        <code>
                             Delete().From("Table");
                     </code>
-                </p>
-                <p>
-                    The output query is:
-                    <code>DELETE FROM [Table]</code>
-                </p>
-            </div>
-        </section>
-        <section id="insert">
-            <h2>Create Insert Queries</h2>
-            <div class="col-md-12">
-                <p>
-                    To create a simple insert statement:
-                    <br>
-                    <code>
+                    </p>
+                    <p>
+                        The output query is:
+                        <code>DELETE FROM [Table]</code>
+                    </p>
+                </div>
+            </section>
+            <section id="insert">
+                <h2>Create Insert Queries</h2>
+                <div class="col-md-12">
+                    <p>
+                        To create a simple insert statement:
+                        <br>
+                        <code>
                             Insert("table", "column1", "column2")<br>
                             .Values("value1", 2)
                     </code>
-                </p>
-                <p>
-                    The output query is:
-                    <code>INSERT INTO [table] ([column1],[column2] ) VALUES ('value1',2)"
+                    </p>
+                    <p>
+                        The output query is:
+                        <code>INSERT INTO [table] ([column1],[column2] ) VALUES ('value1',2)"
                     </code>
-                </p>
-            </div>
-        </section>
-        <section>
-            <h3>Building queries</h3>
-            <div class="col-md-12">
-                <p>For All commands, after create a query, use
-                    <code>FlepperQueryBuild.Build()</code> method in order to generate the query
-                </p>
-                <p>Example:
-                    <br>
-                    <code>
+                    </p>
+                </div>
+            </section>
+            <section>
+                <h3>Building queries</h3>
+                <div class="col-md-12">
+                    <p>For All commands, after create a query, use
+                        <code>FlepperQueryBuild.Build()</code> method in order to generate the query
+                    </p>
+                    <p>Example:
+                        <br>
+                        <code>
                             Select().From("Table")<br>
                             .Build()
+                    </code>
+                    </p>
+                </div>
+            </section>
+        </section>
+        &nbsp;
+        <section id="advancedselect">
+            <h1>2. Advanced Select Statement</h1>
+            <div class="col-md-12">
+                <p>
+                    There are a lot of select statement features that you can to compose your query with flepper. Here, We will to show to you
+                    how you can do select with inner join, left join, how you can use sql functions like Max, Min, Count
+                    and how you can use alias table at the columns and alias to columns
+                </p>
+            </div>
+            <div class="col-md-12" >
+                <h2>Creating Select statement with Joins</h2>
+                <code>
+                        FlepperQueryBuilder<br>
+                        .Select(<br>
+                            "Name",<br>
+                            "Age",<br>
+                            "PostalCode")<br>
+                        .From("User").As("usr")<br>
+                        .InnerJoin("Address").As("adr")<br>
+                        .On("usr","AddressId").EqualTo("adr","Id")<br>
+                        .Build();
+                </code>
+                <p>
+                    The code above generate the bellow query:
+                </p>
+                <p>
+                    <code>
+                        SELECT<br>
+                        Name,<br>
+                        Age,<br>
+                        PostalCode<br>
+                    FROM [User] AS usr<br> 
+                    INNER JOIN [Address] AS adr<br> 
+                    ON [usr].AddressId = [adr].Id
+                    </code>
+                </p>
+                <p>
+                    The sintax to create
+                    <code>LEFT JOIN</code> is not much diferent. See bellow an example:
+                </p>
+                <p>
+                    <code>
+                        FlepperQueryBuilder<br>
+                        .Select(<br>
+                            "Name",<br>
+                            "Age",<br>
+                            "PostalCode")<br>
+                        .From("User").As("usr")<br>
+                        .LeftJoin("Address").As("adr")<br>
+                        .On("usr","AddressId").EqualTo("adr","Id")<br>
+                        .Build();
+                    </code>
+                </p>
+                <p>The code above generate the bellow query:</p>
+                <code>
+                        SELECT<br>
+                        Name,<br>
+                        Age,<br>
+                        PostalCode<br>
+                    FROM [User] AS usr<br> 
+                    LEFT JOIN [Address] AS adr<br> 
+                    ON [usr].AddressId = [adr].Id
+                </code>
+            </div>
+            &nbsp;
+            <div class="col-md-12" id="selectcolumnalias">
+                <h2>Creating select statement with column alias</h2>
+                <p>
+                    To create column alias and sql function, like
+                    <code>MAX, MIN SUM</code> , you need
+                    <code>Flepper.QueryBuilder.FlepperQueryFunction</code> namespace.
+                </p>
+                <p>
+                    Bellow, you going to see how create a column alias.
+                </p>
+                <p>
+                    <code>
+                            Select(<br>
+                                As("Name","FirstName"),<br>
+                                "Age")<br>
+                            .From("User")
+                    </code>
+                </p>
+                <p>
+                    the code above generate the query:
+                </p>
+                <p>
+                    <code>
+                            SELECT <br>
+                            Name As FirsName,<br>
+                            Age,<br>
+                            PostalCode<br>
+                        FROM [User]
                     </code>
                 </p>
             </div>
