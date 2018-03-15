@@ -29,9 +29,10 @@ namespace Flepper.QueryBuilder.Utils
             var objType = CreateClass(parameters);
             obj = Activator.CreateInstance(objType);
             foreach (var prop in objType.GetProperties())
-                prop.SetValue(obj, parameters[$"@{prop.Name}"]);
+                prop.SetValue(obj, GetValueParameter(parameters[$"@{prop.Name}"]));
 
             end:
+
             return obj;
         }
 
@@ -41,12 +42,26 @@ namespace Flepper.QueryBuilder.Utils
                 return Types[className];
 
             var typeBuilder = ModuleBuilder.DefineType(className ?? Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
-            typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
-            foreach (var parameter in parameters)
-                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), parameter.Value is null ? typeof(object) : parameter.Value.GetType());
+            typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);           
+            foreach (var parameter in parameters)            
+                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), GetTypeParameter(parameter));            
             var type = typeBuilder.CreateTypeInfo().AsType();
             Types.TryAdd(type.FullName, type);
             return type;
+        }
+        
+        private static Type GetTypeParameter(KeyValuePair<string, object> parameter)
+        {
+            return parameter.Value.GetType().IsGenericType && parameter.Value.GetType().GetGenericTypeDefinition() == typeof(QueryBuilderParamenter<>)
+                           ? (Type)parameter.Value.GetType().GetProperty("ParameterType").GetValue(parameter.Value, null)
+                           : parameter.Value.GetType();
+        }
+
+        private static object GetValueParameter(object parameter)
+        {
+            return parameter.GetType().IsGenericType && parameter.GetType().GetGenericTypeDefinition() == typeof(QueryBuilderParamenter<>)
+                           ? parameter.GetType().GetProperty("Value").GetValue(parameter, null)
+                           : parameter;
         }
 
         private static PropertyBuilder CreateProperty(TypeBuilder typeBuilder, string propertyName, Type propertyType)

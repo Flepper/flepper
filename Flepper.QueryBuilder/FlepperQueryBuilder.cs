@@ -115,5 +115,13 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ISoftDeleteCommand SoftDelete<T>() where T : class
                     => new QueryBuilder().SoftDeleteCommand<T>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static QueryBuilderParamenter<T> Parameter<T>(T value)
+            => new QueryBuilderParamenter<T>(value);
     }
 }
