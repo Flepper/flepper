@@ -53,14 +53,14 @@ namespace Flepper.QueryBuilder.Utils
         internal static Type GetTypeParameter(KeyValuePair<string, object> parameter)
         {
             var value = parameter.Value;
-            return value is IQueryBuilderParameter queryParameter
+            return value is QueryBuilderParameter queryParameter
                     ? queryParameter.ParameterType
                     : value.GetType();
         }
 
         internal static object GetValueParameter(object value)
         {            
-            return value is IQueryBuilderParameter queryParameter
+            return value is QueryBuilderParameter queryParameter
                     ? queryParameter.Value
                     : value;
         }

@@ -122,7 +122,7 @@ namespace Flepper.QueryBuilder
         /// <typeparam name="T">class type that contain the flag</typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static IQueryBuilderParameter NullValue<T>(T? value = default) where T : struct
+        public static QueryBuilderParameter NullValue<T>(T? value = default) where T : struct
             => new QueryBuilderParameter<T>(value);
 
         /// <summary>
@@ -130,9 +130,8 @@ namespace Flepper.QueryBuilder
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static IQueryBuilderParameter NullValueString(string value = null)
-            => new QueryBuilderParameter<char>(value);       
-
+        public static QueryBuilderParameter NullValueString(string value = null)
+            => new QueryBuilderParameterString(value); 
 
     }
 }
