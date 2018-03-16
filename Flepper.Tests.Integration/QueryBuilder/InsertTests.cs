@@ -60,7 +60,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
                 var rows = await connection.Insert()
                     .Into("User")
                     .Columns("Name", "Email", "Nickname", "ProfileId")
-                    .Values("buzz", "feezz@flepper.com", null, 1)
+                    .Values("buzz", "feezz@flepper.com", FlepperQueryBuilder.NullValueString(), 1)
                     .ExecuteAsync();
 
                 rows.Should()
