@@ -117,11 +117,144 @@ namespace Flepper.QueryBuilder
                     => new QueryBuilder().SoftDeleteCommand<T>();
 
         /// <summary>
-        /// 
+        /// Create QueryBuilderParamenter
+        /// </summary>
+        /// <typeparam name="T">class type that contain the flag</typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValue<T>(T value)
+            => new QueryBuilderParameter<T>(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Byte
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static QueryBuilderParamenter<T> Parameter<T>(T value)
-            => new QueryBuilderParamenter<T>(value);
+        public static IQueryBuilderParameter NullValueByte(Byte? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter SByte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueSByte(SByte? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Int
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueInt(int? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Uint
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueUint(uint? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Short
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueShort(short? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter UShort
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueUShort(ushort? value = null)
+            => NullValue(value);
+
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Long
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueLong(long? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter ULong
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueULong(ulong? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Float
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueFloat(float? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Double
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueDouble(double? value = null)
+            => NullValue(value);
+
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Char
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueChar(char? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Bool
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueBool(bool? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter String
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueString(string value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter Decimal
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueDecimal(decimal? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueDateTime(DateTime? value = null)
+            => NullValue(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter TimeSpan
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IQueryBuilderParameter NullValueTimeSpan(TimeSpan? value = null)
+            => NullValue(value);
+
+
     }
 }
