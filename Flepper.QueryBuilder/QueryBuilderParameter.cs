@@ -20,16 +20,27 @@ namespace Flepper.QueryBuilder
     /// <summary>
     /// 
     /// </summary>
-    public sealed class QueryBuilderParameter<T> : IQueryBuilderParameter
+    public sealed class QueryBuilderParameter<T> : IQueryBuilderParameter        
+       where T: struct
     {
         /// <summary>
         /// Create QueryBuilderParamenter
         /// </summary>
         /// <param name="value"></param>
-        public QueryBuilderParameter(T value)
+        public QueryBuilderParameter(T? value = default)          
         {
             Value = value;
-            ParameterType = typeof(T);
+            ParameterType = typeof(T?);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public QueryBuilderParameter(string value = null)
+        {
+            Value = value;
+            ParameterType = typeof(System.String);
         }
 
         /// <summary>
