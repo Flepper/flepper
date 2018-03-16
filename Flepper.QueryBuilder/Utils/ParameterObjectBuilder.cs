@@ -48,25 +48,21 @@ namespace Flepper.QueryBuilder.Utils
             var type = typeBuilder.CreateTypeInfo().AsType();
             Types.TryAdd(type.FullName, type);
             return type;
-        }
-        
-        internal static bool IsIQueryBuilderParameter(object value)
-        {
-            return value.GetType().IsGenericType && value.GetType().GetGenericTypeDefinition() == typeof(QueryBuilderParameter<>);
-        }
+        }       
 
         internal static Type GetTypeParameter(KeyValuePair<string, object> parameter)
         {
-            return IsIQueryBuilderParameter(parameter.Value)
-                ? ((IQueryBuilderParameter)parameter.Value).ParameterType
-                : parameter.Value.GetType();
+            var value = parameter.Value;
+            return value is IQueryBuilderParameter queryParameter
+                    ? queryParameter.ParameterType
+                    : value.GetType();
         }
 
-        internal static object GetValueParameter(object parameter)
-        {
-            return IsIQueryBuilderParameter(parameter)
-                ? ((IQueryBuilderParameter)parameter).Value
-                : parameter;
+        internal static object GetValueParameter(object value)
+        {            
+            return value is IQueryBuilderParameter queryParameter
+                    ? queryParameter.Value
+                    : value;
         }
 
         private static PropertyBuilder CreateProperty(TypeBuilder typeBuilder, string propertyName, Type propertyType)

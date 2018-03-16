@@ -35,11 +35,11 @@ namespace Flepper.QueryBuilder
         /// <summary>
         /// 
         /// </summary>
-        public object Value { get; private set; }
+        public object Value { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Type ParameterType { get; private set; }
+        public Type ParameterType { get; }
     }
 }
