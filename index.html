@@ -213,7 +213,7 @@
                     and how you can use alias table at the columns and alias to columns
                 </p>
             </div>
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h2>Creating Select statement with Joins</h2>
                 <code>
                         FlepperQueryBuilder<br>
@@ -269,7 +269,7 @@
                 </code>
             </div>
             &nbsp;
-            <div class="col-md-12" id="selectcolumnalias">
+            <div class="col-md-12">
                 <h2>Creating select statement with column alias</h2>
                 <p>
                     To create column alias and sql function, like
@@ -293,11 +293,70 @@
                 <p>
                     <code>
                             SELECT <br>
-                            Name As FirsName,<br>
-                            Age,<br>
-                            PostalCode<br>
+                                Name As FirsName,<br>
+                                Age,<br>
+                                PostalCode<br>
                         FROM [User]
                     </code>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <h2>Creating select statement with table alias</h2>
+                <p>
+                    Bellow, you going to see how create a table alias.
+                </p>
+                <p>
+                    <code>
+                            Select(<br>
+                                "Age")<br>
+                            .From("User").As("usr")
+                    </code>
+                </p>
+                <p>
+                    the code above generate the query:
+                </p>
+                <p>
+                    <code>
+                            SELECT <br>
+                                Age<br>
+                        FROM [User] AS usr
+                    </code>
+                </p>
+            </div>
+
+            <div class="col-md-12">
+                <h2>Creating select statement with Count, Max and Min sql functions</h2>
+                <p>
+                    Bellow, you going to see how create sql function.
+                </p>
+                <p>
+                    <code>
+                            Select(<br>
+                                Max("Age","OlderAge"),<br>
+                                Min("Id","YoungerAge"),<br>
+                                Count("Id","UserQuantity")<br>
+                            .From("User")<br>
+                            .GroupBy("Age","Id")
+                    </code>
+                </p>
+                <p>
+                    the code above generate the query:
+                </p>
+                <p>
+                    <code>
+                            SELECT <br>
+                                MAX([Age])As OlderAge,<br>
+                                MIN([Age])As YoungerAge,<br>
+                                COUNT([Id]As UserQuantity)<br>
+                            FROM [User]<br>
+                            GROUP BY 
+                                [Age],
+                                [Id]
+                    </code>
+                </p>
+                <p>
+                    <strong>Important! You need use
+                        <code>GroupBy</code> command Explicity in order sql function work correctly.</strong>
                 </p>
             </div>
         </section>
