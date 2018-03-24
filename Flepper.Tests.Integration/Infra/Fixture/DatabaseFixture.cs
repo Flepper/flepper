@@ -14,15 +14,18 @@ namespace Flepper.Tests.Integration.Infra.Fixture
             Connection
                 .CreateProfileTable()
                 .CreateUserTable()
+                .CreatePeopleTable()
                 .LoadProfileTable()
-                .LoadUserTable();
+                .LoadUserTable()
+                .LoadPeopleTable();
         }
 
         public void Dispose()
         {
             Connection
                 .ResetUserTable()
-                .ResetProfileTable();
+                .ResetProfileTable()
+                .ResetPeopleTable();
         }
 
         public IDbConnection Connection { get; private set; }

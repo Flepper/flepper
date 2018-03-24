@@ -45,5 +45,37 @@ namespace Flepper.Tests.Integration.QueryBuilder
                 row.Should().BeGreaterThan(0);
             }
         }
+
+        [Fact]
+        public void ShouldUpdatePeople()
+        {
+            using (var connection = databaseFixture.Connection)
+            {
+                connection.Open();
+                var row = connection.Update("People")
+                    .Set("Active", FlepperQueryBuilder.NullValue<int>())
+                    .Set("NickName", FlepperQueryBuilder.NullValueString())
+                    .Where("Id").EqualTo(1)
+                    .Execute();
+
+                row.Should().BeGreaterThan(0);
+            }
+        }
+
+        [Fact]
+        public async void ShouldUpdatePeopleAsync()
+        {
+            using (var connection = databaseFixture.Connection)
+            {
+                connection.Open();
+                var row = await connection.Update("People")
+                    .Set("Active", FlepperQueryBuilder.NullValue<int>())
+                    .Set("NickName", FlepperQueryBuilder.NullValueString())
+                    .Where("Id").EqualTo(1)
+                    .ExecuteAsync();
+
+                row.Should().BeGreaterThan(0);
+            }
+        }
     }
 }

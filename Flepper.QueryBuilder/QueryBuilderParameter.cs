@@ -2,7 +2,7 @@
 namespace Flepper.QueryBuilder
 {
     /// <summary>
-    /// Interface IQueryBuilderParamenter
+    /// abstract QueryBuilderParamenter
     /// </summary>
     public abstract class QueryBuilderParameter
     {
