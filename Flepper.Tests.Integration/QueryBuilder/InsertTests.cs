@@ -60,8 +60,25 @@ namespace Flepper.Tests.Integration.QueryBuilder
                 var rows = await connection.Insert()
                     .Into("User")
                     .Columns("Name", "Email", "Nickname", "ProfileId")
-                    .Values("buzz", "feezz@flepper.com", null, 1)
+                    .Values("buzz", "feezz@flepper.com", FlepperQueryBuilder.NullValueString(), 1)
                     .ExecuteAsync();
+
+                rows.Should()
+                    .BeGreaterThan(0);
+            }
+        }
+
+        [Fact]
+        public void ShouldExecuteInsertPeople()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                connection.Open();
+                var rows = connection.Insert()
+                    .Into("People")
+                    .Columns("Name", "Active", "NickName")
+                    .Values("buzz", FlepperQueryBuilder.NullValue<int>(), FlepperQueryBuilder.NullValueString())
+                    .Execute();
 
                 rows.Should()
                     .BeGreaterThan(0);

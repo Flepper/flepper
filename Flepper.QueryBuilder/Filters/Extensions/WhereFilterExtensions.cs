@@ -15,6 +15,14 @@
             => whereFilter is IComparisonOperators command ? command.EqualTo<T>(value) : null;
 
         /// <summary>
+        /// Add Equal to query
+        /// </summary>
+        /// <param name="whereFilter">Where Filter instance</param>
+        /// <returns></returns>
+        public static IComparisonOperators EqualNull(this IWhereFilter whereFilter)
+            => whereFilter is IComparisonOperators command ? command.EqualNull() : null;
+
+        /// <summary>
         /// Add Greater Than to query
         /// </summary>
         /// <param name="whereFilter">Where Filter instance</param>

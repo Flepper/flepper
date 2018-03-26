@@ -13,6 +13,12 @@
         IComparisonOperators EqualTo<T>(T value);
 
         /// <summary>
+        /// Equal Null Comparison Operator Contract
+        /// </summary>
+        /// <returns></returns>
+        IComparisonOperators EqualNull();
+
+        /// <summary>
         /// Greater Than Comparison Operator Contract
         /// </summary>
         /// <param name="value">Value used to compare</param>

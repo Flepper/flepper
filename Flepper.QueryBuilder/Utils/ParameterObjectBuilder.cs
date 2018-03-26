@@ -29,9 +29,10 @@ namespace Flepper.QueryBuilder.Utils
             var objType = CreateClass(parameters);
             obj = Activator.CreateInstance(objType);
             foreach (var prop in objType.GetProperties())
-                prop.SetValue(obj, parameters[$"@{prop.Name}"]);
+                prop.SetValue(obj, GetValueParameter(parameters[$"@{prop.Name}"]));
 
             end:
+
             return obj;
         }
 
@@ -41,12 +42,27 @@ namespace Flepper.QueryBuilder.Utils
                 return Types[className];
 
             var typeBuilder = ModuleBuilder.DefineType(className ?? Guid.NewGuid().ToString(), TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout, null);
-            typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
-            foreach (var parameter in parameters)
-                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), parameter.Value is null ? typeof(object) : parameter.Value.GetType());
+            typeBuilder.DefineDefaultConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);           
+            foreach (var parameter in parameters)            
+                CreateProperty(typeBuilder, parameter.Key.Replace("@", ""), GetTypeParameter(parameter));            
             var type = typeBuilder.CreateTypeInfo().AsType();
             Types.TryAdd(type.FullName, type);
             return type;
+        }       
+
+        internal static Type GetTypeParameter(KeyValuePair<string, object> parameter)
+        {
+            var value = parameter.Value;
+            return value is QueryBuilderParameter queryParameter
+                    ? queryParameter.ParameterType
+                    : value.GetType();
+        }
+
+        internal static object GetValueParameter(object value)
+        {            
+            return value is QueryBuilderParameter queryParameter
+                    ? queryParameter.Value
+                    : value;
         }
 
         private static PropertyBuilder CreateProperty(TypeBuilder typeBuilder, string propertyName, Type propertyType)

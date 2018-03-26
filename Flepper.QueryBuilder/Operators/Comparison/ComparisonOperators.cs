@@ -12,6 +12,12 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
+        public IComparisonOperators EqualNull()
+        {
+            Command.AppendFormat("IS NULL ");
+            return this;
+        }
+
         public IComparisonOperators GreaterThan<T>(T value)
         {
             Command.Append($"> @p{AddParameters(value)} ");
@@ -69,5 +75,7 @@ namespace Flepper.QueryBuilder
             Command.Append($"BETWEEN @p{AddParameters(from)} AND @p{AddParameters(to)} ");
             return this;
         }
+
+        
     }
 }

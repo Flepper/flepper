@@ -19,5 +19,6 @@
         /// <param name="field">Column Name</param>
         /// <returns></returns>
         IWhereFilter Where(string tableAlias, string field);
+               
     }
 }

@@ -4,7 +4,6 @@ namespace Flepper.Tests.Integration.Infra.Extensions
 {
     public static class DbConnectionExtensions
     {
-
         public static IDbConnection CreateProfileTable(this IDbConnection dbConnection)
         {
             dbConnection.Open();
@@ -38,6 +37,21 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             return dbConnection;
         }
 
+        public static IDbConnection CreatePeopleTable(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS `People` (
+	                                `Id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	                                `Name`	TEXT,
+                                    `Active` INTEGER NULL,
+                                    `Nickname` TEXT NULL);";
+
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
 
         public static IDbConnection LoadProfileTable(this IDbConnection dbConnection)
         {
@@ -64,6 +78,17 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             return dbConnection;
         }
 
+        public static IDbConnection LoadPeopleTable(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"INSERT INTO People (Name, Active, NickName) VALUES ('Nicolas',null,null);";
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
+
         public static IDbConnection ResetProfileTable(this IDbConnection dbConnection)
         {
             dbConnection.Open();
@@ -82,6 +107,18 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             var command = dbConnection.CreateCommand();
             command.CommandText = @"delete from User;    
                                     delete from sqlite_sequence where name='User';";
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
+
+        public static IDbConnection ResetPeopleTable(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"delete from People;    
+                                    delete from sqlite_sequence where name='People';";
 
             command.ExecuteNonQuery();
             dbConnection.Close();

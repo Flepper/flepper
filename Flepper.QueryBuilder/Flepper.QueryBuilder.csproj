@@ -19,6 +19,7 @@
     <tags>dapper querybuilder sql dotnet-core dotnet-standard database-interaction query-builder</tags>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

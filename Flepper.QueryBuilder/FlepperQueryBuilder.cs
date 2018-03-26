@@ -115,5 +115,23 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static ISoftDeleteCommand SoftDelete<T>() where T : class
                     => new QueryBuilder().SoftDeleteCommand<T>();
+
+        /// <summary>
+        /// Create QueryBuilderParamenter
+        /// </summary>
+        /// <typeparam name="T">class type that contain the flag</typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static QueryBuilderParameter NullValue<T>(T? value = default) where T : struct
+            => new QueryBuilderParameter<T>(value);
+
+        /// <summary>
+        /// Create QueryBuilderParamenter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static QueryBuilderParameter NullValueString(string value = null)
+            => new QueryBuilderParameterString(value); 
+
     }
 }

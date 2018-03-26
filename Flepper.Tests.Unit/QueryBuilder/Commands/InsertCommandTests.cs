@@ -29,19 +29,19 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
                 .Be("INSERT INTO [Test] ([column1],[column2] )");
         }
 
-	    [Fact]
-	    public void ShouldCreateInsertStatementWithColumnsArray()
-	    {
-		    FlepperQueryBuilder
-			    .Insert().Into("Test")
-			    .Columns(new[] {"column1", "column2"})
-			    .Build()
-			    .Trim()
-			    .Should()
-			    .Be("INSERT INTO [Test] ([column1],[column2] )");
-	    }
+        [Fact]
+        public void ShouldCreateInsertStatementWithColumnsArray()
+        {
+            FlepperQueryBuilder
+                .Insert().Into("Test")
+                .Columns(new[] { "column1", "column2" })
+                .Build()
+                .Trim()
+                .Should()
+                .Be("INSERT INTO [Test] ([column1],[column2] )");
+        }
 
-		[Fact]
+        [Fact]
         public void ShouldCreateInsertStatementWithValuesToColumns()
         {
             var queryResult = FlepperQueryBuilder
@@ -122,6 +122,28 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
 
             Assert.Equal("value1", parameters.@p0);
             Assert.Equal(200, parameters.@p1);
+        }
+
+        [Fact]
+        public void ShouldCreateInsertStatementWithValuesAndNullValueToColumns()
+        {
+            var queryResult = FlepperQueryBuilder
+                .Insert().Into("Test")
+                .Columns("column1", "column2", "column3")
+                .Values("value1", FlepperQueryBuilder.NullValueString(), FlepperQueryBuilder.NullValue<System.DateTime>())
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("INSERT INTO [Test] ([column1],[column2],[column3] ) VALUES (@p0, @p1, @p2)");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("value1", parameters.@p0);
+            Assert.Equal(null, parameters.@p1);
+            Assert.Equal(null, parameters.@p2);
         }
     }
 }
