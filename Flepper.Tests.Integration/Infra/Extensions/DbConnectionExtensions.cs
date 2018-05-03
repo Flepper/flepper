@@ -53,6 +53,35 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             return dbConnection;
         }
 
+        public static IDbConnection CreateTest1AndTest2Table(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS `Test1` (
+	                                `Id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	                                `Name`	TEXT);";
+
+            command.CommandText += @"CREATE TABLE IF NOT EXISTS `Test2` (
+	                                `Id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	                                `Name`	TEXT);";
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
+
+        public static IDbConnection LoadTest1Table(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"INSERT INTO Test1 (Name) VALUES ('t1');
+                                    INSERT INTO Test2 (Name) VALUES ('t2');";
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
+
         public static IDbConnection LoadProfileTable(this IDbConnection dbConnection)
         {
             dbConnection.Open();
@@ -119,6 +148,20 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             var command = dbConnection.CreateCommand();
             command.CommandText = @"delete from People;    
                                     delete from sqlite_sequence where name='People';";
+
+            command.ExecuteNonQuery();
+            dbConnection.Close();
+            return dbConnection;
+        }
+
+        public static IDbConnection ResetTest1AndTest2Table(this IDbConnection dbConnection)
+        {
+            dbConnection.Open();
+            var command = dbConnection.CreateCommand();
+            command.CommandText = @"delete from Test1;    
+                                    delete from Test2;
+                                    delete from sqlite_sequence where name='Test1';
+                                    delete from sqlite_sequence where name='Test2';";
 
             command.ExecuteNonQuery();
             dbConnection.Close();

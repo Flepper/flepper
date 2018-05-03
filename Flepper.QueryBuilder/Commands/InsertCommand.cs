@@ -1,4 +1,5 @@
 using Flepper.QueryBuilder.Utils.Extensions;
+using System;
 using System.Linq;
 
 namespace Flepper.QueryBuilder
@@ -27,6 +28,20 @@ namespace Flepper.QueryBuilder
         {
             Command.AppendFormat("{0}", ";SELECT scope_identity();");
             return this;
+        }
+
+        public IInsertIntoIQueryCommand Columns(string[] columns, Func<IQueryCommand, IQueryCommand> query)
+        {
+            var sqlColumns = columns.Select(c => new SqlColumn(c)).ToArray();
+            Columns(sqlColumns);
+            QueryBuilder querySelect = new QueryBuilder();
+            querySelect = (QueryBuilder)query.Invoke(querySelect);             
+            Command.Append(querySelect.Command);
+            foreach (var parameter in querySelect?.Parameters)
+            {
+                Parameters.Add(parameter.Key, parameter.Value);
+            }
+            return this;            
         }
     }
 }

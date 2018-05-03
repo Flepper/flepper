@@ -84,5 +84,25 @@ namespace Flepper.Tests.Integration.QueryBuilder
                     .BeGreaterThan(0);
             }
         }
+
+        [Fact]
+        public void ShouldExecuteInsertTest2WithSelectTest1()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                connection.Open();
+                var rows = connection.Insert()
+                    .Into("Test2")
+                    .Columns
+                    (
+                        new string[1] { "Name" },
+                        x => connection.Select("Name").From("Test1") // IQueryCommand
+                    )                      
+                    .Execute();
+
+                rows.Should()
+                    .BeGreaterThan(0);
+            }
+        }
     }
 }

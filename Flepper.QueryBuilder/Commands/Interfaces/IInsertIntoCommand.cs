@@ -3,7 +3,7 @@
     /// <summary>
     /// Insert Into Command Interface
     /// </summary>
-    public interface IInsertIntoCommand : IQueryCommand
+    public interface IInsertIntoCommand : IInsertIntoIQueryCommand
     {
         /// <summary>
         /// Columns contract
@@ -17,6 +17,6 @@
 		/// </summary>
 		/// <param name="columns"></param>
 		/// <returns></returns>
-		IInsertIntoCommand Columns(string[] columns);
+		IInsertIntoCommand Columns(string[] columns);        
 	}
 }
