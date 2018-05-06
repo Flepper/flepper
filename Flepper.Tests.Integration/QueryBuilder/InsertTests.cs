@@ -93,11 +93,8 @@ namespace Flepper.Tests.Integration.QueryBuilder
                 connection.Open();
                 var rows = connection.Insert()
                     .Into("Test2")
-                    .Columns
-                    (
-                        new string[1] { "Name" },
-                        x => connection.Select("Name").From("Test1") // IQueryCommand
-                    )                      
+                    .Columns("Name")   
+                    .Values(_ => connection.Select("Name").From("Test1"))
                     .Execute();
 
                 rows.Should()

@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Values Operator Interface
@@ -11,5 +13,12 @@
         /// <param name="values">Array of values</param>
         /// <returns></returns>
         IValuesOperator Values(params object[] values);
+
+        /// <summary>
+        /// Values Operator Contract
+        /// </summary>
+        /// <param name="query">IQueryCommand</param>
+        /// <returns></returns>
+        IValuesOperator Values(Func<IQueryCommand, IQueryCommand> query);
     }
 }

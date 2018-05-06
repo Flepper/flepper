@@ -3,7 +3,7 @@
     /// <summary>
     /// Insert Into Command Interface
     /// </summary>
-    public interface IInsertIntoCommand : IInsertIntoIQueryCommand
+    public interface IInsertIntoCommand : IQueryCommand
     {
         /// <summary>
         /// Columns contract

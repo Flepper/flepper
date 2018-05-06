@@ -145,7 +145,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal(null, parameters.@p1);
             Assert.Equal(null, parameters.@p2);
         }
-
+        /**/
         [Fact]
         public void ShouldCreateInsertStatementWithSelectQueryBuilder()
         {
@@ -156,7 +156,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var queryResult = FlepperQueryBuilder
                 .Insert()
                 .Into("Test")
-                .Columns(new string[] { "column1", "column2" }, x => querySelect)
+                .Columns(new string[] { "column1", "column2" })
+                .Values(_ => querySelect)
                 .BuildWithParameters();
 
             Assert.Equal("INSERT INTO [Test] ([column1],[column2] ) SELECT [column1],[column2] FROM [Test2] ", queryResult.Query);
@@ -173,7 +174,8 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             var queryResult = FlepperQueryBuilder
                 .Insert()
                 .Into("Test")
-                .Columns(new string[] { "column1", "column2" }, x => querySelect)                
+                .Columns(new string[] { "column1", "column2" })                
+                .Values(_ => querySelect)                
                 .BuildWithParameters();
 
             Assert.Equal("INSERT INTO [Test] ([column1],[column2] ) SELECT [column1],[column2] FROM [Test2] WHERE [Id] = @p0 ", queryResult.Query);
