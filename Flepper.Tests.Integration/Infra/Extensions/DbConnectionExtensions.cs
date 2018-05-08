@@ -53,7 +53,7 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             return dbConnection;
         }
 
-        public static IDbConnection CreateTest1AndTest2Table(this IDbConnection dbConnection)
+        public static IDbConnection CreateTablesForInsertIntoTests(this IDbConnection dbConnection)
         {
             dbConnection.Open();
             var command = dbConnection.CreateCommand();
@@ -154,7 +154,7 @@ namespace Flepper.Tests.Integration.Infra.Extensions
             return dbConnection;
         }
 
-        public static IDbConnection ResetTest1AndTest2Table(this IDbConnection dbConnection)
+        public static IDbConnection ResetTablesForInsertIntoTests(this IDbConnection dbConnection)
         {
             dbConnection.Open();
             var command = dbConnection.CreateCommand();

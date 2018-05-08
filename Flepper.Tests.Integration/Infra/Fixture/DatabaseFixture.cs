@@ -15,7 +15,7 @@ namespace Flepper.Tests.Integration.Infra.Fixture
                 .CreateProfileTable()
                 .CreateUserTable()
                 .CreatePeopleTable()
-                .CreateTest1AndTest2Table()
+                .CreateTablesForInsertIntoTests()
                 .LoadProfileTable()
                 .LoadUserTable()
                 .LoadPeopleTable()
@@ -28,7 +28,7 @@ namespace Flepper.Tests.Integration.Infra.Fixture
                 .ResetUserTable()
                 .ResetProfileTable()
                 .ResetPeopleTable()
-                .ResetTest1AndTest2Table();
+                .ResetTablesForInsertIntoTests();
         }
 
         public IDbConnection Connection { get; private set; }
