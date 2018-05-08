@@ -1,4 +1,5 @@
 using Flepper.QueryBuilder.Utils.Extensions;
+using System;
 using System.Linq;
 
 namespace Flepper.QueryBuilder

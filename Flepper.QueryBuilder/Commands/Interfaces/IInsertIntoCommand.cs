@@ -17,6 +17,6 @@
 		/// </summary>
 		/// <param name="columns"></param>
 		/// <returns></returns>
-		IInsertIntoCommand Columns(string[] columns);
+		IInsertIntoCommand Columns(string[] columns);        
 	}
 }

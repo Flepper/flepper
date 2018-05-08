@@ -145,5 +145,44 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             Assert.Equal(null, parameters.@p1);
             Assert.Equal(null, parameters.@p2);
         }
+        /**/
+        [Fact]
+        public void ShouldCreateInsertStatementWithSelectQueryBuilder()
+        {
+            var querySelect = FlepperQueryBuilder
+                .Select(new string[] { "column1", "column2" })
+                .From("Test2");
+
+            var queryResult = FlepperQueryBuilder
+                .Insert()
+                .Into("Test")
+                .Columns(new string[] { "column1", "column2" })
+                .Values(_ => querySelect)
+                .BuildWithParameters();
+
+            Assert.Equal("INSERT INTO [Test] ([column1],[column2] ) SELECT [column1],[column2] FROM [Test2] ", queryResult.Query);
+        }
+
+        [Fact]
+        public void ShouldCreateInsertStatementWithSelectQueryBuilderWithWhere()
+        {
+            var querySelect = FlepperQueryBuilder
+                .Select(new string[] { "column1", "column2" })
+                .From("Test2")
+                .Where("Id").EqualTo(1);
+
+            var queryResult = FlepperQueryBuilder
+                .Insert()
+                .Into("Test")
+                .Columns(new string[] { "column1", "column2" })                
+                .Values(_ => querySelect)                
+                .BuildWithParameters();
+
+            Assert.Equal("INSERT INTO [Test] ([column1],[column2] ) SELECT [column1],[column2] FROM [Test2] WHERE [Id] = @p0 ", queryResult.Query);
+
+            dynamic parameters = queryResult.Parameters;
+            Assert.Equal(1, parameters.@p0);
+        }
+
     }
 }
