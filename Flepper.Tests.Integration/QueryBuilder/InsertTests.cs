@@ -98,7 +98,7 @@ namespace Flepper.Tests.Integration.QueryBuilder
                     .Execute();
 
                 rows.Should()
-                    .BeGreaterThan(0);
+                    .BeGreaterThan(0);                
             }
         }
     }

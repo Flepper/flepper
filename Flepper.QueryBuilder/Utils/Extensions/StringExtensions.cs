@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Flepper.QueryBuilder.Utils.Extensions
 {
@@ -9,6 +11,6 @@ namespace Flepper.QueryBuilder.Utils.Extensions
         {
             column = strs[0];
             alias = strs[1];
-        }
+        }        
     }
 }

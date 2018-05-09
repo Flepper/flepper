@@ -68,7 +68,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
         }
 
         [Fact]
-        public void ShouldCreteSelectWithWhereCondition()
+        public void ShouldCreateSelectWithWhereCondition()
         {
             var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
                 .From("user")
@@ -84,6 +84,92 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             dynamic parameters = queryResult.Parameters;
 
             Assert.Equal("Nicolas", parameters.@p0);
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithIn()
+        {
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("User")
+                .Where("Id").In(1, 2, 3)
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [User] WHERE [Id] IN(@p0,@p1,@p2)");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
+            Assert.Equal(2, parameters.@p1);
+            Assert.Equal(3, parameters.@p2);
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithNotIn()
+        {
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("User")
+                .Where("Id").NotIn(1, 2, 3)
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [User] WHERE [Id] NOT IN(@p0,@p1,@p2)");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
+            Assert.Equal(2, parameters.@p1);
+            Assert.Equal(3, parameters.@p2);
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithInSelect()
+        {
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("User")
+                .Where("Active").EqualTo(1)
+                .And("Id").In(_ => FlepperQueryBuilder.Select("Id").From("Profile").Where("Active").EqualTo(1))
+                .And("Name").Contains("A")                
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [User] WHERE [Active] = @p0 AND [Id] IN(SELECT [Id] FROM [Profile] WHERE [Active] = @p1 ) AND [Name] LIKE @p2");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal(1, parameters.@p0);
+            Assert.Equal(1, parameters.@p1);
+            Assert.Equal("%A%", parameters.@p2);
+            
+        }
+
+        [Fact]
+        public void ShouldCreateSelectWithNotInSelect()
+        {
+            var queryResult = FlepperQueryBuilder.Select("Id", "Name", "Birthday")
+                .From("User")
+                .Where("Id").NotIn(_ => FlepperQueryBuilder.Select("Id").From("Profile"))
+                .And("Name").Contains("A")
+                .BuildWithParameters();
+
+            queryResult
+                .Query
+                .Trim()
+                .Should()
+                .Be("SELECT [Id],[Name],[Birthday] FROM [User] WHERE [Id] NOT IN(SELECT [Id] FROM [Profile] ) AND [Name] LIKE @p0");
+
+            dynamic parameters = queryResult.Parameters;
+
+            Assert.Equal("%A%", parameters.@p0);
         }
 
         [Fact]

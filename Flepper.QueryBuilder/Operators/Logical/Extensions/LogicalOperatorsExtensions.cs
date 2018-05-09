@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Flepper.QueryBuilder
 {
     /// <summary>
@@ -14,6 +16,14 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators EqualTo<T>(this ILogicalOperators logicalOperators, T value)
             => logicalOperators is IComparisonOperators command ? command.EqualTo(value) : null;
+
+        /// <summary>
+        /// Add Equal NULL Operator to query
+        /// </summary>
+        /// <param name="logicalOperators">Logical Operators instance</param>
+        /// <returns>Value</returns>
+        public static IComparisonOperators EqualNull(this ILogicalOperators logicalOperators)
+           => logicalOperators is IComparisonOperators command ? command.EqualNull() : null;
 
         /// <summary>
         /// Add Greater Than Operator to query
@@ -99,5 +109,41 @@ namespace Flepper.QueryBuilder
         /// <returns></returns>
         public static IComparisonOperators Between<TFrom, TTo>(this ILogicalOperators logicalOperators, TFrom from, TTo to)
             => logicalOperators is IComparisonOperators command ? command.Between(from, to) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalOperators"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static IComparisonOperators In(this ILogicalOperators logicalOperators, params object[] values)
+            => logicalOperators is IComparisonOperators command ? command.In(values) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalOperators"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static IComparisonOperators NotIn(this ILogicalOperators logicalOperators, params object[] values)
+            => logicalOperators is IComparisonOperators command ? command.NotIn(values) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalOperators"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static IComparisonOperators In(this ILogicalOperators logicalOperators, Func<IQueryCommand, IQueryCommand> query)
+            => logicalOperators is IComparisonOperators command ? command.In(query) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalOperators"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static IComparisonOperators NotIn(this ILogicalOperators logicalOperators, Func<IQueryCommand, IQueryCommand> query)
+            => logicalOperators is IComparisonOperators command ? command.NotIn(query) : null;
     }
 }

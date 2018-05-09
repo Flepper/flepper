@@ -12,9 +12,8 @@ namespace Flepper.QueryBuilder
         }
 
         public IValuesOperator Values(Func<IQueryCommand, IQueryCommand> query)
-        {            
-            QueryBuilder querySelect = new QueryBuilder();
-            querySelect = (QueryBuilder)query.Invoke(querySelect);
+        {
+            QueryBuilder querySelect = query.AsQueryBuilder();
             Command.Append(querySelect.Command);
             foreach (var parameter in querySelect?.Parameters)
             {
