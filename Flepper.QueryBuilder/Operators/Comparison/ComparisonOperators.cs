@@ -1,3 +1,8 @@
+using Flepper.QueryBuilder.Utils.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Flepper.QueryBuilder
 {
     internal partial class QueryBuilder : IComparisonOperators
@@ -54,19 +59,19 @@ namespace Flepper.QueryBuilder
 
         public IComparisonOperators Contains<T>(T value)
         {
-            Command.Append($"LIKE @p{AddParameters($"%{value}%")}  ");
+            Command.Append($"LIKE @p{AddParameters($"%{value}%")} ");
             return this;
         }
 
         public IComparisonOperators StartsWith<T>(T value)
         {
-            Command.Append($"LIKE @p{AddParameters($"%{value}")}  ");
+            Command.Append($"LIKE @p{AddParameters($"%{value}")} ");
             return this;
         }
 
         public IComparisonOperators EndsWith<T>(T value)
         {
-            Command.Append($"LIKE @p{AddParameters($"{value}%")}  ");
+            Command.Append($"LIKE @p{AddParameters($"{value}%")} ");
             return this;
         }
 
@@ -76,6 +81,55 @@ namespace Flepper.QueryBuilder
             return this;
         }
 
-        
+        private IComparisonOperators InOrNotIn(string o, params object[] values)
+        {
+            Command.Append($"{o}(");
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (i > 0) Command.Append(",");
+                Command.Append($"@p{AddParameters(values.GetValue(i))}");
+            }
+            Command.Append(") ");
+            return this;
+        }
+
+        public IComparisonOperators In(params object[] values)
+        {
+            return InOrNotIn("IN", values);
+        }
+
+        public IComparisonOperators NotIn(params object[] values)
+        {
+            return InOrNotIn("NOT IN", values);            
+        }
+
+        private IComparisonOperators InOrNotInQueryCommand(string o, Func<IQueryCommand, IQueryCommand> query)
+        {
+            IDictionary<string, string> parametersReplace = new Dictionary<string, string>();
+            Command.Append($"{o}(");
+            QueryBuilder querySelect = query.AsQueryBuilder();
+            foreach (var parameter in querySelect?.Parameters)
+            {
+                int p = AddParameters(parameter.Value);
+                if (Parameters.ContainsKey(parameter.Key))
+                {
+                    parametersReplace.Add(parameter.Key, $"@p{p}");
+                }
+            }
+            Command.Append(querySelect.Command.Replace(parametersReplace));
+            Command.Append(") ");
+            parametersReplace = null;
+            return this;
+        }
+
+        public IComparisonOperators In(Func<IQueryCommand, IQueryCommand> query)
+        {
+            return InOrNotInQueryCommand("IN", query);
+        }
+
+        public IComparisonOperators NotIn(Func<IQueryCommand, IQueryCommand> query)
+        {
+            return InOrNotInQueryCommand("NOT IN", query);
+        }
     }
 }

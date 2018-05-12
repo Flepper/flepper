@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Comparison Operator Interface
@@ -86,5 +88,34 @@
         /// <param name="to"></param>
         /// <returns></returns>
         IComparisonOperators Between<TFrom, TTo>(TFrom from, TTo to);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        IComparisonOperators In(params object[] values);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        IComparisonOperators NotIn(params object[] values);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IComparisonOperators In(Func<IQueryCommand, IQueryCommand> query);
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IComparisonOperators NotIn(Func<IQueryCommand, IQueryCommand> query);
     }
 }

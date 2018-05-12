@@ -1,4 +1,6 @@
-﻿namespace Flepper.QueryBuilder
+﻿using System;
+
+namespace Flepper.QueryBuilder
 {
     /// <summary>
     /// Where Extensions
@@ -108,5 +110,41 @@
         /// <returns></returns>
         public static IComparisonOperators Between<TFrom, TTo>(this IWhereFilter whereFilter, TFrom from, TTo to)
             => whereFilter is IComparisonOperators command ? command.Between(from, to) : null;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="whereFilter"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static IComparisonOperators In(this IWhereFilter whereFilter, params object[] values)
+            => whereFilter is IComparisonOperators command ? command.In(values) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="whereFilter"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static IComparisonOperators NotIn(this IWhereFilter whereFilter, params object[] values)
+            => whereFilter is IComparisonOperators command ? command.NotIn(values) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="whereFilter"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static IComparisonOperators In(this IWhereFilter whereFilter, Func<IQueryCommand, IQueryCommand> query)
+            => whereFilter is IComparisonOperators command ? command.In(query) : null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="whereFilter"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static IComparisonOperators NotIn(this IWhereFilter whereFilter, Func<IQueryCommand, IQueryCommand> query)
+            => whereFilter is IComparisonOperators command ? command.NotIn(query) : null;
     }
 }

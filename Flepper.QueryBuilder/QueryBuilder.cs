@@ -16,7 +16,7 @@ namespace Flepper.QueryBuilder
         {
             Command = new StringBuilder();
             Parameters = new Dictionary<string, object>();
-        }
+        }        
 
         internal QueryBuilder(StringBuilder command, IDictionary<string, object> parameters, SqlColumn[] columns)
         {

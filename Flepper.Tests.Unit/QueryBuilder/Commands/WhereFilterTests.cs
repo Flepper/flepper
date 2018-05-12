@@ -304,7 +304,7 @@ namespace Flepper.Tests.Unit.QueryBuilder.Commands
             result.Query
                 .Trim()
                 .Should()
-                .Be("SELECT * FROM [table] WHERE [field1] LIKE @p0  AND [field2] LIKE @p1  AND [field3] LIKE @p2");
+                .Be("SELECT * FROM [table] WHERE [field1] LIKE @p0 AND [field2] LIKE @p1 AND [field3] LIKE @p2");
 
             dynamic parameters = result.Parameters;
             Assert.Equal("%abc1%", parameters.@p0);

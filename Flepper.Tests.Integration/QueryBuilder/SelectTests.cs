@@ -146,6 +146,62 @@ namespace Flepper.Tests.Integration.QueryBuilder
                 profiles.Should().NotBeEmpty();
             }
         }
+
+        [Fact]
+        public void ShouldSelectUserWithWhereIn()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                var users = connection.Select()
+                    .From("User")
+                    .Where("Id").In(1, 2, 3)
+                    .Query();
+
+                users.Should().NotBeEmpty();
+            }
+        }
+
+        [Fact]
+        public void ShouldSelectUserWithWhereNotIn()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                var users = connection.Select()
+                    .From("User")
+                    .Where("Id").NotIn(1, 2, 3)
+                    .Query();
+
+                users.Should().BeNullOrEmpty();
+            }
+        }
+
+        [Fact]
+        public void ShouldSelectUserWithWhereInSelect()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                var users = connection.Select()
+                    .From("User")
+                    .Where("Id").In(_ => connection.Select("Id").From("Profile"))
+                    .Query();
+
+                users.Should().NotBeEmpty();
+            }
+        }
+
+        [Fact]
+        public void ShouldSelectUserWithWhereNotInSelect()
+        {
+            using (var connection = _databaseFixture.Connection)
+            {
+                var users = connection.Select()
+                    .From("User")
+                    .Where("Id").NotIn(_ => connection.Select("Id").From("Profile"))
+                    .Query();
+
+                users.Should().NotBeEmpty();
+            }
+        }
     }
 
     public class Profile
